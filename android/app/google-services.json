@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "499744643857",
+    "project_id": "hungryhub-61461",
+    "storage_bucket": "hungryhub-61461.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499744643857:android:757ed4b8f34eb043284ab0",
+        "android_client_info": {
+          "package_name": "com.example.hungryhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499744643857-hcd350al182hklc9at2n08ofbhh3nd16.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hungryhub",
+            "certificate_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+          }
+        },
+        {
+          "client_id": "499744643857-ourkpkfbsf4qrp2s0q0hthrlbentqce4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACAj8YFqxKHFmTAJoCmxZNqCBRARd8Vxc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499744643857-ourkpkfbsf4qrp2s0q0hthrlbentqce4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
