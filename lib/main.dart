@@ -1,6 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hungryhub/UI/SplashScreen/splash_screen.dart';
+import 'package:provider/provider.dart';
+
+import 'controlls/authentication.dart';
+import 'controlls/bottom_nav_controler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,14 +17,24 @@ class HungryHub extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primarySwatch: Colors.grey,
-          appBarTheme: const AppBarTheme(
-            color: Colors.redAccent,
-          )),
-      home: const SplashScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => GoogleSignInProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => BottomNavController(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            primarySwatch: Colors.grey,
+            appBarTheme: const AppBarTheme(
+              color: Colors.orange,
+            )),
+        home: const SplashScreen(),
+      ),
     );
   }
 }

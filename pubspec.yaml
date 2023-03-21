@@ -28,6 +28,9 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  carousel_slider: ^4.2.1
+  circular_bottom_navigation: ^2.3.0
+  cloud_firestore: ^4.4.5
   cupertino_icons: ^1.0.2
   email_validator: ^2.1.17
   firebase_auth: ^4.3.0
@@ -37,6 +40,7 @@ dependencies:
   flutter_signin_button: ^2.0.0
   gif_view: ^0.3.1
   google_sign_in: ^6.0.2
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -60,6 +64,7 @@ flutter:
     - assets/images/foodicon3.jpg
     - assets/images/foodsplash1.gif
     - assets/images/splash2.gif
+    - assets/images/loading1.gif
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

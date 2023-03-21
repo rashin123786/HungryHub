@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(246, 235, 218, 1),
+      backgroundColor: const Color.fromRGBO(255, 199, 0, 1),
       body: Container(
         width: double.infinity,
         height: double.infinity,

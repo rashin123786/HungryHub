@@ -1,8 +1,12 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:hungryhub/UI/authentication/view/signup.dart';
 import 'package:hungryhub/domain/widgets/text_form_field.dart';
+import 'package:provider/provider.dart';
 
+import '../../../controlls/authentication.dart';
 import '../authenticate.dart';
 
 class SignIn extends StatefulWidget {
@@ -14,10 +18,13 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
+    final authpProvider =
+        Provider.of<GoogleSignInProvider>(context, listen: false);
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(246, 235, 218, 1),
+      backgroundColor: const Color.fromRGBO(255, 199, 0, 1),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10, top: 150),
@@ -27,8 +34,11 @@ class _SignInState extends State<SignIn> {
               child: Column(
                 children: [
                   const Text(
-                    'Login In to continue',
-                    style: TextStyle(fontSize: 25),
+                    'Sign In to continue',
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 50,
@@ -62,7 +72,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     onPressed: () async {
                       _formkey.currentState!.validate();
-                      await sigIn(context);
+                      await authpProvider.sigIn(context);
                       clearstextfeild();
                     },
                     child: const Text(
@@ -92,6 +102,16 @@ class _SignInState extends State<SignIn> {
                   const SizedBox(
                     height: 20,
                   ),
+                  SignInButton(Buttons.Google, onPressed: () {
+                    final provider = Provider.of<GoogleSignInProvider>(context,
+                        listen: false);
+                    provider.googleLogIn(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Authenticate(),
+                        ));
+                  })
                 ],
               ),
             ),

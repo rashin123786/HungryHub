@@ -2,6 +2,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:hungryhub/UI/authentication/view/sign_in.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:provider/provider.dart';
+import '../../../controlls/authentication.dart';
 import '../../../domain/widgets/text_form_field.dart';
 import '../authenticate.dart';
 
@@ -14,6 +16,8 @@ class SignUp extends StatelessWidget {
   final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final authpProvider =
+        Provider.of<GoogleSignInProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: const Color.fromRGBO(246, 235, 218, 1),
       body: SafeArea(
@@ -71,7 +75,7 @@ class SignUp extends StatelessWidget {
                   ),
                   onPressed: () async {
                     _formkey.currentState!.validate();
-                    await signUp(context);
+                    await authpProvider.signUp(context);
                     //  clearstextfeild();
                   },
                   child: const Text(
