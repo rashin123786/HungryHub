@@ -29,16 +29,17 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   carousel_slider: ^4.2.1
-  circular_bottom_navigation: ^2.3.0
   cloud_firestore: ^4.4.5
   cupertino_icons: ^1.0.2
   email_validator: ^2.1.17
+  fancy_bottom_navigation_2: ^0.3.5
   firebase_auth: ^4.3.0
   firebase_core: ^2.8.0
   flutter:
     sdk: flutter
   flutter_signin_button: ^2.0.0
   gif_view: ^0.3.1
+  google_fonts: ^4.0.3
   google_sign_in: ^6.0.2
   provider: ^6.0.5
 

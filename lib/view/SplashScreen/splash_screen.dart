@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../../domain/constants/constants.dart';
 import '../authentication/authenticate.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -20,7 +21,7 @@ class SplashScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(255, 199, 0, 1),
+      backgroundColor: backgroundcolor,
       body: Container(
         width: double.infinity,
         height: double.infinity,

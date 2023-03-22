@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hungryhub/UI/SplashScreen/splash_screen.dart';
+import 'package:hungryhub/view/SplashScreen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'controlls/authentication.dart';

@@ -2,12 +2,15 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
-import 'package:hungryhub/UI/authentication/view/signup.dart';
-import 'package:hungryhub/domain/widgets/text_form_field.dart';
+import 'package:hungryhub/view/authentication/view/signup.dart';
+import 'package:hungryhub/view/widgets/text_form_field.dart';
 import 'package:provider/provider.dart';
 
 import '../../../controlls/authentication.dart';
+import '../../../domain/constants/constants.dart';
 import '../authenticate.dart';
+
+bool checks = true;
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -24,7 +27,7 @@ class _SignInState extends State<SignIn> {
     final authpProvider =
         Provider.of<GoogleSignInProvider>(context, listen: false);
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(255, 199, 0, 1),
+      backgroundColor: backgroundcolor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10, top: 150),
@@ -102,15 +105,19 @@ class _SignInState extends State<SignIn> {
                   const SizedBox(
                     height: 20,
                   ),
-                  SignInButton(Buttons.Google, onPressed: () {
-                    final provider = Provider.of<GoogleSignInProvider>(context,
-                        listen: false);
-                    provider.googleLogIn(context);
+                  SignInButton(Buttons.Google, onPressed: () async {
+                    checks = false;
+                    final provider = Provider.of<GoogleSignInProvider>(
+                      context,
+                      listen: false,
+                    );
+                    await provider.googleLogIn(context);
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Authenticate(),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Authenticate(),
+                      ),
+                    );
                   })
                 ],
               ),

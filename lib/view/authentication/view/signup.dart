@@ -1,11 +1,10 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:hungryhub/UI/authentication/view/sign_in.dart';
+import 'package:hungryhub/view/authentication/view/sign_in.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:provider/provider.dart';
 import '../../../controlls/authentication.dart';
-import '../../../domain/widgets/text_form_field.dart';
-import '../authenticate.dart';
+import '../../widgets/text_form_field.dart';
 
 final TextEditingController usernamecontrol = TextEditingController();
 final TextEditingController emailcontrol = TextEditingController();

@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:hungryhub/UI/authentication/authenticate.dart';
+import 'package:hungryhub/view/authentication/authenticate.dart';
 
-import '../UI/authentication/view/sign_in.dart';
-import '../UI/authentication/view/signup.dart';
-import '../UI/Home/home.dart';
+import '../view/authentication/view/sign_in.dart';
+import '../view/authentication/view/signup.dart';
+import '../view/Home/home.dart';
 
 late final int istaps;
 
@@ -28,6 +28,7 @@ class GoogleSignInProvider with ChangeNotifier {
       await FirebaseAuth.instance.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       print(e);
+      // ignore: unnecessary_null_comparison
       if (e.code == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -41,9 +42,21 @@ class GoogleSignInProvider with ChangeNotifier {
   }
 
   Future logOutWithGoogle(context) async {
-    await googleSignIn.disconnect();
-    FirebaseAuth.instance.signOut();
-    print('sign out');
+    if (checks == false) {
+      print('qqqqq');
+      await googleSignIn.disconnect();
+      await FirebaseAuth.instance.signOut();
+    } else if (checks == true) {
+      print('aaaaaa');
+      FirebaseAuth.instance.signOut().then((value) {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const Authenticate(),
+            ));
+      });
+    }
+
     // Navigator.push(
     //   context,
     //   MaterialPageRoute(
@@ -59,7 +72,7 @@ class GoogleSignInProvider with ChangeNotifier {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Authenticate(),
+            builder: (context) => const Authenticate(),
           ));
     });
     print('sign out');
