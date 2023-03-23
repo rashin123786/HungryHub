@@ -179,7 +179,7 @@ class HomeScreen extends StatelessWidget {
                       foregroundColor: Colors.white,
                     ),
                     child: Text(
-                      'SandWitch',
+                      'SandWich',
                       style: GoogleFonts.secularOne(),
                     ),
                   ),
