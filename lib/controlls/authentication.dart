@@ -1,15 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:hungryhub/view/authentication/authenticate.dart';
+import 'package:hungryhub/domain/services/authenticate.dart';
 
-import '../view/authentication/view/sign_in.dart';
-import '../view/authentication/view/signup.dart';
+import '../view/authentication/forgott_pass.dart';
+import '../view/authentication/sign_in.dart';
+import '../view/authentication/signup.dart';
 import '../view/Home/home.dart';
 
 late final int istaps;
 
-class GoogleSignInProvider with ChangeNotifier {
+class AuthenticateProvider with ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   GoogleSignInAccount? _user;
   int istap = 1;
@@ -160,6 +161,39 @@ class GoogleSignInProvider with ChangeNotifier {
         );
         print(e);
       }
+    }
+    notifyListeners();
+  }
+
+  Future forgotPassword(context) async {
+    try {
+      FirebaseAuth.instance
+          .sendPasswordResetEmail(email: forgotpasscontrol.text)
+          .then((value) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'We Have Send a Link To Reset Your Password',
+            ),
+          ),
+        );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SignIn(),
+          ),
+        );
+      }).onError((error, stackTrace) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              error.toString(),
+            ),
+          ),
+        );
+      });
+    } on FirebaseAuthException catch (e) {
+      return;
     }
     notifyListeners();
   }

@@ -1,81 +1,31 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/domain/constants/constants.dart';
-import 'package:provider/provider.dart';
+import 'package:hungryhub/model/offermodel.dart';
+import 'package:hungryhub/view/productOverview/product_overview.dart';
+import 'package:hungryhub/view/widgets/drawer_screen.dart';
 
-import '../../controlls/authentication.dart';
+OfferModel? datass;
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final user = FirebaseAuth.instance.currentUser!;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final CollectionReference offerfoods =
+      FirebaseFirestore.instance.collection('offers');
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
 
-    final authpProvider =
-        Provider.of<GoogleSignInProvider>(context, listen: false);
     return Scaffold(
       key: scaffoldKey,
-      endDrawer: Drawer(
-        width: width * 0.6,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 12, right: 12, top: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(user.photoURL ??
-                      'https://toppng.com/uploads/preview/customer-icon-whatsapp-profile-picture-ico-115630569778argolzwmt.png'),
-                ),
-                Text(
-                  user.displayName ?? 'User',
-                ),
-                ListTile(
-                  textColor: backgroundcolor,
-                  onTap: () {},
-                  title: const Text(
-                    'My Profile',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: const Text(
-                    'WishList',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                  textColor: backgroundcolor,
-                ),
-                ListTile(
-                  title: const Text(
-                    'Cart',
-                  ),
-                  textColor: backgroundcolor,
-                ),
-                ListTile(
-                  title: const Text(
-                    'Settings',
-                  ),
-                  textColor: backgroundcolor,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      endDrawer: DrawerScreen(),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.only(left: 10, top: 30),
@@ -91,11 +41,6 @@ class HomeScreen extends StatelessWidget {
                     style: GoogleFonts.secularOne(
                       fontSize: 25,
                     ),
-                    // style: TextStyle(
-                    //   fontSize: 25,
-                    //   fontWeight: FontWeight.w900,
-                    //   color: Color.fromARGB(255, 0, 0, 0),
-                    // ),
                   ),
                   IconButton(
                     onPressed: () {
@@ -109,42 +54,79 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               sizedboxHeight20,
-              CarouselSlider.builder(
-                itemBuilder: (context, index, realIndex) {
-                  final imagesoffer = images[index];
-                  return Stack(
-                    fit: StackFit.passthrough,
-                    children: [
-                      Container(
-                        width: width * 0.8,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                imagesoffer,
+              StreamBuilder(
+                stream: offerfoods.snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return CarouselSlider.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index, realIndex) {
+                        final data = snapshot.data!.docs[index];
+                        return Stack(
+                          fit: StackFit.loose,
+                          children: [
+                            GestureDetector(
+                              child: Container(
+                                width: width * 0.8,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                        data['productImg'],
+                                      ),
+                                      fit: BoxFit.cover),
+                                ),
                               ),
-                              fit: BoxFit.cover),
-                        ),
+                              onTap: () async {
+                                datass = OfferModel(
+                                  productImage: data['productImg'],
+                                  productName: data['productName'],
+                                  productRate: data['productRate'],
+                                  productRating: data['productRate'],
+                                  productTime: data['productTime'],
+                                );
+                                // ignore: use_build_context_synchronously
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProductOverView(),
+                                    ));
+                              },
+                            ),
+                            Positioned(
+                              left: width * 0.001,
+                              top: height * 0.10,
+                              child: CircleAvatar(
+                                backgroundColor: backgroundcolor,
+                                radius: 37,
+                                child: const Center(
+                                  child: Text(
+                                    '  30%\n  Off',
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                      },
+                      options: CarouselOptions(
+                        height: height * 0.2,
+                        autoPlay: true,
+                        enlargeCenterPage: true,
                       ),
-                      Positioned(
-                        left: width * 0.08,
-                        top: height * 0.1,
-                        child: const Text(
-                          '30% Off',
-                          style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.amberAccent,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    ],
-                  );
+                    );
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return const Text('Something Wrong');
+                  }
                 },
-                options: CarouselOptions(
-                  autoPlay: true,
-                  enlargeCenterPage: true,
-                ),
-                itemCount: images.length,
               ),
               sizedboxHeight20,
               Row(
@@ -185,11 +167,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              TextButton(
-                  onPressed: () {
-                    authpProvider.logOutWithGoogle(context);
-                  },
-                  child: const Text('jk')),
+              sizedboxHeight20,
               const Center(
                 child: Text(
                   'Recommended Food',

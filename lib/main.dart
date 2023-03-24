@@ -20,7 +20,7 @@ class HungryHub extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => GoogleSignInProvider(),
+          create: (context) => AuthenticateProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => BottomNavController(),

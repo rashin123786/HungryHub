@@ -7,6 +7,7 @@ import 'package:hungryhub/view/wishlist/wish_list.dart';
 import 'package:provider/provider.dart';
 import '../../controlls/bottom_nav_controler.dart';
 import '../../domain/constants/constants.dart';
+import '../orderhistory/order_history.dart';
 
 class BottomNav extends StatelessWidget {
   BottomNav({super.key});
@@ -15,6 +16,7 @@ class BottomNav extends StatelessWidget {
     HomeScreen(),
     const CartScreen(),
     const WishListScreen(),
+    const OrderHistory()
   ];
 
   @override
@@ -31,7 +33,8 @@ class BottomNav extends StatelessWidget {
           tabs: [
             TabData(iconData: Icons.home, title: "Home"),
             TabData(iconData: Icons.shopping_cart, title: "Cart"),
-            TabData(iconData: Icons.favorite_rounded, title: "WishList")
+            TabData(iconData: Icons.favorite_rounded, title: "WishList"),
+            TabData(iconData: Icons.history_rounded, title: "OrderHistory")
           ],
           activeIconColor: backgroundcolor,
           barBackgroundColor: backgroundcolor,

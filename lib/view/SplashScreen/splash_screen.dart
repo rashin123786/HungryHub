@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../domain/constants/constants.dart';
-import '../authentication/authenticate.dart';
+import '../../domain/services/authenticate.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

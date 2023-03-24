@@ -1,10 +1,10 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:hungryhub/view/authentication/view/sign_in.dart';
+import 'package:hungryhub/view/authentication/sign_in.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:provider/provider.dart';
-import '../../../controlls/authentication.dart';
-import '../../widgets/text_form_field.dart';
+import '../../controlls/authentication.dart';
+import '../widgets/text_form_field.dart';
 
 final TextEditingController usernamecontrol = TextEditingController();
 final TextEditingController emailcontrol = TextEditingController();
@@ -16,9 +16,9 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authpProvider =
-        Provider.of<GoogleSignInProvider>(context, listen: false);
+        Provider.of<AuthenticateProvider>(context, listen: false);
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(246, 235, 218, 1),
+      backgroundColor: backgroundcolor,
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.only(top: 100),
@@ -83,6 +83,7 @@ class SignUp extends StatelessWidget {
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),
+                sizedboxHeight10,
                 InkWell(
                   child: const Text(
                     "Already have an account?Sign In",
