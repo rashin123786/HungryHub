@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hungryhub/domain/services/authenticate.dart';
+import 'package:hungryhub/view/widgets/bottom_nav.dart';
 
 import '../view/authentication/forgott_pass.dart';
 import '../view/authentication/sign_in.dart';
@@ -15,6 +16,7 @@ class AuthenticateProvider with ChangeNotifier {
   GoogleSignInAccount? _user;
   int istap = 1;
 
+// --------GoogleLogin------------//
   GoogleSignInAccount get user => _user!;
   Future googleLogIn(context) async {
     try {
@@ -41,6 +43,7 @@ class AuthenticateProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+  //------logOutwithgoogle-------------//
 
   Future logOutWithGoogle(context) async {
     if (checks == false) {
@@ -57,17 +60,10 @@ class AuthenticateProvider with ChangeNotifier {
             ));
       });
     }
-
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => const SignIn(),
-    //   ),
-    // );
-    // });
     notifyListeners();
   }
 
+//-------------logout--------//
   Future logOut(context) async {
     FirebaseAuth.instance.signOut().then((value) {
       Navigator.pushReplacement(
@@ -81,6 +77,8 @@ class AuthenticateProvider with ChangeNotifier {
     notifyListeners();
   }
 
+//--------------SignIn------------//
+
   Future<void> sigIn(context) async {
     try {
       await FirebaseAuth.instance
@@ -92,7 +90,7 @@ class AuthenticateProvider with ChangeNotifier {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => BottomNav(),
           ),
         );
       });
@@ -164,6 +162,8 @@ class AuthenticateProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  //--------forgot password---------//
 
   Future forgotPassword(context) async {
     try {

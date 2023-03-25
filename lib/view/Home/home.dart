@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:hungryhub/domain/services/offer.dart';
 import 'package:hungryhub/model/offermodel.dart';
 import 'package:hungryhub/view/productOverview/product_overview.dart';
 import 'package:hungryhub/view/widgets/drawer_screen.dart';
@@ -55,13 +56,13 @@ class HomeScreen extends StatelessWidget {
               ),
               sizedboxHeight20,
               StreamBuilder(
-                stream: offerfoods.snapshots(),
+                stream: getUserStream(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return CarouselSlider.builder(
-                      itemCount: snapshot.data!.docs.length,
+                      itemCount: snapshot.data!.length,
                       itemBuilder: (context, index, realIndex) {
-                        final data = snapshot.data!.docs[index];
+                        final data = snapshot.data![index];
                         return Stack(
                           fit: StackFit.loose,
                           children: [
@@ -72,18 +73,18 @@ class HomeScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                        data['productImg'],
+                                        data.productImage,
                                       ),
                                       fit: BoxFit.cover),
                                 ),
                               ),
                               onTap: () async {
                                 datass = OfferModel(
-                                  productImage: data['productImg'],
-                                  productName: data['productName'],
-                                  productRate: data['productRate'],
-                                  productRating: data['productRate'],
-                                  productTime: data['productTime'],
+                                  productImage: data.productImage,
+                                  productName: data.productName,
+                                  productRate: data.productRate,
+                                  productRating: data.productRating,
+                                  productTime: data.productTime,
                                 );
                                 // ignore: use_build_context_synchronously
                                 Navigator.push(

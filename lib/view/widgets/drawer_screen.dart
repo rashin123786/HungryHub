@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryhub/domain/services/offer.dart';
+import 'package:hungryhub/view/productOverview/product_overview.dart';
 import 'package:provider/provider.dart';
 
 import '../../controlls/authentication.dart';
@@ -83,7 +85,14 @@ class DrawerScreen extends StatelessWidget {
                   backgroundColor: backgroundcolor,
                 ),
                 onPressed: () async {
-                  authpProvider.logOutWithGoogle(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductOverView(),
+                      ));
+                  // fetchOfferDetails();
+                  //  hlo();
+                  //  authpProvider.logOutWithGoogle(context);
                 },
                 child: const Text(
                   'Logout',

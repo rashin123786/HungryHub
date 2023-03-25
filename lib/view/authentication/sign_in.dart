@@ -64,8 +64,11 @@ class _SignInState extends State<SignIn> {
                       hintText: 'Enter password',
                       ispass: true),
                   GestureDetector(
-                    child: const Text(
-                      'Forgot password?',
+                    child: const Padding(
+                      padding: EdgeInsets.only(right: 10, left: 250),
+                      child: Text(
+                        'Forgot password?',
+                      ),
                     ),
                     onTap: () {
                       Navigator.push(
