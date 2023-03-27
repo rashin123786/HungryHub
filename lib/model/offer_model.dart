@@ -16,15 +16,15 @@ class OfferModel {
     required this.productTime,
   });
 
-  factory OfferModel.fromSnapshot(DocumentSnapshot snapshot) {
-    return OfferModel(
-      productImage: snapshot.get('productImg'),
-      productName: snapshot.get('productName'),
-      productRate: snapshot.get('productRate'),
-      productRating: snapshot.get('productRating'),
-      productTime: snapshot.get('productTime'),
-    );
-  }
+  // factory OfferModel.fromSnapshot(DocumentSnapshot snapshot) {
+  //   return OfferModel(
+  //     productImage: snapshot.get('productImg'),
+  //     productName: snapshot.get('productName'),
+  //     productRate: snapshot.get('productRate'),
+  //     productRating: snapshot.get('productRating'),
+  //     productTime: snapshot.get('productTime'),
+  //   );
+  // }
 
   factory OfferModel.fromJson(Map<String, dynamic> json) {
     return OfferModel(

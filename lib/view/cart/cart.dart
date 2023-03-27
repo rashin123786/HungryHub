@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hungryhub/domain/services/offer.dart';
 
-import '../../model/offermodel.dart';
+import '../../model/offer_model.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -11,7 +11,7 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: StreamBuilder(
-          stream: getUserStream(),
+          stream: getOfferStream(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();

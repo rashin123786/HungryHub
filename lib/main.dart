@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hungryhub/view/SplashScreen/splash_screen.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter/services.dart';
 import 'controlls/authentication.dart';
 import 'controlls/bottom_nav_controler.dart';
 
@@ -17,6 +17,10 @@ class HungryHub extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ));
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(

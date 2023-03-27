@@ -39,6 +39,7 @@ dependencies:
   firebase_storage: ^11.0.16
   flutter:
     sdk: flutter
+  flutter_rating_bar: ^4.0.1
   flutter_signin_button: ^2.0.0
   gif_view: ^0.3.1
   google_fonts: ^4.0.3

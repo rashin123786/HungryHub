@@ -6,11 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/domain/services/offer.dart';
-import 'package:hungryhub/model/offermodel.dart';
+import 'package:hungryhub/model/offer_model.dart';
+import 'package:hungryhub/view/Home/widgets/offer_card_widget.dart';
 import 'package:hungryhub/view/productOverview/product_overview.dart';
 import 'package:hungryhub/view/widgets/drawer_screen.dart';
-
-OfferModel? datass;
+import 'package:hungryhub/view/Home/widgets/popular_food.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -55,80 +55,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               sizedboxHeight20,
-              StreamBuilder(
-                stream: getUserStream(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return CarouselSlider.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index, realIndex) {
-                        final data = snapshot.data![index];
-                        return Stack(
-                          fit: StackFit.loose,
-                          children: [
-                            GestureDetector(
-                              child: Container(
-                                width: width * 0.8,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                        data.productImage,
-                                      ),
-                                      fit: BoxFit.cover),
-                                ),
-                              ),
-                              onTap: () async {
-                                datass = OfferModel(
-                                  productImage: data.productImage,
-                                  productName: data.productName,
-                                  productRate: data.productRate,
-                                  productRating: data.productRating,
-                                  productTime: data.productTime,
-                                );
-                                // ignore: use_build_context_synchronously
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ProductOverView(),
-                                    ));
-                              },
-                            ),
-                            Positioned(
-                              left: width * 0.001,
-                              top: height * 0.10,
-                              child: CircleAvatar(
-                                backgroundColor: backgroundcolor,
-                                radius: 37,
-                                child: const Center(
-                                  child: Text(
-                                    '  30%\n  Off',
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        );
-                      },
-                      options: CarouselOptions(
-                        height: height * 0.2,
-                        autoPlay: true,
-                        enlargeCenterPage: true,
-                      ),
-                    );
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    return const Text('Something Wrong');
-                  }
-                },
-              ),
+              OfferCardWidget(width: width, height: height),
               sizedboxHeight20,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -171,7 +98,7 @@ class HomeScreen extends StatelessWidget {
               sizedboxHeight20,
               const Center(
                 child: Text(
-                  'Recommended Food',
+                  'Popular Food',
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w900,
@@ -180,31 +107,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               sizedboxHeight10,
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: (1 / 0.7),
-                    crossAxisSpacing: 2,
-                    crossAxisCount: 2),
-                itemBuilder: (context, index) {
-                  final imagses = images[index];
-                  return Card(
-                    child: Container(
-                      width: width * 0.8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                              imagses,
-                            ),
-                            fit: BoxFit.cover),
-                      ),
-                    ),
-                  );
-                },
-                itemCount: images.length,
-              )
+              const PopularFoods(),
             ],
           ),
         ),
