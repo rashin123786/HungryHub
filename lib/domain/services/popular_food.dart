@@ -1,17 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hungryhub/model/popular_model.dart';
+import 'package:hungryhub/model/all_product_model.dart.dart';
 
 final CollectionReference popularFoodCollect =
     FirebaseFirestore.instance.collection('popularfood');
 
-Stream<List<PopularFood>> getPopularStream() {
-  return popularFoodCollect.snapshots().map(
-    (snapshot) {
-      return snapshot.docs.map(
-        (popular) {
-          return PopularFood.fromjson(popular.data() as Map<String, dynamic>);
-        },
-      ).toList();
-    },
-  );
+Stream<List<AllProductDetails>> getPopularStream() {
+  return popularFoodCollect.snapshots().map((snapshot) {
+    return snapshot.docs.map((doc) {
+      return AllProductDetails.fromjson(doc.data() as Map<String, dynamic>);
+    }).toList();
+  });
 }

@@ -6,8 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/domain/services/offer.dart';
-import 'package:hungryhub/model/offer_model.dart';
+
 import 'package:hungryhub/view/Home/widgets/offer_card_widget.dart';
+import 'package:hungryhub/view/category/Burger/burger_screen.dart';
 import 'package:hungryhub/view/productOverview/product_overview.dart';
 import 'package:hungryhub/view/widgets/drawer_screen.dart';
 import 'package:hungryhub/view/Home/widgets/popular_food.dart';
@@ -61,7 +62,14 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BurgerScreen(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromRGBO(255, 199, 0, 1),
                       foregroundColor: Colors.white,
@@ -107,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               sizedboxHeight10,
-              const PopularFoods(),
+              PopularFoods(),
             ],
           ),
         ),

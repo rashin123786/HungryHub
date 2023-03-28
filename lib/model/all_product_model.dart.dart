@@ -1,20 +1,28 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-class OfferModel {
+class AllProductDetails {
   final String? id;
   final String productImage;
   final String productName;
   final String productRate;
-  final String productRating;
+  final String productDescription;
   final String productTime;
-  OfferModel({
+  AllProductDetails({
     this.id,
     required this.productImage,
     required this.productName,
     required this.productRate,
-    required this.productRating,
+    required this.productDescription,
     required this.productTime,
   });
+
+  factory AllProductDetails.fromjson(Map<String, dynamic> json) {
+    return AllProductDetails(
+      productImage: json['productImg'],
+      productName: json['productName'],
+      productRate: json['productRate'],
+      productDescription: json['productDescription'],
+      productTime: json['productTime'],
+    );
+  }
 
   // factory OfferModel.fromSnapshot(DocumentSnapshot snapshot) {
   //   return OfferModel(
@@ -25,14 +33,4 @@ class OfferModel {
   //     productTime: snapshot.get('productTime'),
   //   );
   // }
-
-  factory OfferModel.fromJson(Map<String, dynamic> json) {
-    return OfferModel(
-      productImage: json['productImg'],
-      productName: json['productName'],
-      productRate: json['productRate'],
-      productRating: json['productRating'],
-      productTime: json['productTime'],
-    );
-  }
 }

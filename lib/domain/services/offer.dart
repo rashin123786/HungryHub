@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../../model/offer_model.dart';
+import 'package:hungryhub/model/all_product_model.dart.dart';
 
 final CollectionReference offerCollect =
     FirebaseFirestore.instance.collection('offers');
@@ -22,10 +21,10 @@ final CollectionReference offerCollect =
 //   }
 //}
 
-Stream<List<OfferModel>> getOfferStream() {
+Stream<List<AllProductDetails>> getOfferStream() {
   return offerCollect.snapshots().map((snapshot) {
     return snapshot.docs.map((doc) {
-      return OfferModel.fromJson(doc.data() as Map<String, dynamic>);
+      return AllProductDetails.fromjson(doc.data() as Map<String, dynamic>);
     }).toList();
   });
 }

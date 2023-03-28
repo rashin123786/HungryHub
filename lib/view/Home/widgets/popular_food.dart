@@ -5,16 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/domain/services/popular_food.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-double? rating;
-double? re;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PopularFoods extends StatelessWidget {
-  const PopularFoods({super.key});
+  PopularFoods({super.key});
 
   @override
   Widget build(BuildContext context) {
-    rating ?? re;
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
@@ -65,21 +62,6 @@ class PopularFoods extends StatelessWidget {
                         style: GoogleFonts.secularOne(
                           fontSize: 25,
                         ),
-                      ),
-                      RatingBar.builder(
-                        itemSize: 20,
-                        initialRating: double.parse(popularData.productRating),
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemBuilder: (context, _) => Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        onRatingUpdate: (ratings) {
-                          rating = ratings;
-                        },
                       ),
                     ],
                   ),

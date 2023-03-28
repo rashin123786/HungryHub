@@ -1,13 +1,14 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:hungryhub/model/all_product_model.dart.dart';
 
 import '../../../domain/constants/constants.dart';
 import '../../../domain/services/offer.dart';
-import '../../../model/offer_model.dart';
+
 import '../../productOverview/product_overview.dart';
 
-OfferModel? datass;
+AllProductDetails? datass;
 
 class OfferCardWidget extends StatelessWidget {
   const OfferCardWidget({
@@ -45,11 +46,11 @@ class OfferCardWidget extends StatelessWidget {
                       ),
                     ),
                     onTap: () async {
-                      datass = OfferModel(
+                      datass = AllProductDetails(
                         productImage: data.productImage,
                         productName: data.productName,
                         productRate: data.productRate,
-                        productRating: data.productRating,
+                        productDescription: data.productDescription,
                         productTime: data.productTime,
                       );
                       // ignore: use_build_context_synchronously

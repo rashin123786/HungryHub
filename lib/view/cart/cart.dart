@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hungryhub/domain/services/offer.dart';
 
-import '../../model/offer_model.dart';
-
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 

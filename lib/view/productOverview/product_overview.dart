@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hungryhub/model/offer_model.dart';
 
 import 'package:hungryhub/view/Home/home.dart';
 
