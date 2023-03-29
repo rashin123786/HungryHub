@@ -7,31 +7,25 @@ import 'package:hungryhub/view/widgets/text_form_field.dart';
 
 import '../../../domain/services/burger_product.dart';
 
-final searchBurgerControl = TextEditingController();
-
 class BurgerScreen extends StatelessWidget {
   BurgerScreen({super.key});
   final _formkey = GlobalKey<FormState>();
+
+  final searchBurgerControl = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Center(
-                child: Text(
-                  'Burgers',
-                  style: GoogleFonts.secularOne(
-                    fontSize: 25,
-                    color: Colors.amber,
-                  ),
-                ),
-              ),
-              sizedboxHeight20,
-              Form(
-                key: _formkey,
+        child: Column(
+          children: [
+            sizedboxHeight20,
+            Form(
+              key: _formkey,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
                 child: TextFormField(
                   controller: searchBurgerControl,
                   validator: (value) =>
@@ -48,7 +42,7 @@ class BurgerScreen extends StatelessWidget {
                         FocusManager.instance.primaryFocus?.unfocus();
                       },
                     ),
-                    fillColor: Colors.grey,
+                    fillColor: Colors.white,
                     hintText: 'Search here...',
                     border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(
@@ -60,71 +54,104 @@ class BurgerScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              sizedboxHeight20,
-              StreamBuilder(
-                stream: getBurgerStream(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (snapshot.hasData) {
-                    return Expanded(
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          final data = snapshot.data![index];
-                          return Card(
-                            elevation: 15,
-                            shadowColor: Colors.black,
-                            child: Container(
-                              color: Color.fromARGB(255, 255, 191, 0),
-                              width: double.infinity,
-                              height: 120,
-                              child: Row(
+            ),
+            sizedboxHeight20,
+            Center(
+              child: Text(
+                'Burgers',
+                style: GoogleFonts.secularOne(
+                  fontSize: 25,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            StreamBuilder(
+              stream: getBurgerStream(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasData) {
+                  return Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: GridView.builder(
+                          itemCount: snapshot.data!.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: (0.5 / 0.7),
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 2,
+                          ),
+                          itemBuilder: (context, index) {
+                            final data = snapshot.data![index];
+                            return Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              color: Colors.white,
+                              shadowColor: backgroundcolor,
+                              elevation: 15,
+                              child: Column(
                                 children: [
-                                  Container(
-                                    width: 140,
-                                    height: 120,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      image: DecorationImage(
-                                        image: NetworkImage(
+                                  Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                        child: Image.network(
                                           data.productImage,
+                                          fit: BoxFit.fill,
+                                          width: double.infinity,
+                                          height: height * 0.2,
                                         ),
-                                        fit: BoxFit.cover,
+                                      ),
+                                      Positioned(
+                                        left: width * 0.365,
+                                        top: height * 0.15,
+                                        child: CircleAvatar(
+                                          radius: 24,
+                                          backgroundColor: Colors.white,
+                                          child: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.favorite,
+                                                color: Colors.amber,
+                                                size: 35,
+                                              )),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Flexible(
+                                    child: RichText(
+                                      overflow: TextOverflow.ellipsis,
+                                      text: TextSpan(
+                                        style: GoogleFonts.secularOne(
+                                            fontSize: 20, color: Colors.black),
+                                        text: "  ${data.productName}",
                                       ),
                                     ),
                                   ),
-                                  Column(
-                                    children: [
-                                      Flexible(
-                                        child: RichText(
-                                          overflow: TextOverflow.ellipsis,
-                                          text: TextSpan(
-                                            style: GoogleFonts.secularOne(
-                                                fontSize: 15,
-                                                color: Colors.black),
-                                            text: "  ${data.productName}",
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                  Text(
+                                    data.productRate,
+                                    style: GoogleFonts.secularOne(
+                                      fontSize: 25,
+                                    ),
                                   ),
                                 ],
                               ),
-                            ),
-                          );
-                        },
-                        itemCount: snapshot.data!.length,
-                      ),
-                    );
-                  } else {
-                    return const Text('Something went wrong');
-                  }
-                },
-              ),
-            ],
-          ),
+                            );
+                          },
+                        )),
+                  );
+                } else {
+                  return const Text('Something went wrong');
+                }
+              },
+            ),
+          ],
         ),
       ),
     );

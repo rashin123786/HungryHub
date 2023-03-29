@@ -41,11 +41,30 @@ class PopularFoods extends StatelessWidget {
                   elevation: 15,
                   child: Column(
                     children: [
-                      Image.network(
-                        popularData.productImage,
-                        fit: BoxFit.fill,
-                        width: double.infinity,
-                        height: height * 0.2,
+                      Stack(
+                        children: [
+                          Image.network(
+                            popularData.productImage,
+                            fit: BoxFit.fill,
+                            width: double.infinity,
+                            height: height * 0.2,
+                          ),
+                          Positioned(
+                            left: width * 0.365,
+                            top: height * 0.15,
+                            child: CircleAvatar(
+                              radius: 24,
+                              backgroundColor: Colors.white,
+                              child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.favorite,
+                                    color: Colors.amber,
+                                    size: 35,
+                                  )),
+                            ),
+                          )
+                        ],
                       ),
                       Flexible(
                         child: RichText(

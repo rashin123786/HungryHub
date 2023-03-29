@@ -9,6 +9,8 @@ import 'package:hungryhub/domain/services/offer.dart';
 
 import 'package:hungryhub/view/Home/widgets/offer_card_widget.dart';
 import 'package:hungryhub/view/category/Burger/burger_screen.dart';
+import 'package:hungryhub/view/category/pizza/pizza_screen.dart';
+import 'package:hungryhub/view/category/sandwich/sandwich_screen.dart';
 import 'package:hungryhub/view/productOverview/product_overview.dart';
 import 'package:hungryhub/view/widgets/drawer_screen.dart';
 import 'package:hungryhub/view/Home/widgets/popular_food.dart';
@@ -80,7 +82,14 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PizzaScreen(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromRGBO(255, 199, 0, 1),
                       foregroundColor: Colors.white,
@@ -91,7 +100,14 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SandwichScreen(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromRGBO(255, 199, 0, 1),
                       foregroundColor: Colors.white,
