@@ -2,7 +2,7 @@ class AllProductDetails {
   final String? id;
   final String productImage;
   final String productName;
-  final String productRate;
+  final int productRate;
   final String productDescription;
   final String productTime;
   AllProductDetails({

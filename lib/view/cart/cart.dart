@@ -20,7 +20,7 @@ class CartScreen extends StatelessWidget {
                   final datafound = snapshot.data![index];
                   return ListTile(
                     title: Text(datafound.productName),
-                    subtitle: Text(datafound.productRate),
+                    subtitle: Text("${datafound.productRate}"),
                   );
                 },
               );

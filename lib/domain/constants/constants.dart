@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../model/all_product_model.dart.dart';
+
 SizedBox sizedboxHeight10 = const SizedBox(
   height: 10,
 );
@@ -26,3 +28,9 @@ List<String> images = [
 // ------------------colors-----------------------------------//
 
 Color backgroundcolor = const Color.fromRGBO(255, 199, 0, 1);
+
+AllProductDetails? allDatas;
+
+bool isOffer = true;
+
+Divider divider = Divider();

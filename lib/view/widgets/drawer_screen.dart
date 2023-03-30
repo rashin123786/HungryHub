@@ -88,7 +88,7 @@ class DrawerScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductOverView(),
+                        builder: (context) => const ProductOverView(),
                       ));
                   // fetchOfferDetails();
                   //  hlo();

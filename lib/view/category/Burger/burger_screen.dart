@@ -6,6 +6,8 @@ import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/view/widgets/text_form_field.dart';
 
 import '../../../domain/services/burger_product.dart';
+import '../../../model/all_product_model.dart.dart';
+import '../../productOverview/product_overview.dart';
 
 class BurgerScreen extends StatelessWidget {
   BurgerScreen({super.key});
@@ -86,61 +88,81 @@ class BurgerScreen extends StatelessWidget {
                           ),
                           itemBuilder: (context, index) {
                             final data = snapshot.data![index];
-                            return Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              color: Colors.white,
-                              shadowColor: backgroundcolor,
-                              elevation: 15,
-                              child: Column(
-                                children: [
-                                  Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                        child: Image.network(
-                                          data.productImage,
-                                          fit: BoxFit.fill,
-                                          width: double.infinity,
-                                          height: height * 0.2,
+                            return GestureDetector(
+                              onTap: () async {
+                                isOffer = true;
+                                allDatas = await AllProductDetails(
+                                  productImage: data.productImage,
+                                  productName: data.productName,
+                                  productRate: data.productRate,
+                                  productDescription: data.productDescription,
+                                  productTime: data.productTime,
+                                );
+                                // ignore: use_build_context_synchronously
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProductOverView(),
+                                    ));
+                              },
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                color: Colors.white,
+                                shadowColor: backgroundcolor,
+                                elevation: 15,
+                                child: Column(
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                          child: Image.network(
+                                            data.productImage,
+                                            fit: BoxFit.fill,
+                                            width: double.infinity,
+                                            height: height * 0.2,
+                                          ),
+                                        ),
+                                        Positioned(
+                                          left: width * 0.365,
+                                          top: height * 0.15,
+                                          child: CircleAvatar(
+                                            radius: 24,
+                                            backgroundColor: Colors.white,
+                                            child: IconButton(
+                                                onPressed: () {},
+                                                icon: Icon(
+                                                  Icons.favorite,
+                                                  color: Colors.amber,
+                                                  size: 35,
+                                                )),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Flexible(
+                                      child: RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        text: TextSpan(
+                                          style: GoogleFonts.secularOne(
+                                              fontSize: 20,
+                                              color: Colors.black),
+                                          text: "  ${data.productName}",
                                         ),
                                       ),
-                                      Positioned(
-                                        left: width * 0.365,
-                                        top: height * 0.15,
-                                        child: CircleAvatar(
-                                          radius: 24,
-                                          backgroundColor: Colors.white,
-                                          child: IconButton(
-                                              onPressed: () {},
-                                              icon: Icon(
-                                                Icons.favorite,
-                                                color: Colors.amber,
-                                                size: 35,
-                                              )),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Flexible(
-                                    child: RichText(
-                                      overflow: TextOverflow.ellipsis,
-                                      text: TextSpan(
-                                        style: GoogleFonts.secularOne(
-                                            fontSize: 20, color: Colors.black),
-                                        text: "  ${data.productName}",
+                                    ),
+                                    Text(
+                                      "₹${data.productRate}",
+                                      style: GoogleFonts.secularOne(
+                                        fontSize: 25,
                                       ),
                                     ),
-                                  ),
-                                  Text(
-                                    data.productRate,
-                                    style: GoogleFonts.secularOne(
-                                      fontSize: 25,
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           },

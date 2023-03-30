@@ -8,8 +8,6 @@ import '../../../domain/services/offer.dart';
 
 import '../../productOverview/product_overview.dart';
 
-AllProductDetails? datass;
-
 class OfferCardWidget extends StatelessWidget {
   const OfferCardWidget({
     super.key,
@@ -46,7 +44,8 @@ class OfferCardWidget extends StatelessWidget {
                       ),
                     ),
                     onTap: () async {
-                      datass = AllProductDetails(
+                      isOffer = false;
+                      allDatas = await AllProductDetails(
                         productImage: data.productImage,
                         productName: data.productName,
                         productRate: data.productRate,
