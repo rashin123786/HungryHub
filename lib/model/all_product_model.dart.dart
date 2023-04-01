@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class AllProductDetails {
   final String? id;
   final String productImage;
@@ -24,13 +27,13 @@ class AllProductDetails {
     );
   }
 
-  // factory OfferModel.fromSnapshot(DocumentSnapshot snapshot) {
-  //   return OfferModel(
-  //     productImage: snapshot.get('productImg'),
-  //     productName: snapshot.get('productName'),
-  //     productRate: snapshot.get('productRate'),
-  //     productRating: snapshot.get('productRating'),
-  //     productTime: snapshot.get('productTime'),
-  //   );
-  // }
+  factory AllProductDetails.fromSnapshot(DocumentSnapshot snapshot) {
+    return AllProductDetails(
+      productImage: snapshot.get('productImg'),
+      productName: snapshot.get('productName'),
+      productRate: snapshot.get('productRate'),
+      productTime: snapshot.get('productTime'),
+      productDescription: snapshot.get('productDescription'),
+    );
+  }
 }

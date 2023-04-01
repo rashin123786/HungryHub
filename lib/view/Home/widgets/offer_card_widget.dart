@@ -89,6 +89,7 @@ class OfferCardWidget extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else {
+          print(snapshot.error.toString());
           return const Text('Something Wrong');
         }
       },

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryhub/controlls/offer.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/domain/services/popular_food.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../model/all_product_model.dart.dart';
@@ -28,7 +30,7 @@ class PopularFoods extends StatelessWidget {
         } else if (snapshot.hasData) {
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: (0.5 / 0.7),
+                childAspectRatio: (0.53 / 0.7),
                 crossAxisSpacing: 2,
                 crossAxisCount: 2),
             shrinkWrap: true,
@@ -76,13 +78,17 @@ class PopularFoods extends StatelessWidget {
                               ),
                             ),
                             Positioned(
-                              left: width * 0.365,
+                              left: width * 0.35,
                               top: height * 0.15,
                               child: CircleAvatar(
                                 radius: 24,
                                 backgroundColor: Colors.white,
                                 child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      // Provider.of<WishListData>(context,
+                                      //         listen: false)
+                                      //     .addWishListData();
+                                    },
                                     icon: Icon(
                                       Icons.favorite,
                                       color: Colors.amber,

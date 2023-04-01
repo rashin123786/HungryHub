@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryhub/controlls/offer.dart';
 import 'package:hungryhub/domain/services/sandwich._product.dart';
+import 'package:provider/provider.dart';
 
 import '../../../domain/constants/constants.dart';
 import '../../../model/all_product_model.dart.dart';
@@ -28,6 +30,8 @@ class SandwichScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: TextFormField(
+                  // Provider.of<WishListData>(context, listen: false)
+                  //     .SearchList(value),
                   controller: searchSandwichControl,
                   validator: (value) =>
                       value!.isEmpty ? 'Please Enter a Name' : null,

@@ -1,19 +1,40 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryhub/controlls/offer.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:hungryhub/model/burger_model.dart';
 import 'package:hungryhub/view/widgets/text_form_field.dart';
+import 'package:provider/provider.dart';
 
 import '../../../domain/services/burger_product.dart';
 import '../../../model/all_product_model.dart.dart';
 import '../../productOverview/product_overview.dart';
 
-class BurgerScreen extends StatelessWidget {
+BurgerModel? burgerobj;
+List<AllProductDetails> allburgerlist = [];
+
+class BurgerScreen extends StatefulWidget {
   BurgerScreen({super.key});
+
+  @override
+  State<BurgerScreen> createState() => _BurgerScreenState();
+}
+
+class _BurgerScreenState extends State<BurgerScreen> {
   final _formkey = GlobalKey<FormState>();
 
   final searchBurgerControl = TextEditingController();
+  late final List<AllProductDetails> allresult;
+  String searchQuery = '';
+  void hlo() {
+    getBurgerStream().listen((List<AllProductDetails> burgerList) {
+      allburgerlist = burgerList;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -29,6 +50,10 @@ class BurgerScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: TextFormField(
+                  onChanged: (value) {
+                    bool istext = false;
+                    searchQuery = value;
+                  },
                   controller: searchBurgerControl,
                   validator: (value) =>
                       value!.isEmpty ? 'Please Enter a Name' : null,
@@ -91,7 +116,7 @@ class BurgerScreen extends StatelessWidget {
                             return GestureDetector(
                               onTap: () async {
                                 isOffer = true;
-                                allDatas = await AllProductDetails(
+                                burgerobj = await BurgerModel(
                                   productImage: data.productImage,
                                   productName: data.productName,
                                   productRate: data.productRate,
