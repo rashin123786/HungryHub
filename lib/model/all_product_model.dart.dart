@@ -19,6 +19,7 @@ class AllProductDetails {
 
   factory AllProductDetails.fromjson(Map<String, dynamic> json) {
     return AllProductDetails(
+      id: json['productId'],
       productImage: json['productImg'],
       productName: json['productName'],
       productRate: json['productRate'],
@@ -27,13 +28,13 @@ class AllProductDetails {
     );
   }
 
-  factory AllProductDetails.fromSnapshot(DocumentSnapshot snapshot) {
-    return AllProductDetails(
-      productImage: snapshot.get('productImg'),
-      productName: snapshot.get('productName'),
-      productRate: snapshot.get('productRate'),
-      productTime: snapshot.get('productTime'),
-      productDescription: snapshot.get('productDescription'),
-    );
-  }
+  // factory AllProductDetails.fromSnapshot(DocumentSnapshot snapshot) {
+  //   return AllProductDetails(
+  //     productImage: snapshot.get('productImg'),
+  //     productName: snapshot.get('productName'),
+  //     productRate: snapshot.get('productRate'),
+  //     productTime: snapshot.get('productTime'),
+  //     productDescription: snapshot.get('productDescription'),
+  //   );
+  // }
 }

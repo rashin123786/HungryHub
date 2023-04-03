@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryhub/controlls/offer.dart';
+import 'package:hungryhub/controlls/cart_list_controller.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
-import 'package:hungryhub/model/burger_model.dart';
+
 import 'package:hungryhub/view/widgets/text_form_field.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,6 @@ import '../../../domain/services/burger_product.dart';
 import '../../../model/all_product_model.dart.dart';
 import '../../productOverview/product_overview.dart';
 
-BurgerModel? burgerobj;
 List<AllProductDetails> allburgerlist = [];
 
 class BurgerScreen extends StatefulWidget {
@@ -107,7 +106,7 @@ class _BurgerScreenState extends State<BurgerScreen> {
                           itemCount: snapshot.data!.length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: (0.5 / 0.7),
+                            childAspectRatio: (0.45 / 0.55),
                             crossAxisCount: 2,
                             crossAxisSpacing: 2,
                           ),
@@ -116,7 +115,8 @@ class _BurgerScreenState extends State<BurgerScreen> {
                             return GestureDetector(
                               onTap: () async {
                                 isOffer = true;
-                                burgerobj = await BurgerModel(
+                                allDatas = await AllProductDetails(
+                                  id: data.id,
                                   productImage: data.productImage,
                                   productName: data.productName,
                                   productRate: data.productRate,

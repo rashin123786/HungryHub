@@ -4,22 +4,22 @@ import 'package:hungryhub/model/all_product_model.dart.dart';
 final CollectionReference offerCollect =
     FirebaseFirestore.instance.collection('offers');
 
-Future<List<AllProductDetails>> getUser() async {
-  List<AllProductDetails> offerDetailsList = [];
-  try {
-    QuerySnapshot querySnapshot = await offerCollect.get();
-    // ignore: avoid_function_literals_in_foreach_calls
-    querySnapshot.docs.forEach((element) {
-      offerDetailsList.add(
-        AllProductDetails.fromSnapshot(element),
-      );
-    });
-    return offerDetailsList;
-  } catch (e) {
-    print(e);
-    return [];
-  }
-}
+// Future<List<AllProductDetails>> getUser() async {
+//   List<AllProductDetails> offerDetailsList = [];
+//   try {
+//     QuerySnapshot querySnapshot = await offerCollect.get();
+//     // ignore: avoid_function_literals_in_foreach_calls
+//     querySnapshot.docs.forEach((element) {
+//       offerDetailsList.add(
+//         AllProductDetails.fromSnapshot(element),
+//       );
+//     });
+//     return offerDetailsList;
+//   } catch (e) {
+//     print(e);
+//     return [];
+//   }
+// }
 
 Stream<List<AllProductDetails>> getOfferStream() {
   return offerCollect.snapshots().map((snapshot) {

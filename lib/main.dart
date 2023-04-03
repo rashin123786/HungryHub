@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'controlls/authentication.dart';
 import 'controlls/bottom_nav_controler.dart';
-import 'controlls/offer.dart';
+import 'controlls/cart_list_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +31,7 @@ class HungryHub extends StatelessWidget {
           create: (context) => BottomNavController(),
         ),
         ChangeNotifierProvider(
-          create: (context) => WishListData(),
+          create: (context) => CartProductControll(),
         )
       ],
       child: MaterialApp(

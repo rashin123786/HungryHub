@@ -29,7 +29,7 @@ List<String> images = [
 
 Color backgroundcolor = const Color.fromRGBO(255, 199, 0, 1);
 
-AllProductDetails? allDatas;
+late AllProductDetails allDatas;
 
 bool isOffer = true;
 

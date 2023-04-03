@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../model/all_product_model.dart.dart';
 
 class WishListScreen extends StatefulWidget {
-  WishListScreen({super.key});
+  const WishListScreen({super.key});
 
   @override
   State<WishListScreen> createState() => _WishListScreenState();
@@ -26,7 +26,7 @@ class _WishListScreenState extends State<WishListScreen> {
         .get();
     setState(() {
       allfood = result.docs.map((e) {
-        return AllProductDetails.fromjson(e.data() as Map<String, dynamic>);
+        return AllProductDetails.fromjson(e.data());
       }).toList();
     });
   }

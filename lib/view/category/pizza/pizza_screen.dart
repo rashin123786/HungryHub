@@ -80,7 +80,7 @@ class PizzaScreen extends StatelessWidget {
                         itemCount: snapshot.data!.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: (0.55 / 0.7),
+                          childAspectRatio: (0.45 / 0.55),
                           crossAxisCount: 2,
                           crossAxisSpacing: 2,
                         ),
@@ -90,6 +90,7 @@ class PizzaScreen extends StatelessWidget {
                             onTap: () async {
                               isOffer = true;
                               allDatas = await AllProductDetails(
+                                id: data.id,
                                 productImage: data.productImage,
                                 productName: data.productName,
                                 productRate: data.productRate,

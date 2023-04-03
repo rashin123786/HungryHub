@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
 
 import 'package:hungryhub/view/Home/home.dart';
+import 'package:hungryhub/view/Home/widgets/counter.dart';
 
 import '../../domain/services/offer.dart';
 import 'widgets/amount_detials.dart';
@@ -31,7 +32,7 @@ class ProductOverView extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: Image.network(
-                          allDatas!.productImage,
+                          '${allDatas.productImage}',
                           width: double.infinity,
                           height: 250,
                           fit: BoxFit.cover,
@@ -66,7 +67,7 @@ class ProductOverView extends StatelessWidget {
                 //       label: Text('Add to Cart')),
                 // )
                 Text(
-                  allDatas!.productName,
+                  allDatas.productName,
                   style: GoogleFonts.secularOne(
                     fontSize: 28,
                     color: backgroundcolor,
@@ -77,17 +78,20 @@ class ProductOverView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      " ⏰${allDatas!.productTime} ",
+                      " ⏰${allDatas.productTime} ",
                       style: GoogleFonts.secularOne(
                         fontSize: 20,
                       ),
                     ),
-                    ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: backgroundcolor),
-                        onPressed: () {},
-                        icon: Icon(Icons.add),
-                        label: Text('Add to Cart')),
+                    CounterWidget(
+                      id: allDatas.id,
+                      productDescription: allDatas.productDescription,
+                      productImage: allDatas.productImage,
+                      productName: allDatas.productName,
+                      productRate: allDatas.productRate,
+                      productTime: allDatas.productTime,
+                      produtQuantity: 1,
+                    ),
                     !isOffer
                         ? Flexible(
                             child: RichText(
@@ -98,7 +102,7 @@ class ProductOverView extends StatelessWidget {
                                   children: [
                                     TextSpan(children: [
                                       TextSpan(
-                                          text: "₹${allDatas!.productRate}",
+                                          text: "₹${allDatas.productRate}",
                                           style: GoogleFonts.secularOne(
                                             fontSize: 20,
                                             color: Colors.black,
@@ -110,7 +114,7 @@ class ProductOverView extends StatelessWidget {
                             ),
                           )
                         : Text(
-                            "₹${allDatas!.productRate}",
+                            "₹${allDatas.productRate}",
                             style: GoogleFonts.secularOne(
                               fontSize: 20,
                             ),
@@ -119,18 +123,23 @@ class ProductOverView extends StatelessWidget {
                 ),
                 sizedboxHeight10,
                 Text(
-                  allDatas!.productDescription,
+                  allDatas.productDescription,
                   style: GoogleFonts.secularOne(
                     fontSize: 15,
                     color: Color.fromARGB(255, 161, 161, 161),
                   ),
                 ),
                 divider,
-                ProductOverViewAmount(
-                  leftText: 'Subtotal',
-                  rightText:
-                      "₹${((allDatas!.productRate / 100) * 30).floorToDouble()}",
-                ),
+                !isOffer
+                    ? ProductOverViewAmount(
+                        leftText: 'Subtotal',
+                        rightText:
+                            "₹${((allDatas.productRate / 100) * 30).floorToDouble()}",
+                      )
+                    : ProductOverViewAmount(
+                        leftText: 'Subtotal',
+                        rightText: "₹${allDatas.productRate}",
+                      ),
                 ProductOverViewAmount(
                   leftText: 'Additional Fee',
                   rightText: "₹${10}",
@@ -145,13 +154,21 @@ class ProductOverView extends StatelessWidget {
                         fontSize: 25,
                       ),
                     ),
-                    Text(
-                      "₹${((allDatas!.productRate / 100) * 30).floorToDouble() + 10}",
-                      softWrap: true,
-                      style: GoogleFonts.secularOne(
-                        fontSize: 20,
-                      ),
-                    )
+                    !isOffer
+                        ? Text(
+                            "₹${((allDatas.productRate / 100) * 30).floorToDouble() + 10}",
+                            softWrap: true,
+                            style: GoogleFonts.secularOne(
+                              fontSize: 20,
+                            ),
+                          )
+                        : Text(
+                            "₹${allDatas.productRate + 10}",
+                            softWrap: true,
+                            style: GoogleFonts.secularOne(
+                              fontSize: 20,
+                            ),
+                          )
                   ],
                 ),
                 divider,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryhub/controlls/offer.dart';
+import 'package:hungryhub/controlls/cart_list_controller.dart';
 import 'package:hungryhub/domain/services/sandwich._product.dart';
 import 'package:provider/provider.dart';
 
@@ -86,13 +86,14 @@ class SandwichScreen extends StatelessWidget {
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 2,
-                            childAspectRatio: (0.5 / 0.7)),
+                            childAspectRatio: (0.45 / 0.55)),
                         itemBuilder: (context, index) {
                           final data = snapshot.data![index];
                           return GestureDetector(
                             onTap: () async {
                               isOffer = true;
                               allDatas = await AllProductDetails(
+                                id: data.id,
                                 productImage: data.productImage,
                                 productName: data.productName,
                                 productRate: data.productRate,

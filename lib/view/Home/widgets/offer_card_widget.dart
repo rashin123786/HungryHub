@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hungryhub/model/all_product_model.dart.dart';
@@ -45,7 +44,8 @@ class OfferCardWidget extends StatelessWidget {
                     ),
                     onTap: () async {
                       isOffer = false;
-                      allDatas = await AllProductDetails(
+                      allDatas = AllProductDetails(
+                        id: data.id,
                         productImage: data.productImage,
                         productName: data.productName,
                         productRate: data.productRate,

@@ -14,8 +14,8 @@ class BottomNav extends StatelessWidget {
 
   final pages = [
     HomeScreen(),
-    const CartScreen(),
-    WishListScreen(),
+    CartScreen(),
+    const WishListScreen(),
     const OrderHistory()
   ];
 

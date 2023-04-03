@@ -11,7 +11,9 @@ class OrderHistory extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Column(
-        children: [Text('orderHistory'), Text(burgerobj!.productName)],
+        children: [
+          Text('orderHistory'),
+        ],
       )),
     );
   }

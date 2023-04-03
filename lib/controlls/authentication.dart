@@ -193,7 +193,7 @@ class AuthenticateProvider with ChangeNotifier {
         );
       });
     } on FirebaseAuthException catch (e) {
-      return;
+      return e;
     }
     notifyListeners();
   }

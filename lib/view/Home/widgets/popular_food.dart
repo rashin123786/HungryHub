@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryhub/controlls/offer.dart';
+
 import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/domain/services/popular_food.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../model/all_product_model.dart.dart';
 import '../../productOverview/product_overview.dart';
 
 class PopularFoods extends StatelessWidget {
-  PopularFoods({super.key});
+  const PopularFoods({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +26,7 @@ class PopularFoods extends StatelessWidget {
         } else if (snapshot.hasData) {
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: (0.53 / 0.7),
+                childAspectRatio: (0.45 / 0.57),
                 crossAxisSpacing: 2,
                 crossAxisCount: 2),
             shrinkWrap: true,
@@ -43,7 +39,8 @@ class PopularFoods extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () async {
                     isOffer = true;
-                    allDatas = await AllProductDetails(
+                    allDatas = AllProductDetails(
+                      id: popularData.id,
                       productImage: popularData.productImage,
                       productName: popularData.productName,
                       productRate: popularData.productRate,
@@ -84,12 +81,8 @@ class PopularFoods extends StatelessWidget {
                                 radius: 24,
                                 backgroundColor: Colors.white,
                                 child: IconButton(
-                                    onPressed: () {
-                                      // Provider.of<WishListData>(context,
-                                      //         listen: false)
-                                      //     .addWishListData();
-                                    },
-                                    icon: Icon(
+                                    onPressed: () {},
+                                    icon: const Icon(
                                       Icons.favorite,
                                       color: Colors.amber,
                                       size: 35,

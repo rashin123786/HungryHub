@@ -1,17 +1,15 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/domain/constants/constants.dart';
-import 'package:hungryhub/domain/services/offer.dart';
 
 import 'package:hungryhub/view/Home/widgets/offer_card_widget.dart';
 import 'package:hungryhub/view/category/Burger/burger_screen.dart';
 import 'package:hungryhub/view/category/pizza/pizza_screen.dart';
 import 'package:hungryhub/view/category/sandwich/sandwich_screen.dart';
-import 'package:hungryhub/view/productOverview/product_overview.dart';
+
 import 'package:hungryhub/view/widgets/drawer_screen.dart';
 import 'package:hungryhub/view/Home/widgets/popular_food.dart';
 
@@ -131,7 +129,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               sizedboxHeight10,
-              PopularFoods(),
+              const PopularFoods(),
             ],
           ),
         ),
