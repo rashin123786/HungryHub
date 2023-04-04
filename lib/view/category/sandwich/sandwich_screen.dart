@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../domain/constants/constants.dart';
 import '../../../model/all_product_model.dart.dart';
+import '../../Home/widgets/wish_list_button.dart';
 import '../../productOverview/product_overview.dart';
 
 class SandwichScreen extends StatelessWidget {
@@ -121,7 +122,7 @@ class SandwichScreen extends StatelessWidget {
                                     children: [
                                       ClipRRect(
                                         borderRadius:
-                                            BorderRadius.circular(15.0),
+                                            BorderRadius.circular(21.0),
                                         child: Image.network(
                                           data.productImage,
                                           fit: BoxFit.fill,
@@ -129,21 +130,15 @@ class SandwichScreen extends StatelessWidget {
                                           height: height * 0.2,
                                         ),
                                       ),
-                                      Positioned(
-                                        left: width * 0.365,
-                                        top: height * 0.15,
-                                        child: CircleAvatar(
-                                          radius: 24,
-                                          backgroundColor: Colors.white,
-                                          child: IconButton(
-                                              onPressed: () {},
-                                              icon: Icon(
-                                                Icons.favorite,
-                                                color: Colors.amber,
-                                                size: 35,
-                                              )),
-                                        ),
-                                      ),
+                                      WishListButton(
+                                        id: data.id,
+                                        productImage: data.productImage,
+                                        productName: data.productName,
+                                        productRate: data.productRate,
+                                        productDescription:
+                                            data.productDescription,
+                                        productTime: data.productTime,
+                                      )
                                     ],
                                   ),
                                   Flexible(

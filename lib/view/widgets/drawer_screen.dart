@@ -2,7 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryhub/domain/services/offer.dart';
+
+import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/productOverview/product_overview.dart';
 import 'package:provider/provider.dart';
 
@@ -69,6 +70,13 @@ class DrawerScreen extends StatelessWidget {
                   ),
                 ),
                 textColor: backgroundcolor,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartScreen(),
+                      ));
+                },
               ),
               ListTile(
                 title: Text(

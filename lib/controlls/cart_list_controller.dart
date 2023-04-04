@@ -7,8 +7,7 @@ import 'package:hungryhub/model/all_product_model.dart.dart';
 import 'package:hungryhub/model/cart_model.dart.dart';
 
 class CartProductControll with ChangeNotifier {
-  List<CartModel> cartDataList = [];
-
+///////////////   Add to Cart   //////////////////////////
   void addCartData({
     String? id,
     String productImage = '',
@@ -29,11 +28,14 @@ class CartProductControll with ChangeNotifier {
       "productName": productName,
       "productRate": productRate,
       "productDescription": productDescription,
-      "productTime": productDescription,
+      "productTime": productTime,
       "produtQuantity": produtQuantity,
       "isAdd": true,
     });
+    notifyListeners();
   }
+
+//////////////   Update Cart   //////////////////////
 
   void updatedCartData({
     String? id,
@@ -55,13 +57,16 @@ class CartProductControll with ChangeNotifier {
       "productName": productName,
       "productRate": productRate,
       "productDescription": productDescription,
-      "productTime": productDescription,
+      "productTime": productTime,
       "produtQuantity": produtQuantity,
       "isAdd": true,
     });
     notifyListeners();
   }
 
+///////////////   Get Cart Data    ////////////////////////////
+
+  List<CartModel> cartDataList = [];
   void getCartList() async {
     List<CartModel> newList = [];
     final cartValue = await FirebaseFirestore.instance
@@ -89,7 +94,7 @@ class CartProductControll with ChangeNotifier {
     return cartDataList;
   }
 
-  /////////////////// cart Delete/////////////////////
+  ////////////   cart Delete    /////////////////////
   cartDeleteData(productId) {
     FirebaseFirestore.instance
         .collection('cart')

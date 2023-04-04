@@ -14,9 +14,8 @@ class BottomNav extends StatelessWidget {
 
   final pages = [
     HomeScreen(),
-    CartScreen(),
-    const WishListScreen(),
-    const OrderHistory()
+    WishListScreen(),
+    const OrderHistory(),
   ];
 
   @override
@@ -32,7 +31,6 @@ class BottomNav extends StatelessWidget {
         bottomNavigationBar: FancyBottomNavigation(
           tabs: [
             TabData(iconData: Icons.home, title: "Home"),
-            TabData(iconData: Icons.shopping_cart, title: "Cart"),
             TabData(iconData: Icons.favorite_rounded, title: "WishList"),
             TabData(iconData: Icons.history_rounded, title: "OrderHistory")
           ],

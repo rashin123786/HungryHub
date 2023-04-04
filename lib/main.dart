@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hungryhub/controlls/wish_list_controller.dart';
 import 'package:hungryhub/view/SplashScreen/splash_screen.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'controlls/authentication.dart';
@@ -32,16 +34,21 @@ class HungryHub extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CartProductControll(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => WishListController(),
         )
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            primarySwatch: Colors.grey,
-            appBarTheme: const AppBarTheme(
-              color: Colors.orange,
-            )),
-        home: const SplashScreen(),
+      child: OverlaySupport.global(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              primarySwatch: Colors.grey,
+              appBarTheme: const AppBarTheme(
+                color: Colors.orange,
+              )),
+          home: const SplashScreen(),
+        ),
       ),
     );
   }

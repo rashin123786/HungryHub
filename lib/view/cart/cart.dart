@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/domain/services/offer.dart';
@@ -25,13 +27,22 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+            //  Navigator.pop(context);
+          },
+        ),
         title: Text(
           'Cart',
           style: GoogleFonts.secularOne(fontSize: 30, color: Colors.black),
         ),
       ),
       body: cartProductControll.getcartDataList.isEmpty
-          ? Center(
+          ? const Center(
               child: Text('No Data'),
             )
           : Padding(
@@ -73,7 +84,7 @@ class CartScreen extends StatelessWidget {
                                 backgroundColor: Colors.white,
                                 child: IconButton(
                                     onPressed: () {},
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.favorite,
                                       color: Colors.amber,
                                       size: 35,
@@ -88,7 +99,7 @@ class CartScreen extends StatelessWidget {
                             text: TextSpan(
                               style: GoogleFonts.secularOne(
                                   fontSize: 20, color: Colors.black),
-                              text: '${data.productName}',
+                              text: data.productName,
                             ),
                           ),
                         ),
@@ -112,9 +123,9 @@ class CartScreen extends StatelessWidget {
                             ),
                             IconButton(
                                 onPressed: () {
-                                  CartDeleteDialogue(context, data.id);
+                                  cartDeleteDialogue(context, data.id);
                                 },
-                                icon: Icon(Icons.delete))
+                                icon: const Icon(Icons.delete))
                           ],
                         )
                       ],
@@ -126,22 +137,23 @@ class CartScreen extends StatelessWidget {
     );
   }
 
-  CartDeleteDialogue(BuildContext context, var delete) {
+  cartDeleteDialogue(BuildContext context, var delete) {
     // set up the buttons
     Widget cancelButton = TextButton(
-      child: Text("No"),
+      child: const Text("No"),
       onPressed: () {
         Navigator.pop(context);
       },
     );
     Widget continueButton = TextButton(
-      child: Text("Yes"),
+      child: const Text("Yes"),
       onPressed: () async {
         await Provider.of<CartProductControll>(context, listen: false)
             .cartDeleteData(delete);
+
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             duration: Duration(milliseconds: 350),
             content: Text(
               'item removed from cart',
@@ -153,8 +165,8 @@ class CartScreen extends StatelessWidget {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Remove From Cart"),
-      content: Text("Do you like to remove this item from cart?"),
+      title: const Text("Remove From Cart"),
+      content: const Text("Do you like to remove this item from cart?"),
       actions: [
         cancelButton,
         continueButton,

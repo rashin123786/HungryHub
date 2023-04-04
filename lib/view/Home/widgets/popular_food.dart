@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/domain/services/popular_food.dart';
+import 'package:hungryhub/view/Home/widgets/wish_list_button.dart';
 
 import '../../../model/all_product_model.dart.dart';
 import '../../productOverview/product_overview.dart';
@@ -66,7 +67,7 @@ class PopularFoods extends StatelessWidget {
                         Stack(
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0),
+                              borderRadius: BorderRadius.circular(21.0),
                               child: Image.network(
                                 popularData.productImage,
                                 fit: BoxFit.fill,
@@ -74,20 +75,14 @@ class PopularFoods extends StatelessWidget {
                                 height: height * 0.2,
                               ),
                             ),
-                            Positioned(
-                              left: width * 0.35,
-                              top: height * 0.15,
-                              child: CircleAvatar(
-                                radius: 24,
-                                backgroundColor: Colors.white,
-                                child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.favorite,
-                                      color: Colors.amber,
-                                      size: 35,
-                                    )),
-                              ),
+                            WishListButton(
+                              id: popularData.id,
+                              productDescription:
+                                  popularData.productDescription,
+                              productImage: popularData.productImage,
+                              productName: popularData.productName,
+                              productRate: popularData.productRate,
+                              productTime: popularData.productTime,
                             )
                           ],
                         ),

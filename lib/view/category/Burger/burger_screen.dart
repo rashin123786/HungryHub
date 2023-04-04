@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/controlls/cart_list_controller.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:hungryhub/view/Home/widgets/wish_list_button.dart';
 
 import 'package:hungryhub/view/widgets/text_form_field.dart';
 import 'package:provider/provider.dart';
@@ -144,7 +145,7 @@ class _BurgerScreenState extends State<BurgerScreen> {
                                       children: [
                                         ClipRRect(
                                           borderRadius:
-                                              BorderRadius.circular(15.0),
+                                              BorderRadius.circular(21.0),
                                           child: Image.network(
                                             data.productImage,
                                             fit: BoxFit.fill,
@@ -152,21 +153,15 @@ class _BurgerScreenState extends State<BurgerScreen> {
                                             height: height * 0.2,
                                           ),
                                         ),
-                                        Positioned(
-                                          left: width * 0.365,
-                                          top: height * 0.15,
-                                          child: CircleAvatar(
-                                            radius: 24,
-                                            backgroundColor: Colors.white,
-                                            child: IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(
-                                                  Icons.favorite,
-                                                  color: Colors.amber,
-                                                  size: 35,
-                                                )),
-                                          ),
-                                        )
+                                        WishListButton(
+                                          id: data.id,
+                                          productImage: data.productImage,
+                                          productName: data.productName,
+                                          productRate: data.productRate,
+                                          productDescription:
+                                              data.productDescription,
+                                          productTime: data.productTime,
+                                        ),
                                       ],
                                     ),
                                     Flexible(

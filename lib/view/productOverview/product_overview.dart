@@ -6,6 +6,7 @@ import 'package:hungryhub/view/Home/home.dart';
 import 'package:hungryhub/view/Home/widgets/counter.dart';
 
 import '../../domain/services/offer.dart';
+import '../Home/widgets/wish_list_button.dart';
 import 'widgets/amount_detials.dart';
 
 class ProductOverView extends StatelessWidget {
@@ -25,12 +26,12 @@ class ProductOverView extends StatelessWidget {
               children: [
                 Card(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular(16.0),
                   ),
                   child: Stack(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(19),
                         child: Image.network(
                           '${allDatas.productImage}',
                           width: double.infinity,
@@ -38,21 +39,13 @@ class ProductOverView extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      Positioned(
-                        left: width * 0.818,
-                        top: height * 0.264,
-                        child: CircleAvatar(
-                          radius: 23.5,
-                          backgroundColor: Colors.white,
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.favorite,
-                              color: Colors.amber,
-                              size: 33,
-                            ),
-                          ),
-                        ),
+                      WishListButton(
+                        id: allDatas.id,
+                        productImage: allDatas.productImage,
+                        productName: allDatas.productName,
+                        productRate: allDatas.productRate,
+                        productDescription: allDatas.productDescription,
+                        productTime: allDatas.productTime,
                       )
                     ],
                   ),
