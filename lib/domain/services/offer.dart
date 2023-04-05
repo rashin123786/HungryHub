@@ -21,6 +21,8 @@ final CollectionReference offerCollect =
 //   }
 // }
 
+//////////       Get offer List     ///////////////////////
+
 Stream<List<AllProductDetails>> getOfferStream() {
   return offerCollect.snapshots().map((snapshot) {
     return snapshot.docs.map((doc) {

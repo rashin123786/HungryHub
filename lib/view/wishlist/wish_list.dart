@@ -1,10 +1,9 @@
-import 'dart:async';
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/controlls/wish_list_controller.dart';
-import 'package:hungryhub/view/Home/widgets/wish_list_button.dart';
+import 'package:hungryhub/view/widgets/wish_list_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../domain/constants/constants.dart';
@@ -35,7 +34,7 @@ class _WishListScreenState extends State<WishListScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final width = size.width;
+    // final width = size.width;
     final height = size.height;
     final wishListController = Provider.of<WishListController>(context);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -53,18 +52,18 @@ class _WishListScreenState extends State<WishListScreen> {
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.only(top: 30),
-        child: wishListController.AllwishListData.isEmpty
-            ? Center(
+        child: wishListController.allwishListData.isEmpty
+            ? const Center(
                 child: Text('No Data Found'),
               )
             : GridView.builder(
-                itemCount: wishListController.AllwishListData.length,
+                itemCount: wishListController.allwishListData.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     childAspectRatio: (0.55 / 0.67),
                     crossAxisSpacing: 2,
                     crossAxisCount: 2),
                 itemBuilder: (context, index) {
-                  final data = wishListController.AllwishListData[index];
+                  final data = wishListController.allwishListData[index];
                   return GestureDetector(
                     child: Card(
                       shape: RoundedRectangleBorder(
@@ -116,7 +115,7 @@ class _WishListScreenState extends State<WishListScreen> {
                       ),
                     ),
                     onTap: () async {
-                      allDatas = await AllProductDetails(
+                      allDatas = AllProductDetails(
                           id: data.id,
                           productImage: data.productImage,
                           productName: data.productName,

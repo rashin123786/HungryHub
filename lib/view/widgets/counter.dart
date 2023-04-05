@@ -3,10 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../../controlls/cart_list_controller.dart';
+import '../../controlls/cart_list_controller.dart';
 
 // ignore: must_be_immutable
 class CounterWidget extends StatefulWidget {
@@ -107,18 +108,29 @@ class _CounterWidgetState extends State<CounterWidget> {
                 ),
                 InkWell(
                   onTap: () {
-                    setState(() {
-                      count++;
-                    });
-                    cartProductControll.updatedCartData(
-                      id: widget.id,
-                      productDescription: widget.productDescription ?? '',
-                      productImage: widget.productImage ?? '',
-                      productName: widget.productName ?? '',
-                      productRate: widget.productRate,
-                      productTime: widget.productTime ?? '',
-                      produtQuantity: count,
-                    );
+                    if (count >= 6) {
+                      showSimpleNotification(
+                          Text(
+                            'you reached your minimum quantity',
+                            style: GoogleFonts.secularOne(
+                                fontSize: 20, color: Colors.amber),
+                          ),
+                          background: Colors.white,
+                          duration: const Duration(milliseconds: 300));
+                    } else {
+                      setState(() {
+                        count++;
+                      });
+                      cartProductControll.updatedCartData(
+                        id: widget.id,
+                        productDescription: widget.productDescription ?? '',
+                        productImage: widget.productImage ?? '',
+                        productName: widget.productName ?? '',
+                        productRate: widget.productRate,
+                        productTime: widget.productTime ?? '',
+                        produtQuantity: count,
+                      );
+                    }
                   },
                   child: const Icon(
                     Icons.add,

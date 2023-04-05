@@ -10,8 +10,9 @@ import 'package:hungryhub/view/category/Burger/burger_screen.dart';
 import 'package:hungryhub/view/category/pizza/pizza_screen.dart';
 import 'package:hungryhub/view/category/sandwich/sandwich_screen.dart';
 
-import 'package:hungryhub/view/widgets/drawer_screen.dart';
 import 'package:hungryhub/view/Home/widgets/popular_food.dart';
+
+import '../menu/menu_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -27,7 +28,6 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       key: scaffoldKey,
-      endDrawer: DrawerScreen(),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.only(left: 10, top: 30, right: 10),
@@ -46,7 +46,11 @@ class HomeScreen extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      scaffoldKey.currentState!.openEndDrawer();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MenuScreen(),
+                          ));
                     },
                     icon: const Icon(
                       Icons.list,
@@ -63,6 +67,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      isCategory = 1;
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -81,6 +86,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      isCategory = 2;
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -99,6 +105,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      isCategory = 3;
                       Navigator.push(
                         context,
                         MaterialPageRoute(

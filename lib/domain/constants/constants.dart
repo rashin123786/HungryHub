@@ -32,5 +32,6 @@ Color backgroundcolor = const Color.fromRGBO(255, 199, 0, 1);
 late AllProductDetails allDatas;
 
 bool isOffer = true;
+int? isCategory;
 
-Divider divider = Divider();
+Divider divider = const Divider();

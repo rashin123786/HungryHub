@@ -2,7 +2,7 @@ import 'package:fancy_bottom_navigation_2/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hungryhub/view/Home/home.dart';
-import 'package:hungryhub/view/cart/cart.dart';
+
 import 'package:hungryhub/view/wishlist/wish_list.dart';
 import 'package:provider/provider.dart';
 import '../../controlls/bottom_nav_controler.dart';

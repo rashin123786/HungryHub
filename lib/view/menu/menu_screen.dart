@@ -5,23 +5,21 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/productOverview/product_overview.dart';
-import 'package:provider/provider.dart';
 
-import '../../controlls/authentication.dart';
 import '../../domain/constants/constants.dart';
 
-class DrawerScreen extends StatelessWidget {
-  DrawerScreen({super.key});
+class MenuScreen extends StatelessWidget {
+  MenuScreen({super.key});
 
   final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
-    final authpProvider =
-        Provider.of<AuthenticateProvider>(context, listen: false);
+    // final authpProvider =
+    //     Provider.of<AuthenticateProvider>(context, listen: false);
     final size = MediaQuery.of(context).size;
     final width = size.width;
-    final height = size.height;
+
     return Drawer(
       width: width * 0.6,
       child: SafeArea(
@@ -80,6 +78,22 @@ class DrawerScreen extends StatelessWidget {
               ),
               ListTile(
                 title: Text(
+                  'Address Book',
+                  style: GoogleFonts.secularOne(
+                    fontSize: 20,
+                  ),
+                ),
+                textColor: backgroundcolor,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartScreen(),
+                      ));
+                },
+              ),
+              ListTile(
+                title: Text(
                   'Settings',
                   style: GoogleFonts.secularOne(
                     fontSize: 20,
@@ -98,9 +112,6 @@ class DrawerScreen extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => const ProductOverView(),
                       ));
-                  // fetchOfferDetails();
-                  //  hlo();
-                  //  authpProvider.logOutWithGoogle(context);
                 },
                 child: const Text(
                   'Logout',

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../domain/constants/constants.dart';
-
 class ProductOverViewAmount extends StatelessWidget {
   const ProductOverViewAmount({
     super.key,

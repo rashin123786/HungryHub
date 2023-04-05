@@ -56,7 +56,7 @@ class WishListController with ChangeNotifier {
     notifyListeners();
   }
 
-  List<AllProductDetails> get AllwishListData {
+  List<AllProductDetails> get allwishListData {
     return wishlistData;
   }
 
@@ -72,6 +72,3 @@ class WishListController with ChangeNotifier {
     notifyListeners();
   }
 }
-
-///////////////////////////
-

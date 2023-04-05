@@ -1,12 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:hungryhub/controlls/search_controller.dart';
-import 'package:hungryhub/domain/constants/constants.dart';
+
 import 'package:hungryhub/domain/services/burger_product.dart';
 import 'package:hungryhub/model/all_product_model.dart.dart';
-import 'package:provider/provider.dart';
-
-import '../category/Burger/burger_screen.dart';
 
 class OrderHistory extends StatefulWidget {
   const OrderHistory({super.key});
@@ -49,11 +44,11 @@ class _OrderHistoryState extends State<OrderHistory> {
                 //     getBurgerStreams(query);
                 // print(burgertree);
               },
-              child: Text('click me')),
+              child: const Text('click me')),
           TextFormField(
             onChanged: (value) {
               setState(() {
-                burgerstream = SearchBurger(value);
+                burgerstream = searchBurger(value);
                 //  onSearchChanged(value);
               });
               // print(value);
@@ -98,7 +93,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final datare = snapshot.data![index];
-                    print(datare.productName);
+
                     return Text(datare.productName);
                   },
                 );

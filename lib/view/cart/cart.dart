@@ -2,15 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryhub/domain/services/offer.dart';
-import 'package:hungryhub/model/cart_model.dart.dart';
-import 'package:hungryhub/view/Home/widgets/counter.dart';
-import 'package:hungryhub/view/Home/widgets/popular_food.dart';
+
+import 'package:hungryhub/view/widgets/counter.dart';
+
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
 import '../../controlls/cart_list_controller.dart';
 import '../../domain/constants/constants.dart';
 
+// ignore: must_be_immutable
 class CartScreen extends StatelessWidget {
   CartProductControll? cartProductControll;
   CartScreen({super.key});
@@ -23,12 +24,12 @@ class CartScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
-    print(cartProductControll.getcartDataList.length);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
           ),
           onPressed: () {
@@ -104,7 +105,7 @@ class CartScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${data.productRate}',
+                          '₹${data.productRate}',
                           style: GoogleFonts.secularOne(
                             fontSize: 25,
                           ),
@@ -134,6 +135,39 @@ class CartScreen extends StatelessWidget {
                 },
               ),
             ),
+      bottomNavigationBar: ListTile(
+        title: Text(
+          'Total Amount',
+          style: GoogleFonts.secularOne(fontSize: 20, color: Colors.grey),
+        ),
+        subtitle: Text(
+          '₹${cartProductControll.getTotalPrice()}',
+          style: GoogleFonts.secularOne(
+            fontSize: 20,
+            color: Colors.black,
+          ),
+        ),
+        trailing: SizedBox(
+          width: width * 0.4,
+          height: height * 0.5,
+          child: MaterialButton(
+            onPressed: () {},
+            color: Colors.amber,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                12,
+              ),
+            ),
+            child: Text(
+              'Submit',
+              style: GoogleFonts.secularOne(
+                fontSize: 15,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -152,14 +186,13 @@ class CartScreen extends StatelessWidget {
             .cartDeleteData(delete);
 
         Navigator.pop(context);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            duration: Duration(milliseconds: 350),
-            content: Text(
+        showSimpleNotification(
+            Text(
               'item removed from cart',
+              style: GoogleFonts.secularOne(fontSize: 20, color: Colors.amber),
             ),
-          ),
-        );
+            background: Colors.white,
+            duration: const Duration(milliseconds: 300));
       },
     );
 

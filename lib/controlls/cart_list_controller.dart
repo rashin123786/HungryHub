@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
-import 'package:hungryhub/domain/constants/constants.dart';
-import 'package:hungryhub/model/all_product_model.dart.dart';
+
 import 'package:hungryhub/model/cart_model.dart.dart';
 
 class CartProductControll with ChangeNotifier {
@@ -103,5 +102,13 @@ class CartProductControll with ChangeNotifier {
         .doc(productId)
         .delete();
     notifyListeners();
+  }
+
+  getTotalPrice() {
+    num total = 0.0;
+    cartDataList.forEach((element) {
+      total += element.productRate * element.produtQuantity!;
+    });
+    return total;
   }
 }

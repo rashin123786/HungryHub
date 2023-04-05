@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
 
-import 'package:hungryhub/view/Home/home.dart';
-import 'package:hungryhub/view/Home/widgets/counter.dart';
+import 'package:hungryhub/view/widgets/counter.dart';
 
-import '../../domain/services/offer.dart';
-import '../Home/widgets/wish_list_button.dart';
+import '../widgets/wish_list_button.dart';
 import 'widgets/amount_detials.dart';
 
 class ProductOverView extends StatelessWidget {
@@ -15,7 +13,7 @@ class ProductOverView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final width = size.width;
+    // final width = size.width;
     final height = size.height;
     return Scaffold(
       body: SafeArea(
@@ -33,7 +31,7 @@ class ProductOverView extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(19),
                         child: Image.network(
-                          '${allDatas.productImage}',
+                          allDatas.productImage,
                           width: double.infinity,
                           height: 250,
                           fit: BoxFit.cover,
@@ -119,7 +117,7 @@ class ProductOverView extends StatelessWidget {
                   allDatas.productDescription,
                   style: GoogleFonts.secularOne(
                     fontSize: 15,
-                    color: Color.fromARGB(255, 161, 161, 161),
+                    color: const Color.fromARGB(255, 161, 161, 161),
                   ),
                 ),
                 divider,
@@ -133,7 +131,7 @@ class ProductOverView extends StatelessWidget {
                         leftText: 'Subtotal',
                         rightText: "₹${allDatas.productRate}",
                       ),
-                ProductOverViewAmount(
+                const ProductOverViewAmount(
                   leftText: 'Additional Fee',
                   rightText: "₹${10}",
                 ),
@@ -175,7 +173,7 @@ class ProductOverView extends StatelessWidget {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: backgroundcolor,
-                      minimumSize: Size.fromHeight(45)),
+                      minimumSize: const Size.fromHeight(45)),
                   onPressed: () {},
                   child: Text(
                     'Buy',

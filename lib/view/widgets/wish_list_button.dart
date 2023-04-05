@@ -1,14 +1,14 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/controlls/wish_list_controller.dart';
-import 'package:hungryhub/domain/constants/constants.dart';
+
 import 'package:provider/provider.dart';
 import 'package:overlay_support/overlay_support.dart';
-import '../../../controlls/wish_list_controller.dart';
 
 class WishListButton extends StatefulWidget {
   WishListButton({
@@ -76,14 +76,14 @@ class _WishListButtonState extends State<WishListButton> {
                     wishListController.wishListDelete(widget.id);
                     showSimpleNotification(
                         Text(
-                          'Deleted from WishList',
+                          'Removed from WishList',
                           style: GoogleFonts.secularOne(
                               fontSize: 20, color: Colors.amber),
                         ),
                         background: Colors.white,
-                        duration: Duration(milliseconds: 300));
+                        duration: const Duration(milliseconds: 300));
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.favorite,
                     color: Colors.amber,
                     size: 30,
@@ -108,9 +108,9 @@ class _WishListButtonState extends State<WishListButton> {
                               fontSize: 20, color: Colors.amber),
                         ),
                         background: Colors.white,
-                        duration: Duration(milliseconds: 300));
+                        duration: const Duration(milliseconds: 300));
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.favorite_border,
                     color: Colors.amber,
                   ))),
