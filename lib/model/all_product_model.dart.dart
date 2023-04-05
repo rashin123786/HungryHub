@@ -37,4 +37,20 @@ class AllProductDetails {
   //     productDescription: snapshot.get('productDescription'),
   //   );
   // }
+
+  List<AllProductDetails> dataListFromSnapshot(QuerySnapshot querySnapshot) {
+    return querySnapshot.docs.map((snapshot) {
+      final Map<String, dynamic> dataMap =
+          snapshot.data() as Map<String, dynamic>;
+
+      return AllProductDetails(
+        id: dataMap['productId'],
+        productImage: dataMap['productImg'],
+        productName: dataMap['productName'],
+        productRate: dataMap['productRate'],
+        productDescription: dataMap['productDescription'],
+        productTime: dataMap['productTime'],
+      );
+    }).toList();
+  }
 }

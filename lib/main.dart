@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'controlls/authentication.dart';
 import 'controlls/bottom_nav_controler.dart';
 import 'controlls/cart_list_controller.dart';
+import 'controlls/product_model.dart';
+import 'controlls/search_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +39,9 @@ class HungryHub extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => WishListController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SearchControll(),
         )
       ],
       child: OverlaySupport.global(

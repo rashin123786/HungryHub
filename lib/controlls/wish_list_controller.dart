@@ -72,3 +72,6 @@ class WishListController with ChangeNotifier {
     notifyListeners();
   }
 }
+
+///////////////////////////
+

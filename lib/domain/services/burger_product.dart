@@ -16,13 +16,25 @@ Stream<List<AllProductDetails>> getBurgerStream() {
   });
 }
 
-Stream<List<AllProductDetails>> getBurgerSearch(String query) {
-  return burgerCollect
-      .where('productName', isEqualTo: query)
-      .snapshots()
-      .map((event) {
-    return event.docs.map((e) {
-      return AllProductDetails.fromjson(e.data() as Map<String, dynamic>);
-    }).toList();
+// Stream<List<AllProductDetails>> getBurgerSearch(String query) {
+//   return burgerCollect
+//       .where('productName', isEqualTo: query)
+//       .snapshots()
+//       .map((event) {
+//     return event.docs.map((e) {
+//       return AllProductDetails.fromjson(e.data() as Map<String, dynamic>);
+//     }).toList();
+//   });
+// }
+
+Stream<List<AllProductDetails>> SearchBurger(String searchQuery) {
+  return burgerCollect.snapshots().map((snapshot) {
+    return snapshot.docs
+        .map((doc) =>
+            AllProductDetails.fromjson(doc.data() as Map<String, dynamic>))
+        .where((product) => product.productName
+            .toLowerCase()
+            .contains(searchQuery.toLowerCase()))
+        .toList();
   });
 }

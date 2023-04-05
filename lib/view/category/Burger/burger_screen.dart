@@ -25,18 +25,21 @@ class BurgerScreen extends StatefulWidget {
 
 class _BurgerScreenState extends State<BurgerScreen> {
   final _formkey = GlobalKey<FormState>();
-
+  String query = '';
   final searchBurgerControl = TextEditingController();
   late final List<AllProductDetails> allresult;
-  String searchQuery = '';
-  void hlo() {
-    getBurgerStream().listen((List<AllProductDetails> burgerList) {
-      allburgerlist = burgerList;
-    });
+
+  List<AllProductDetails> searchList = [];
+  getsearch(String query) {
+    List<AllProductDetails> newsearchList = searchList.where((element) {
+      return element.productName.toLowerCase().contains(query);
+    }).toList();
+    return searchList;
   }
 
   @override
   Widget build(BuildContext context) {
+    List<AllProductDetails> _searchItem = getsearch(query);
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
@@ -51,8 +54,10 @@ class _BurgerScreenState extends State<BurgerScreen> {
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: TextFormField(
                   onChanged: (value) {
-                    bool istext = false;
-                    searchQuery = value;
+                    print(value);
+                    setState(() {
+                      query = value;
+                    });
                   },
                   controller: searchBurgerControl,
                   validator: (value) =>
