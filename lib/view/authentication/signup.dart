@@ -33,6 +33,7 @@ class SignUp extends StatelessWidget {
                 ),
                 sizedboxHeight50,
                 ReUseTextFormsField(
+                  textInputType: TextInputType.text,
                   validator: (username) =>
                       username!.isEmpty ? 'Enter usename' : null,
                   controls: usernamecontrol,
@@ -44,6 +45,7 @@ class SignUp extends StatelessWidget {
                 ),
                 sizedboxHeight10,
                 ReUseTextFormsField(
+                  textInputType: TextInputType.emailAddress,
                   validator: (email) =>
                       email!.isEmpty && !EmailValidator.validate(email)
                           ? 'Enter valid Email'
@@ -57,6 +59,7 @@ class SignUp extends StatelessWidget {
                 ),
                 sizedboxHeight10,
                 ReUseTextFormsField(
+                  textInputType: TextInputType.text,
                   validator: (pass) => pass!.isEmpty && pass.length < 6
                       ? 'Enter min. 6 character'
                       : null,

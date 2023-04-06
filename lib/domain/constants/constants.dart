@@ -35,3 +35,6 @@ bool isOffer = true;
 int? isCategory;
 
 Divider divider = const Divider();
+Divider divider2 = const Divider(
+  thickness: 2,
+);

@@ -47,6 +47,7 @@ class ForgotPassword extends StatelessWidget {
           ),
           sizedboxHeight10,
           ReUseTextFormsField(
+              textInputType: TextInputType.emailAddress,
               validator: (email) =>
                   email!.isEmpty && !EmailValidator.validate(email)
                       ? 'Enter valid Email'

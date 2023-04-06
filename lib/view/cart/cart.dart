@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
 
 import 'package:hungryhub/view/widgets/counter.dart';
 
@@ -141,7 +142,7 @@ class CartScreen extends StatelessWidget {
           style: GoogleFonts.secularOne(fontSize: 20, color: Colors.grey),
         ),
         subtitle: Text(
-          '₹${cartProductControll.getTotalPrice()}',
+          '₹${cartProductControll.getTotalPrice() + cartProductControll.cartDataList.length * 10}',
           style: GoogleFonts.secularOne(
             fontSize: 20,
             color: Colors.black,
@@ -151,7 +152,24 @@ class CartScreen extends StatelessWidget {
           width: width * 0.4,
           height: height * 0.5,
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              if (cartProductControll.cartDataList.isEmpty) {
+                showSimpleNotification(
+                    Text(
+                      'Cart Item is Empty',
+                      style: GoogleFonts.secularOne(
+                          fontSize: 20, color: Colors.amber),
+                    ),
+                    background: Colors.white,
+                    duration: const Duration(milliseconds: 300));
+              } else {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddressDetails(),
+                    ));
+              }
+            },
             color: Colors.amber,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(

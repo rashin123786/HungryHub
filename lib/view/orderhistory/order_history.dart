@@ -1,38 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/domain/services/burger_product.dart';
 import 'package:hungryhub/model/all_product_model.dart.dart';
+import 'package:hungryhub/view/category/Burger/burger_screen.dart';
+import 'package:provider/provider.dart';
 
-class OrderHistory extends StatefulWidget {
-  const OrderHistory({super.key});
+import '../../controlls/search_controller.dart';
+import '../../domain/constants/constants.dart';
+import '../widgets/wish_list_button.dart';
 
-  @override
-  State<OrderHistory> createState() => _OrderHistoryState();
-}
+class OrderHistory extends StatelessWidget {
+  OrderHistory({super.key});
 
-class _OrderHistoryState extends State<OrderHistory> {
   TextEditingController searchController = TextEditingController();
-  List<AllProductDetails> searchResults = [];
 
   // Future<List<AllProductDetails>> searchItem(String searchtext) async {
-  //   final snapshot = await FirebaseFirestore.instance
-  //       .collection('burgers')
-  //       .where('productName', isEqualTo: searchtext)
-  //       .get();
-  //   return snapshot.docs.map((e) {
-  //     return AllProductDetails.fromjson(e.data());
-  //   }).toList();
-  // }
   Stream<List<AllProductDetails>>? burgerstream;
 
   // void onSearchChanged(String query) {
-  //   setState(() {
-  //     burgerstream = getBurgerStreams(query);
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final searchProvider = Provider.of<SearchControll>(context);
+    final height = size.height;
     return Scaffold(
       body: SafeArea(
           child: Column(
@@ -47,12 +38,9 @@ class _OrderHistoryState extends State<OrderHistory> {
               child: const Text('click me')),
           TextFormField(
             onChanged: (value) {
-              setState(() {
-                burgerstream = searchBurger(value);
-                //  onSearchChanged(value);
-              });
+              searchProvider.onChangeButtonBurger(value);
               // print(value);
-
+              searchController.clear();
               // searchItem(value).then((result) {
               //   setState(() {
               //     searchResults = result;
@@ -86,19 +74,72 @@ class _OrderHistoryState extends State<OrderHistory> {
           ),
           Expanded(
               child: StreamBuilder(
-            stream: burgerstream,
+            stream: searchProvider.burgerstream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return ListView.builder(
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: (0.45 / 0.55),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 2,
+                  ),
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final datare = snapshot.data![index];
 
-                    return Text(datare.productName);
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      color: Colors.white,
+                      shadowColor: backgroundcolor,
+                      elevation: 15,
+                      child: Column(
+                        children: [
+                          Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(21.0),
+                                child: Image.network(
+                                  datare.productImage,
+                                  fit: BoxFit.fill,
+                                  width: double.infinity,
+                                  height: height * 0.2,
+                                ),
+                              ),
+                              WishListButton(
+                                id: datare.id,
+                                productImage: datare.productImage,
+                                productName: datare.productName,
+                                productRate: datare.productRate,
+                                productDescription: datare.productDescription,
+                                productTime: datare.productTime,
+                              ),
+                            ],
+                          ),
+                          Flexible(
+                            child: RichText(
+                              overflow: TextOverflow.ellipsis,
+                              text: TextSpan(
+                                style: GoogleFonts.secularOne(
+                                    fontSize: 20, color: Colors.black),
+                                text: "  ${datare.productName}",
+                              ),
+                            ),
+                          ),
+                          Text(
+                            "₹${datare.productRate}",
+                            style: GoogleFonts.secularOne(
+                              fontSize: 25,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   },
                 );
               } else {
-                return Text(snapshot.error.toString());
+                return BurgerScreen();
               }
             },
           )),

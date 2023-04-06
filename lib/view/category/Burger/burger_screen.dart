@@ -42,8 +42,8 @@ class BurgerScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: GestureDetector(
                   child: TextFormField(
-                    onTap: () => istap = true,
                     onChanged: (value) {
+                      istap = true;
                       searchProvider.onChangeButtonBurger(value);
                       // setState(() {
                       //   burgerstream = searchBurger(value);

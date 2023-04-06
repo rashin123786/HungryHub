@@ -6,13 +6,13 @@ import '../domain/services/burger_product.dart';
 import '../domain/services/pizza_product.dart';
 
 class SearchControll with ChangeNotifier {
-  Stream<List<AllProductDetails>>? burgerstream = getBurgerStream();
-  Stream<List<AllProductDetails>>? pizzastream = getPizzaStream();
-  Stream<List<AllProductDetails>>? sandwichstream = getSandwichStream();
+  Stream<List<AllProductDetails>>? burgerstream;
+  Stream<List<AllProductDetails>>? pizzastream;
+  Stream<List<AllProductDetails>>? sandwichstream;
   bool istap = false;
   onTapButton() {
     istap = true;
-    istap = false;
+    //  istap = false;
     notifyListeners();
   }
 

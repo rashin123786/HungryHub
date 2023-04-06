@@ -46,6 +46,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   sizedboxHeight50,
                   ReUseTextFormsField(
+                      textInputType: TextInputType.emailAddress,
                       validator: (email) =>
                           email!.isEmpty && !EmailValidator.validate(email)
                               ? 'Enter valid Email'
@@ -56,6 +57,7 @@ class _SignInState extends State<SignIn> {
                       ispass: false),
                   sizedboxHeight10,
                   ReUseTextFormsField(
+                      textInputType: TextInputType.text,
                       validator: (pass) => pass!.isEmpty && pass.length < 6
                           ? 'Enter min. 6 character'
                           : null,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/view/cart/cart.dart';
+import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
 import 'package:hungryhub/view/productOverview/product_overview.dart';
 
 import '../../domain/constants/constants.dart';
@@ -88,7 +89,7 @@ class MenuScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CartScreen(),
+                        builder: (context) => AddressDetails(),
                       ));
                 },
               ),

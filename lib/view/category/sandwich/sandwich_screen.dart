@@ -35,9 +35,10 @@ class SandwichScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: TextFormField(
                   onChanged: (value) {
+                    isTap = true;
                     searchProvider.onChangeButtonSanwich(value);
                   },
-                  onTap: () => isTap = true,
+
                   // Provider.of<WishListData>(context, listen: false)
                   //     .SearchList(value),
                   controller: searchSandwichControl,

@@ -35,9 +35,9 @@ class PizzaScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: TextFormField(
                   onChanged: (value) {
+                    istap = true;
                     searchProvider.onChangeButtonPizza(value);
                   },
-                  onTap: () => istap = true,
                   controller: searchPizzaControl,
                   validator: (value) =>
                       value!.isEmpty ? 'Please Enter a Name' : null,
