@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/model/address_model.dart';
+import 'package:hungryhub/view/checkout/Address/add_delivary_address.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 class CheckOutController with ChangeNotifier {
@@ -17,7 +20,7 @@ class CheckOutController with ChangeNotifier {
 
   addAddress(context) async {
     await FirebaseFirestore.instance
-        .collection('address')
+        .collection('addAddress')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .set({
       'fullname': fullNamecontroller.text,
@@ -26,18 +29,18 @@ class CheckOutController with ChangeNotifier {
       'landmark': landMarkControler.text,
       'city': cityControler.text,
       'pincode': pincodeControler.text,
-      'location': locationControler.text,
-    }).then((value) async {
-      await showSimpleNotification(
-          Text(
-            'Addeed Address',
-            style: GoogleFonts.secularOne(fontSize: 20, color: Colors.amber),
-          ),
-          background: Colors.white,
-          duration: const Duration(milliseconds: 300));
-      Navigator.pop(context);
-      notifyListeners();
     });
+    notifyListeners();
+  }
+
+  void clearText() {
+    numbercontroller.clear();
+    fullNamecontroller.clear();
+    streetcontroller.clear();
+    cityControler.clear();
+    landMarkControler.clear();
+    locationControler.clear();
+    pincodeControler.clear();
     notifyListeners();
   }
 
@@ -46,12 +49,12 @@ class CheckOutController with ChangeNotifier {
     List<DelivaryAddressModel> newDelivaryDetails = [];
     DelivaryAddressModel? delivaryAddressModel;
     final value = await FirebaseFirestore.instance
-        .collection('address')
+        .collection('addAddress')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
     if (value.exists) {
       delivaryAddressModel = DelivaryAddressModel(
-        City: value.get('city'),
+        city: value.get('city'),
         fullname: value.get('fullname'),
         landMark: value.get('landmark'),
         number: value.get('mobilenumber'),
@@ -60,6 +63,8 @@ class CheckOutController with ChangeNotifier {
       );
       newDelivaryDetails.add(delivaryAddressModel);
       notifyListeners();
+    } else {
+      return Text('No data foundss');
     }
     allDelivaryDetails = newDelivaryDetails;
     notifyListeners();
@@ -69,11 +74,11 @@ class CheckOutController with ChangeNotifier {
     return allDelivaryDetails;
   }
 
-  // deleteAddress() {
-  //   FirebaseFirestore.instance
-  //       .collection('addAddress')
-  //       .doc(FirebaseAuth.instance.currentUser!.uid)
-  //       .delete();
-  //   notifyListeners();
-  // }
+  deleteAddress() {
+    FirebaseFirestore.instance
+        .collection('addAddress')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .delete();
+    notifyListeners();
+  }
 }

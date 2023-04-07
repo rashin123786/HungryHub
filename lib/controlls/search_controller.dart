@@ -10,11 +10,6 @@ class SearchControll with ChangeNotifier {
   Stream<List<AllProductDetails>>? pizzastream;
   Stream<List<AllProductDetails>>? sandwichstream;
   bool istap = false;
-  onTapButton() {
-    istap = true;
-    //  istap = false;
-    notifyListeners();
-  }
 
   void onChangeButtonBurger(value) {
     burgerstream = searchBurger(value);

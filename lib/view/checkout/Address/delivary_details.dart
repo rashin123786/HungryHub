@@ -6,7 +6,10 @@ import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/model/address_model.dart';
 import 'package:hungryhub/view/checkout/Address/add_delivary_address.dart';
 import 'package:hungryhub/view/checkout/Address/single_delivary_item.dart';
+import 'package:hungryhub/view/checkout/payment/view/payment_screen.dart';
 import 'package:provider/provider.dart';
+
+SingleDelivaryItem? singleDelivaryItem;
 
 class AddressDetails extends StatelessWidget {
   const AddressDetails({super.key});
@@ -15,7 +18,7 @@ class AddressDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final checkoutProvider = Provider.of<CheckOutController>(context);
     checkoutProvider.getAddress();
-
+    print(checkoutProvider.allDelivaryDetails.length);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -36,7 +39,7 @@ class AddressDetails extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.only(top: 20),
-        child: ListView(
+        child: Column(
           children: [
             ListTile(
               leading: Image.asset(
@@ -59,7 +62,9 @@ class AddressDetails extends StatelessWidget {
                     children:
                         checkoutProvider.delivaryAddressListResult.map((e) {
                       return SingleDelivaryItem(
-                        address: e.City,
+                        landmark: e.landMark,
+                        pincode: e.pincode,
+                        city: e.city,
                         name: e.fullname,
                         number: e.number,
                         street: e.street,
@@ -89,7 +94,7 @@ class AddressDetails extends StatelessWidget {
                   : Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AddressDetails(),
+                        builder: (context) => PaymentScreen(),
                       ));
             },
             child: checkoutProvider.delivaryAddressListResult.isEmpty
@@ -100,7 +105,7 @@ class AddressDetails extends StatelessWidget {
                     ),
                   )
                 : Text(
-                    'Submit',
+                    'Payment',
                     style: GoogleFonts.secularOne(
                       fontSize: 18,
                     ),

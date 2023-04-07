@@ -1,8 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
 import '../../../controlls/check_out_controller.dart';
@@ -15,16 +18,14 @@ class AddDelivaryAddress extends StatefulWidget {
   State<AddDelivaryAddress> createState() => _AddDelivaryAddressState();
 }
 
-final nameController = TextEditingController();
-
-// enum AdressType { Home, Work, Other }
 final _formkey = GlobalKey<FormState>();
 
 class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
   @override
   Widget build(BuildContext context) {
-    final checkoutProvider = Provider.of<CheckOutController>(context);
-    // var myType = AdressType.Home;
+    final checkoutProvider =
+        Provider.of<CheckOutController>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Delivary Address'),
@@ -43,9 +44,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                 prefixIcons: Icon(
                   Icons.person,
                 ),
-                validator: (name) {
-                  return name!.isEmpty ? 'Name is Empty' : null;
-                },
+                validator: (name) => name!.isEmpty ? 'Name is Empty' : null,
               ),
               sizedboxHeight10,
               ReUseTextFormsField(
@@ -56,9 +55,8 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                 prefixIcons: Icon(
                   Icons.phone_enabled,
                 ),
-                validator: (p0) {
-                  return p0!.isEmpty ? 'Mobile No: is Empty' : null;
-                },
+                validator: (number) =>
+                    number!.isEmpty ? 'Mobile No: is Empty' : null,
               ),
               sizedboxHeight10,
               ReUseTextFormsField(
@@ -69,9 +67,8 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                 prefixIcons: Icon(
                   Icons.streetview,
                 ),
-                validator: (p0) {
-                  return p0!.isEmpty ? 'Street is Empty' : null;
-                },
+                validator: (street) =>
+                    street!.isEmpty ? 'Street is Empty' : null,
               ),
               sizedboxHeight10,
               ReUseTextFormsField(
@@ -82,9 +79,8 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                 prefixIcons: Icon(
                   Icons.landscape_sharp,
                 ),
-                validator: (p0) {
-                  return p0!.isEmpty ? 'LandMark is Empty' : null;
-                },
+                validator: (landMark) =>
+                    landMark!.isEmpty ? 'LandMark is Empty' : null,
               ),
               sizedboxHeight10,
               ReUseTextFormsField(
@@ -95,23 +91,19 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                 prefixIcons: Icon(
                   Icons.location_city,
                 ),
-                validator: (p0) {
-                  return p0!.isEmpty ? 'City is Empty' : null;
-                },
+                validator: (city) => city!.isEmpty ? 'City is Empty' : null,
               ),
               sizedboxHeight10,
               ReUseTextFormsField(
-                textInputType: TextInputType.phone,
-                controls: checkoutProvider.pincodeControler,
-                hintText: 'pincode',
-                ispass: false,
-                prefixIcons: Icon(
-                  Icons.lock,
-                ),
-                validator: (p0) {
-                  return p0!.isEmpty ? 'Pincode is Empty' : null;
-                },
-              ),
+                  textInputType: TextInputType.phone,
+                  controls: checkoutProvider.pincodeControler,
+                  hintText: 'pincode',
+                  ispass: false,
+                  prefixIcons: const Icon(
+                    Icons.lock,
+                  ),
+                  validator: (pincode) =>
+                      pincode!.isEmpty ? 'Pincode is Empty' : null),
               sizedboxHeight10,
               divider,
               InkWell(
@@ -149,9 +141,20 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                 borderRadius: BorderRadius.circular(
               25,
             )),
-            onPressed: () {
-              _formkey.currentState!.validate();
-              checkoutProvider.addAddress(context);
+            onPressed: () async {
+              if (_formkey.currentState!.validate()) {
+                checkoutProvider.addAddress(context);
+                showSimpleNotification(
+                    Text(
+                      'Addeed Address',
+                      style: GoogleFonts.secularOne(
+                          fontSize: 20, color: Colors.amber),
+                    ),
+                    background: Colors.white,
+                    duration: const Duration(milliseconds: 300));
+                checkoutProvider.clearText();
+                Navigator.pop(context);
+              }
             },
             child: Text(
               'Submit',

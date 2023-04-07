@@ -27,6 +27,7 @@ class CartScreen extends StatelessWidget {
     final height = size.height;
 
     return Scaffold(
+      
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(

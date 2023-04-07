@@ -3,10 +3,10 @@ class DelivaryAddressModel {
   String? number;
   String? street;
   String? landMark;
-  String? City;
+  String? city;
   String? pincode;
   DelivaryAddressModel({
-    this.City,
+    this.city,
     this.fullname,
     this.landMark,
     this.number,

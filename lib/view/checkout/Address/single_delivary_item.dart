@@ -12,45 +12,24 @@ class SingleDelivaryItem extends StatelessWidget {
     super.key,
     this.name,
     this.street,
-    this.address,
+    this.landmark,
     this.number,
+    this.city,
+    this.pincode,
   });
   final String? name;
-  final String? address;
+  final String? landmark;
   final String? number;
   final String? street;
+  final String? city;
+  final String? pincode;
 
   @override
   Widget build(BuildContext context) {
-    final checkoutProvider = Provider.of<CheckOutController>(context);
-
+    final checkoutprovider = Provider.of<CheckOutController>(context);
     return Column(
       children: [
         ListTile(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                name ?? '',
-                style: GoogleFonts.secularOne(
-                  fontSize: 18,
-                ),
-              ),
-              Container(
-                width: 60,
-                height: 20,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.amber,
-                ),
-                child: Center(
-                  child: Text(
-                    street ?? '',
-                  ),
-                ),
-              ),
-            ],
-          ),
           leading: CircleAvatar(
             radius: 8,
             backgroundColor: backgroundcolor,
@@ -59,11 +38,12 @@ class SingleDelivaryItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(address ?? ''),
               SizedBox(
                 height: 5,
               ),
-              Text(number ?? ''),
+              Text("+91 $number"),
+              Text("$street,$landmark"),
+              Text("$city,$pincode"),
             ],
           ),
         ),

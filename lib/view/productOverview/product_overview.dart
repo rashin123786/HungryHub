@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
 
 import 'package:hungryhub/view/widgets/counter.dart';
 
@@ -174,7 +175,13 @@ class ProductOverView extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: backgroundcolor,
                       minimumSize: const Size.fromHeight(45)),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddressDetails(),
+                        ));
+                  },
                   child: Text(
                     'Buy',
                     style: GoogleFonts.secularOne(

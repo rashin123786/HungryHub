@@ -34,7 +34,7 @@ class _WishListScreenState extends State<WishListScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // final width = size.width;
+
     final height = size.height;
     final wishListController = Provider.of<WishListController>(context);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -106,7 +106,7 @@ class _WishListScreenState extends State<WishListScreen> {
                             ),
                           ),
                           Text(
-                            "${data.productRate}",
+                            "₹${data.productRate}",
                             style: GoogleFonts.secularOne(
                               fontSize: 25,
                             ),

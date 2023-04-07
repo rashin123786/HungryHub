@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryhub/view/productOverview/product_overview.dart';
 
 import '../../domain/constants/constants.dart';
 import '../../model/all_product_model.dart.dart';
@@ -42,6 +43,11 @@ class SearchWidget extends StatelessWidget {
                         productRate: datare.productRate,
                         productDescription: datare.productDescription,
                         productTime: datare.productTime);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductOverView(),
+                        ));
                   },
                   child: Card(
                       shape: RoundedRectangleBorder(
