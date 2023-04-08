@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../model/all_product_model.dart.dart';
 
@@ -37,4 +38,8 @@ int? isCategory;
 Divider divider = const Divider();
 Divider divider2 = const Divider(
   thickness: 2,
+);
+
+TextStyle menuscreen20 = GoogleFonts.secularOne(
+  fontSize: 20,
 );

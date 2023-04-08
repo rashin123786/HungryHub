@@ -10,39 +10,31 @@ import 'package:hungryhub/view/checkout/Address/add_delivary_address.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 class CheckOutController with ChangeNotifier {
-  final fullNamecontroller = TextEditingController();
-  final numbercontroller = TextEditingController();
-  final streetcontroller = TextEditingController();
-  final landMarkControler = TextEditingController();
-  final cityControler = TextEditingController();
-  final pincodeControler = TextEditingController();
-  final locationControler = TextEditingController();
+  // addAddress(context) async {
+  //   await FirebaseFirestore.instance
+  //       .collection('addAddress')
+  //       .doc(FirebaseAuth.instance.currentUser!.uid)
+  //       .set({
+  //     'fullname': fullNamecontroller.text,
+  //     'mobilenumber': numbercontroller.text,
+  //     'street': streetcontroller.text,
+  //     'landmark': landMarkControler.text,
+  //     'city': cityControler.text,
+  //     'pincode': pincodeControler.text,
+  //   });
+  //   notifyListeners();
+  // }
 
-  addAddress(context) async {
-    await FirebaseFirestore.instance
-        .collection('addAddress')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({
-      'fullname': fullNamecontroller.text,
-      'mobilenumber': numbercontroller.text,
-      'street': streetcontroller.text,
-      'landmark': landMarkControler.text,
-      'city': cityControler.text,
-      'pincode': pincodeControler.text,
-    });
-    notifyListeners();
-  }
-
-  void clearText() {
-    numbercontroller.clear();
-    fullNamecontroller.clear();
-    streetcontroller.clear();
-    cityControler.clear();
-    landMarkControler.clear();
-    locationControler.clear();
-    pincodeControler.clear();
-    notifyListeners();
-  }
+  // void clearText() {
+  //   numbercontroller.clear();
+  //   fullNamecontroller.clear();
+  //   streetcontroller.clear();
+  //   cityControler.clear();
+  //   landMarkControler.clear();
+  //   locationControler.clear();
+  //   pincodeControler.clear();
+  //   notifyListeners();
+  // }
 
   List<DelivaryAddressModel> allDelivaryDetails = [];
   getAddress() async {

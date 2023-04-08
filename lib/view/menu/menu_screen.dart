@@ -6,7 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
 import 'package:hungryhub/view/productOverview/product_overview.dart';
+import 'package:hungryhub/view/wishlist/wish_list.dart';
+import 'package:provider/provider.dart';
 
+import '../../controlls/wish_list_controller.dart';
 import '../../domain/constants/constants.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -16,6 +19,7 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final wishListController = Provider.of<WishListController>(context);
     // final authpProvider =
     //     Provider.of<AuthenticateProvider>(context, listen: false);
     final size = MediaQuery.of(context).size;
@@ -44,29 +48,26 @@ class MenuScreen extends StatelessWidget {
               sizedboxHeight20,
               ListTile(
                 textColor: backgroundcolor,
-                onTap: () {},
-                title: Text(
-                  'My Profile',
-                  style: GoogleFonts.secularOne(
-                    fontSize: 20,
-                  ),
-                ),
+                onTap: () {
+                  wishListController.add();
+                },
+                title: Text('My Profile', style: menuscreen20),
               ),
               ListTile(
-                title: Text(
-                  'WishList',
-                  style: GoogleFonts.secularOne(
-                    fontSize: 20,
-                  ),
-                ),
+                title: Text('WishList', style: menuscreen20),
                 textColor: backgroundcolor,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WishListScreen(),
+                      ));
+                },
               ),
               ListTile(
                 title: Text(
                   'Cart',
-                  style: GoogleFonts.secularOne(
-                    fontSize: 20,
-                  ),
+                  style: menuscreen20,
                 ),
                 textColor: backgroundcolor,
                 onTap: () {
@@ -80,9 +81,7 @@ class MenuScreen extends StatelessWidget {
               ListTile(
                 title: Text(
                   'Address Book',
-                  style: GoogleFonts.secularOne(
-                    fontSize: 20,
-                  ),
+                  style: menuscreen20,
                 ),
                 textColor: backgroundcolor,
                 onTap: () {
@@ -96,9 +95,7 @@ class MenuScreen extends StatelessWidget {
               ListTile(
                 title: Text(
                   'Settings',
-                  style: GoogleFonts.secularOne(
-                    fontSize: 20,
-                  ),
+                  style: menuscreen20,
                 ),
                 textColor: backgroundcolor,
               ),
@@ -107,13 +104,7 @@ class MenuScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: backgroundcolor,
                 ),
-                onPressed: () async {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ProductOverView(),
-                      ));
-                },
+                onPressed: () async {},
                 child: const Text(
                   'Logout',
                   style: TextStyle(

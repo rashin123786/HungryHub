@@ -79,6 +79,14 @@ class _CounterWidgetState extends State<CounterWidget> {
                       });
                       // await CartDeleteDialogue(context, widget.id);
                       cartProductControll.cartDeleteData(widget.id);
+                      showSimpleNotification(
+                          Text(
+                            ' item deleted from cart',
+                            style: GoogleFonts.secularOne(
+                                fontSize: 20, color: Colors.amber),
+                          ),
+                          background: Colors.white,
+                          duration: const Duration(milliseconds: 300));
                     } else {
                       setState(() {
                         count--;
@@ -92,6 +100,14 @@ class _CounterWidgetState extends State<CounterWidget> {
                         productTime: widget.productTime ?? '',
                         produtQuantity: count,
                       );
+                      showSimpleNotification(
+                          Text(
+                            '1 item removed from cart',
+                            style: GoogleFonts.secularOne(
+                                fontSize: 20, color: Colors.amber),
+                          ),
+                          background: Colors.white,
+                          duration: const Duration(milliseconds: 300));
                     }
                   },
                   child: const Icon(
@@ -130,6 +146,14 @@ class _CounterWidgetState extends State<CounterWidget> {
                         productTime: widget.productTime ?? '',
                         produtQuantity: count,
                       );
+                      showSimpleNotification(
+                          Text(
+                            '1 item added to cart',
+                            style: GoogleFonts.secularOne(
+                                fontSize: 20, color: Colors.amber),
+                          ),
+                          background: Colors.white,
+                          duration: const Duration(milliseconds: 300));
                     }
                   },
                   child: const Icon(

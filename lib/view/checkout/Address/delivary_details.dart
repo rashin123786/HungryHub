@@ -9,11 +9,18 @@ import 'package:hungryhub/view/checkout/Address/single_delivary_item.dart';
 import 'package:hungryhub/view/checkout/payment/view/payment_screen.dart';
 import 'package:provider/provider.dart';
 
-SingleDelivaryItem? singleDelivaryItem;
+import '../../../domain/services/add_address.dart';
 
-class AddressDetails extends StatelessWidget {
+int isSelectedIndex = 0;
+
+class AddressDetails extends StatefulWidget {
   const AddressDetails({super.key});
 
+  @override
+  State<AddressDetails> createState() => _AddressDetailsState();
+}
+
+class _AddressDetailsState extends State<AddressDetails> {
   @override
   Widget build(BuildContext context) {
     final checkoutProvider = Provider.of<CheckOutController>(context);
@@ -54,23 +61,55 @@ class AddressDetails extends StatelessWidget {
               ),
             ),
             divider2,
-            checkoutProvider.delivaryAddressListResult.isEmpty
-                ? Center(
-                    child: Text('No Data'),
-                  )
-                : Column(
-                    children:
-                        checkoutProvider.delivaryAddressListResult.map((e) {
-                      return SingleDelivaryItem(
-                        landmark: e.landMark,
-                        pincode: e.pincode,
-                        city: e.city,
-                        name: e.fullname,
-                        number: e.number,
-                        street: e.street,
-                      );
-                    }).toList(),
-                  )
+            Expanded(
+              child: StreamBuilder(
+                stream: getAddress(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        bool isSelect = index == isSelectedIndex;
+                        final data = snapshot.data![index];
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isSelectedIndex = index;
+                            });
+                          },
+                          child: Container(
+                            color: isSelect ? Colors.amber : null,
+                            child: ListTile(
+                              title: Text("${data.fullname}"),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text("+91 ${data.number}"),
+                                  Text("${data.street} ${data.landMark}"),
+                                  Text("${data.city} ${data.pincode}"),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return Text("something went wrong");
+                  }
+                },
+              ),
+            )
           ],
         ),
       ),

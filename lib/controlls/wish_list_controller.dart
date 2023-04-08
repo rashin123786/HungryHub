@@ -40,7 +40,7 @@ class WishListController with ChangeNotifier {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('yourwishlist')
         .get();
-    wishListValue.docs.forEach((element) {
+    for (var element in wishListValue.docs) {
       AllProductDetails allProductDetails = AllProductDetails(
         id: element.get('productId'),
         productImage: element.get('productImg'),
@@ -50,7 +50,7 @@ class WishListController with ChangeNotifier {
         productTime: element.get('productTime'),
       );
       newwishlist.add(allProductDetails);
-    });
+    }
 
     wishlistData = newwishlist;
     notifyListeners();
@@ -70,5 +70,16 @@ class WishListController with ChangeNotifier {
         .doc(productId)
         .delete();
     notifyListeners();
+  }
+
+  void add() {
+    FirebaseFirestore.instance
+        .collection('something')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('newcollection')
+        .add({
+      "name": "rashin",
+      "age": 19,
+    });
   }
 }

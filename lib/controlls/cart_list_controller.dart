@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/model/cart_model.dart.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class CartProductControll with ChangeNotifier {
 ///////////////   Add to Cart   //////////////////////////
@@ -30,6 +32,14 @@ class CartProductControll with ChangeNotifier {
       "productTime": productTime,
       "produtQuantity": produtQuantity,
       "isAdd": true,
+    }).then((value) {
+      showSimpleNotification(
+          Text(
+            'Add to cart',
+            style: GoogleFonts.secularOne(fontSize: 20, color: Colors.amber),
+          ),
+          background: Colors.white,
+          duration: const Duration(milliseconds: 300));
     });
     notifyListeners();
   }
@@ -106,9 +116,9 @@ class CartProductControll with ChangeNotifier {
 
   getTotalPrice() {
     num total = 0.0;
-    cartDataList.forEach((element) {
+    for (var element in cartDataList) {
       total += element.productRate * element.produtQuantity!;
-    });
+    }
     return total;
   }
 }

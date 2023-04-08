@@ -9,6 +9,7 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
 import '../../../controlls/check_out_controller.dart';
+import '../../../domain/services/add_address.dart';
 import '../../widgets/text_form_field.dart';
 
 class AddDelivaryAddress extends StatefulWidget {
@@ -38,7 +39,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
             children: [
               ReUseTextFormsField(
                 textInputType: TextInputType.text,
-                controls: checkoutProvider.fullNamecontroller,
+                controls: fullNamecontroller,
                 hintText: 'Full Name',
                 ispass: false,
                 prefixIcons: Icon(
@@ -49,7 +50,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
               sizedboxHeight10,
               ReUseTextFormsField(
                 textInputType: TextInputType.phone,
-                controls: checkoutProvider.numbercontroller,
+                controls: numbercontroller,
                 hintText: 'Mobile No:',
                 ispass: false,
                 prefixIcons: Icon(
@@ -61,7 +62,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
               sizedboxHeight10,
               ReUseTextFormsField(
                 textInputType: TextInputType.streetAddress,
-                controls: checkoutProvider.streetcontroller,
+                controls: streetcontroller,
                 hintText: 'Street',
                 ispass: false,
                 prefixIcons: Icon(
@@ -73,7 +74,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
               sizedboxHeight10,
               ReUseTextFormsField(
                 textInputType: TextInputType.text,
-                controls: checkoutProvider.landMarkControler,
+                controls: landMarkControler,
                 hintText: 'LandMark',
                 ispass: false,
                 prefixIcons: Icon(
@@ -85,7 +86,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
               sizedboxHeight10,
               ReUseTextFormsField(
                 textInputType: TextInputType.text,
-                controls: checkoutProvider.cityControler,
+                controls: cityControler,
                 hintText: 'City',
                 ispass: false,
                 prefixIcons: Icon(
@@ -96,7 +97,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
               sizedboxHeight10,
               ReUseTextFormsField(
                   textInputType: TextInputType.phone,
-                  controls: checkoutProvider.pincodeControler,
+                  controls: pincodeControler,
                   hintText: 'pincode',
                   ispass: false,
                   prefixIcons: const Icon(
@@ -143,7 +144,9 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
             )),
             onPressed: () async {
               if (_formkey.currentState!.validate()) {
-                checkoutProvider.addAddress(context);
+                addAddress();
+                clearText();
+                //  checkoutProvider.addAddress(context);
                 showSimpleNotification(
                     Text(
                       'Addeed Address',
@@ -152,7 +155,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                     ),
                     background: Colors.white,
                     duration: const Duration(milliseconds: 300));
-                checkoutProvider.clearText();
+                //   checkoutProvider.clearText();
                 Navigator.pop(context);
               }
             },
