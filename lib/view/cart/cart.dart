@@ -27,7 +27,6 @@ class CartScreen extends StatelessWidget {
     final height = size.height;
 
     return Scaffold(
-      
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
@@ -68,33 +67,14 @@ class CartScreen extends StatelessWidget {
                     elevation: 15,
                     child: Column(
                       children: [
-                        Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0),
-                              child: Image.network(
-                                data.productImage,
-                                fit: BoxFit.fill,
-                                width: double.infinity,
-                                height: height * 0.2,
-                              ),
-                            ),
-                            Positioned(
-                              left: width * 0.365,
-                              top: height * 0.15,
-                              child: CircleAvatar(
-                                radius: 24,
-                                backgroundColor: Colors.white,
-                                child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.favorite,
-                                      color: Colors.amber,
-                                      size: 35,
-                                    )),
-                              ),
-                            )
-                          ],
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(15.0),
+                          child: Image.network(
+                            data.productImage,
+                            fit: BoxFit.fill,
+                            width: double.infinity,
+                            height: height * 0.2,
+                          ),
                         ),
                         Flexible(
                           child: RichText(
@@ -167,7 +147,7 @@ class CartScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddressDetails(),
+                      builder: (context) => const AddressDetails(),
                     ));
               }
             },
