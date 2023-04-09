@@ -7,11 +7,15 @@ import 'package:hungryhub/model/address_model.dart';
 import 'package:hungryhub/view/checkout/Address/add_delivary_address.dart';
 import 'package:hungryhub/view/checkout/Address/single_delivary_item.dart';
 import 'package:hungryhub/view/checkout/payment/view/payment_screen.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
-import '../../../domain/services/add_address.dart';
+import '../../../controlls/add_address.dart';
 
 int isSelectedIndex = 0;
+int isTap = 0;
+bool isEdit = false;
+String idss = '';
 
 class AddressDetails extends StatefulWidget {
   const AddressDetails({super.key});
@@ -23,9 +27,12 @@ class AddressDetails extends StatefulWidget {
 class _AddressDetailsState extends State<AddressDetails> {
   @override
   Widget build(BuildContext context) {
+    final addAddressProvider = Provider.of<AddAddressController>(context);
     final checkoutProvider = Provider.of<CheckOutController>(context);
-    checkoutProvider.getAddress();
-    print(checkoutProvider.allDelivaryDetails.length);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      addAddressProvider.getAllAddress();
+    });
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -37,6 +44,7 @@ class _AddressDetailsState extends State<AddressDetails> {
           Icons.add,
         ),
         onPressed: () {
+          isEdit = false;
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -61,26 +69,36 @@ class _AddressDetailsState extends State<AddressDetails> {
               ),
             ),
             divider2,
-            Expanded(
-              child: StreamBuilder(
-                stream: getAddress(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemCount: snapshot.data!.length,
+            addAddressProvider.getResultAddressDetails.isEmpty
+                ? Center(
+                    child: Text('No address Found'),
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount:
+                          addAddressProvider.getResultAddressDetails.length,
                       itemBuilder: (context, index) {
-                        bool isSelect = index == isSelectedIndex;
-                        final data = snapshot.data![index];
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isSelectedIndex = index;
-                            });
-                          },
-                          child: Container(
-                            color: isSelect ? Colors.amber : null,
+                        bool isSlected = index == isSelectedIndex;
+                        final data =
+                            addAddressProvider.getResultAddressDetails[index];
+                        return Container(
+                          color: isSlected ? Colors.amber : null,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isSelectedIndex = index;
+                                allAddressData = DelivaryAddressModel(
+                                  fullname: data.fullname,
+                                  number: data.number,
+                                );
+                                print(allAddressData.fullname);
+                              });
+                            },
                             child: ListTile(
-                              title: Text("${data.fullname}"),
+                              title: Text(
+                                data.fullname ?? '',
+                                style: menuscreen20,
+                              ),
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:
@@ -89,27 +107,90 @@ class _AddressDetailsState extends State<AddressDetails> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text("+91 ${data.number}"),
-                                  Text("${data.street} ${data.landMark}"),
-                                  Text("${data.city} ${data.pincode}"),
+                                  Text("+91 ${data.fullname}"),
+                                  Text("${data.street},${data.landMark}"),
+                                  Text("${data.city},${data.pincode}"),
+                                  Text("${data.city},${data.pincode}"),
                                 ],
+                              ),
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.grey,
+                                radius: 10,
+                              ),
+                              trailing: PopupMenuButton(
+                                itemBuilder: (context) {
+                                  return <PopupMenuItem>[
+                                    PopupMenuItem(
+                                      child: TextButton(
+                                        onPressed: () {
+                                          isEdit = true;
+                                          addAddressProvider.fullNamecontroller
+                                              .text = "${data.fullname}";
+                                          addAddressProvider.cityControler
+                                              .text = "${data.city}";
+                                          addAddressProvider.landMarkControler
+                                              .text = "${data.landMark}";
+                                          addAddressProvider.numbercontroller
+                                              .text = "${data.number}";
+                                          addAddressProvider.pincodeControler
+                                              .text = "${data.pincode}";
+                                          addAddressProvider.streetcontroller
+                                              .text = "${data.street}";
+
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AddDelivaryAddress(
+                                                        id: data.id),
+                                              ));
+                                          //
+                                        },
+                                        child: Text(
+                                          "Edit",
+                                          style: TextStyle(color: Colors.amber),
+                                        ),
+                                      ),
+                                    ),
+                                    PopupMenuItem(
+                                      child: TextButton(
+                                        onPressed: () {
+                                          deleteAddressDialgoue(data.id);
+                                          //       // addAddressProvider.deleteAddress(data.id),
+                                        },
+                                        child: Text(
+                                          "Delete",
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                    ),
+                                    PopupMenuItem(
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return PaymentScreen(
+                                                name: allAddressData.fullname,
+                                                number: allAddressData.number);
+                                          }));
+                                          //       // addAddressProvider.deleteAddress(data.id),
+                                        },
+                                        child: Text(
+                                          "gg",
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                    )
+                                  ];
+                                },
                               ),
                             ),
                           ),
                         );
                       },
-                    );
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else {
-                    return Text("something went wrong");
-                  }
-                },
-              ),
-            )
+                    ),
+                  ),
           ],
         ),
       ),
@@ -124,19 +205,20 @@ class _AddressDetailsState extends State<AddressDetails> {
               25,
             )),
             onPressed: () {
-              checkoutProvider.allDelivaryDetails.isEmpty
+              addAddressProvider.getResultAddressDetails.isEmpty
                   ? Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => AddDelivaryAddress(),
                       ))
-                  : Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PaymentScreen(),
-                      ));
+                  : allAddressData = DelivaryAddressModel();
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return PaymentScreen(
+                    name: allAddressData.fullname,
+                    number: allAddressData.number);
+              }));
             },
-            child: checkoutProvider.delivaryAddressListResult.isEmpty
+            child: addAddressProvider.getResultAddressDetails.isEmpty
                 ? Text(
                     'Add Adress',
                     style: GoogleFonts.secularOne(
@@ -152,6 +234,50 @@ class _AddressDetailsState extends State<AddressDetails> {
           ),
         ),
       ),
+    );
+  }
+
+  deleteAddressDialgoue(var delete) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: const Text("No"),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = TextButton(
+      child: const Text("Yes"),
+      onPressed: () async {
+        await Provider.of<AddAddressController>(context, listen: false)
+            .deleteAddress(delete);
+
+        Navigator.pop(context);
+        showSimpleNotification(
+            Text(
+              'Address removed',
+              style: GoogleFonts.secularOne(fontSize: 20, color: Colors.amber),
+            ),
+            background: Colors.white,
+            duration: const Duration(milliseconds: 300));
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Are You Sure?"),
+      content: const Text("Do you want to remove the address?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

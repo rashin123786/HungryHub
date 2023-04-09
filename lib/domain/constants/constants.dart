@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryhub/model/address_model.dart';
 
 import '../../model/all_product_model.dart.dart';
 
@@ -31,6 +32,8 @@ List<String> images = [
 Color backgroundcolor = const Color.fromRGBO(255, 199, 0, 1);
 
 late AllProductDetails allDatas;
+
+late DelivaryAddressModel allAddressData;
 
 bool isOffer = true;
 int? isCategory;

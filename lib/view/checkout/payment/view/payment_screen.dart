@@ -6,7 +6,9 @@ import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/view/checkout/payment/widgets/order_items.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
+  String? number;
+  String? name;
+  PaymentScreen({super.key, this.name, this.number});
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -66,7 +68,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  title: Text('Full Name'),
+                  title: Text('Full Name${widget.name}'),
                   subtitle: Text('area,landmark,city'),
                 ),
                 divider,

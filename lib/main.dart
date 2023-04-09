@@ -11,6 +11,7 @@ import 'controlls/bottom_nav_controler.dart';
 import 'controlls/cart_list_controller.dart';
 
 import 'controlls/search_controller.dart';
+import 'controlls/add_address.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +47,9 @@ class HungryHub extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CheckOutController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AddAddressController(),
         )
       ],
       child: OverlaySupport.global(
