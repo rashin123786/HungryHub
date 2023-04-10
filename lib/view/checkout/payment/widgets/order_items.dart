@@ -1,17 +1,26 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
+import 'package:hungryhub/model/cart_model.dart.dart';
 
 class OrderItems extends StatelessWidget {
-  OrderItems({super.key});
+  OrderItems({super.key, required this.cartModel});
+  final CartModel cartModel;
   bool? isTrue;
+
+  final num rate = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      title: Text(cartModel.productName),
       leading: Image.network(
-          'https://thumbs.dreamstime.com/b/pizza-pepperoni-cheese-salami-vegetables-58914487.jpg'),
-      title: Text("food name"),
-      subtitle: Text('rate of product'),
+        cartModel.productImage,
+      ),
+      subtitle: Text("${cartModel.produtQuantity}"),
+      trailing:
+          Text("₹${(cartModel.productRate) * (cartModel.produtQuantity ?? 1)}"),
     );
   }
 }

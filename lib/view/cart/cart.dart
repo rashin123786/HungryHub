@@ -12,6 +12,9 @@ import 'package:provider/provider.dart';
 import '../../controlls/cart_list_controller.dart';
 import '../../domain/constants/constants.dart';
 
+bool isCart = false;
+int carrtInt = 0;
+
 // ignore: must_be_immutable
 class CartScreen extends StatelessWidget {
   CartProductControll? cartProductControll;
@@ -134,6 +137,8 @@ class CartScreen extends StatelessWidget {
           height: height * 0.5,
           child: MaterialButton(
             onPressed: () {
+              carrtInt = 1;
+              isCart = true;
               if (cartProductControll.cartDataList.isEmpty) {
                 showSimpleNotification(
                     Text(

@@ -33,7 +33,7 @@ Color backgroundcolor = const Color.fromRGBO(255, 199, 0, 1);
 
 late AllProductDetails allDatas;
 
-late DelivaryAddressModel allAddressData;
+DelivaryAddressModel allAddressData = DelivaryAddressModel();
 
 bool isOffer = true;
 int? isCategory;

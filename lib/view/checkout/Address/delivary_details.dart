@@ -15,7 +15,6 @@ import '../../../controlls/add_address.dart';
 int isSelectedIndex = 0;
 int isTap = 0;
 bool isEdit = false;
-String idss = '';
 
 class AddressDetails extends StatefulWidget {
   const AddressDetails({super.key});
@@ -36,11 +35,11 @@ class _AddressDetailsState extends State<AddressDetails> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Delivary Address'),
+        title: const Text('Delivary Address'),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: backgroundcolor,
-        child: Icon(
+        child: const Icon(
           Icons.add,
         ),
         onPressed: () {
@@ -53,7 +52,7 @@ class _AddressDetailsState extends State<AddressDetails> {
         },
       ),
       body: Padding(
-        padding: EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 20),
         child: Column(
           children: [
             ListTile(
@@ -70,7 +69,7 @@ class _AddressDetailsState extends State<AddressDetails> {
             ),
             divider2,
             addAddressProvider.getResultAddressDetails.isEmpty
-                ? Center(
+                ? const Center(
                     child: Text('No address Found'),
                   )
                 : Expanded(
@@ -91,7 +90,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                                   fullname: data.fullname,
                                   number: data.number,
                                 );
-                                print(allAddressData.fullname);
+                                print("aaaaaa${allAddressData.fullname}");
                               });
                             },
                             child: ListTile(
@@ -104,7 +103,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text("+91 ${data.fullname}"),
@@ -113,7 +112,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                                   Text("${data.city},${data.pincode}"),
                                 ],
                               ),
-                              leading: CircleAvatar(
+                              leading: const CircleAvatar(
                                 backgroundColor: Colors.grey,
                                 radius: 10,
                               ),
@@ -121,6 +120,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                                 itemBuilder: (context) {
                                   return <PopupMenuItem>[
                                     PopupMenuItem(
+                                      onTap: () {},
                                       child: TextButton(
                                         onPressed: () {
                                           isEdit = true;
@@ -146,7 +146,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                                               ));
                                           //
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "Edit",
                                           style: TextStyle(color: Colors.amber),
                                         ),
@@ -158,30 +158,12 @@ class _AddressDetailsState extends State<AddressDetails> {
                                           deleteAddressDialgoue(data.id);
                                           //       // addAddressProvider.deleteAddress(data.id),
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "Delete",
                                           style: TextStyle(color: Colors.red),
                                         ),
                                       ),
                                     ),
-                                    PopupMenuItem(
-                                      child: TextButton(
-                                        onPressed: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return PaymentScreen(
-                                                name: allAddressData.fullname,
-                                                number: allAddressData.number);
-                                          }));
-                                          //       // addAddressProvider.deleteAddress(data.id),
-                                        },
-                                        child: Text(
-                                          "gg",
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                      ),
-                                    )
                                   ];
                                 },
                               ),
@@ -211,12 +193,14 @@ class _AddressDetailsState extends State<AddressDetails> {
                       MaterialPageRoute(
                         builder: (context) => AddDelivaryAddress(),
                       ))
-                  : allAddressData = DelivaryAddressModel();
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return PaymentScreen(
-                    name: allAddressData.fullname,
-                    number: allAddressData.number);
-              }));
+                  : Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                      print(allAddressData.fullname);
+                      return PaymentScreen(
+                          cartint: 1,
+                          name: allAddressData.fullname,
+                          number: allAddressData.number);
+                    }));
             },
             child: addAddressProvider.getResultAddressDetails.isEmpty
                 ? Text(

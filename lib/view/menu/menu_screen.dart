@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
+import 'package:hungryhub/view/checkout/payment/view/payment_screen.dart';
 import 'package:hungryhub/view/productOverview/product_overview.dart';
 import 'package:hungryhub/view/wishlist/wish_list.dart';
 import 'package:provider/provider.dart';

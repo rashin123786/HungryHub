@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:hungryhub/model/all_product_model.dart.dart';
+import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
 
 import 'package:hungryhub/view/widgets/counter.dart';
@@ -176,6 +178,23 @@ class ProductOverView extends StatelessWidget {
                       backgroundColor: backgroundcolor,
                       minimumSize: const Size.fromHeight(45)),
                   onPressed: () {
+                    if (isOffer == false) {
+                      allDatas = AllProductDetails(
+                          productImage: allDatas.productImage,
+                          productName: allDatas.productName,
+                          productRate: allDatas.productRate,
+                          productDescription: allDatas.productDescription,
+                          productTime: allDatas.productTime);
+                    } else if (isOffer == true) {
+                      allDatas = AllProductDetails(
+                          productImage: allDatas.productImage,
+                          productName: allDatas.productName,
+                          productRate: allDatas.productRate,
+                          productDescription: allDatas.productDescription,
+                          productTime: allDatas.productTime);
+                    }
+                    carrtInt = 2;
+                    isCart = false;
                     Navigator.push(
                         context,
                         MaterialPageRoute(
