@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../controlls/cart_list_controller.dart';
 import '../../domain/constants/constants.dart';
+import '../menu/menu_screen.dart';
 
 bool isCart = false;
 int carrtInt = 0;
@@ -137,6 +138,7 @@ class CartScreen extends StatelessWidget {
           height: height * 0.5,
           child: MaterialButton(
             onPressed: () {
+              isAddress = false;
               carrtInt = 1;
               isCart = true;
               if (cartProductControll.cartDataList.isEmpty) {

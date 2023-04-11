@@ -6,12 +6,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
 import 'package:hungryhub/view/checkout/payment/view/payment_screen.dart';
-import 'package:hungryhub/view/productOverview/product_overview.dart';
-import 'package:hungryhub/view/wishlist/wish_list.dart';
-import 'package:provider/provider.dart';
 
-import '../../controlls/wish_list_controller.dart';
+import 'package:hungryhub/view/wishlist/wish_list.dart';
+
 import '../../domain/constants/constants.dart';
+
+bool isAddress = false;
 
 class MenuScreen extends StatelessWidget {
   MenuScreen({super.key});
@@ -20,9 +20,6 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wishListController = Provider.of<WishListController>(context);
-    // final authpProvider =
-    //     Provider.of<AuthenticateProvider>(context, listen: false);
     final size = MediaQuery.of(context).size;
     final width = size.width;
 
@@ -50,7 +47,7 @@ class MenuScreen extends StatelessWidget {
               ListTile(
                 textColor: backgroundcolor,
                 onTap: () {
-                  wishListController.add();
+                  datetime = DateTime.now().toString();
                 },
                 title: Text('My Profile', style: menuscreen20),
               ),
@@ -86,10 +83,11 @@ class MenuScreen extends StatelessWidget {
                 ),
                 textColor: backgroundcolor,
                 onTap: () {
+                  isAddress = true;
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AddressDetails(),
+                        builder: (context) => const AddressDetails(),
                       ));
                 },
               ),

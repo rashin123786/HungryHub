@@ -61,6 +61,7 @@ class _CounterWidgetState extends State<CounterWidget> {
     getAddAndQuantity();
     final cartProductControll =
         Provider.of<CartProductControll>(context, listen: false);
+
     return Container(
       width: 120,
       height: 30,
@@ -77,7 +78,7 @@ class _CounterWidgetState extends State<CounterWidget> {
                       setState(() {
                         isTrue = false;
                       });
-                      // await CartDeleteDialogue(context, widget.id);
+
                       cartProductControll.cartDeleteData(widget.id);
                       showSimpleNotification(
                           Text(

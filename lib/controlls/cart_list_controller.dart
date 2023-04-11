@@ -7,7 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/model/cart_model.dart.dart';
 import 'package:overlay_support/overlay_support.dart';
 
+String cartid = '';
+
 class CartProductControll with ChangeNotifier {
+  int count = 1;
+  bool isTrue = false;
 ///////////////   Add to Cart   //////////////////////////
   void addCartData({
     String? id,
@@ -83,7 +87,7 @@ class CartProductControll with ChangeNotifier {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('yourcart')
         .get();
-    cartValue.docs.forEach((element) {
+    for (var element in cartValue.docs) {
       CartModel cartModel = CartModel(
         id: element.get('productId'),
         productImage: element.get('productImg'),
@@ -94,7 +98,7 @@ class CartProductControll with ChangeNotifier {
         produtQuantity: element.get('produtQuantity'),
       );
       newList.add(cartModel);
-    });
+    }
     cartDataList = newList;
     notifyListeners();
   }

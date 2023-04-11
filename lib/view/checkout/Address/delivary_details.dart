@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryhub/controlls/check_out_controller.dart';
 
 import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/model/address_model.dart';
+import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/Address/add_delivary_address.dart';
-import 'package:hungryhub/view/checkout/Address/single_delivary_item.dart';
+
 import 'package:hungryhub/view/checkout/payment/view/payment_screen.dart';
+import 'package:hungryhub/view/menu/menu_screen.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
@@ -16,18 +17,13 @@ int isSelectedIndex = 0;
 int isTap = 0;
 bool isEdit = false;
 
-class AddressDetails extends StatefulWidget {
+class AddressDetails extends StatelessWidget {
   const AddressDetails({super.key});
 
   @override
-  State<AddressDetails> createState() => _AddressDetailsState();
-}
-
-class _AddressDetailsState extends State<AddressDetails> {
-  @override
   Widget build(BuildContext context) {
     final addAddressProvider = Provider.of<AddAddressController>(context);
-    final checkoutProvider = Provider.of<CheckOutController>(context);
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       addAddressProvider.getAllAddress();
     });
@@ -84,14 +80,11 @@ class _AddressDetailsState extends State<AddressDetails> {
                           color: isSlected ? Colors.amber : null,
                           child: GestureDetector(
                             onTap: () {
-                              setState(() {
-                                isSelectedIndex = index;
-                                allAddressData = DelivaryAddressModel(
-                                  fullname: data.fullname,
-                                  number: data.number,
-                                );
-                                print("aaaaaa${allAddressData.fullname}");
-                              });
+                              isSelectedIndex = index;
+                              allAddressData = DelivaryAddressModel(
+                                fullname: data.fullname,
+                                number: data.number,
+                              );
                             },
                             child: ListTile(
                               title: Text(
@@ -155,8 +148,8 @@ class _AddressDetailsState extends State<AddressDetails> {
                                     PopupMenuItem(
                                       child: TextButton(
                                         onPressed: () {
-                                          deleteAddressDialgoue(data.id);
-                                          //       // addAddressProvider.deleteAddress(data.id),
+                                          deleteAddressDialgoue(
+                                              context, data.id);
                                         },
                                         child: const Text(
                                           "Delete",
@@ -193,14 +186,18 @@ class _AddressDetailsState extends State<AddressDetails> {
                       MaterialPageRoute(
                         builder: (context) => AddDelivaryAddress(),
                       ))
-                  : Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
-                      print(allAddressData.fullname);
-                      return PaymentScreen(
-                          cartint: 1,
-                          name: allAddressData.fullname,
-                          number: allAddressData.number);
-                    }));
+                  : isAddress == true
+                      ? Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                          return CartScreen();
+                        }))
+                      : Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                          return PaymentScreen(
+                              cartint: 1,
+                              name: allAddressData.fullname,
+                              number: allAddressData.number);
+                        }));
             },
             child: addAddressProvider.getResultAddressDetails.isEmpty
                 ? Text(
@@ -209,20 +206,26 @@ class _AddressDetailsState extends State<AddressDetails> {
                       fontSize: 18,
                     ),
                   )
-                : Text(
-                    'Payment',
-                    style: GoogleFonts.secularOne(
-                      fontSize: 18,
-                    ),
-                  ),
+                : isAddress == true
+                    ? Text(
+                        'Go to cart',
+                        style: GoogleFonts.secularOne(
+                          fontSize: 18,
+                        ),
+                      )
+                    : Text(
+                        'Payment',
+                        style: GoogleFonts.secularOne(
+                          fontSize: 18,
+                        ),
+                      ),
           ),
         ),
       ),
     );
   }
 
-  deleteAddressDialgoue(var delete) {
-    // set up the buttons
+  deleteAddressDialgoue(context, var delete) {
     Widget cancelButton = TextButton(
       child: const Text("No"),
       onPressed: () {
@@ -245,8 +248,6 @@ class _AddressDetailsState extends State<AddressDetails> {
             duration: const Duration(milliseconds: 300));
       },
     );
-
-    // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: const Text("Are You Sure?"),
       content: const Text("Do you want to remove the address?"),
@@ -255,8 +256,6 @@ class _AddressDetailsState extends State<AddressDetails> {
         continueButton,
       ],
     );
-
-    // show the dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {

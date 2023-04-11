@@ -4,6 +4,7 @@ import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/model/all_product_model.dart.dart';
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
+import 'package:hungryhub/view/menu/menu_screen.dart';
 
 import 'package:hungryhub/view/widgets/counter.dart';
 
@@ -52,14 +53,6 @@ class ProductOverView extends StatelessWidget {
                   ),
                 ),
                 sizedboxHeight10,
-                // ListTile(
-                //   title: Text(allDatas!.productName),
-                //   subtitle: Text(allDatas!.productDescription),
-                //   trailing: ElevatedButton.icon(
-                //       onPressed: () {},
-                //       icon: Icon(Icons.add),
-                //       label: Text('Add to Cart')),
-                // )
                 Text(
                   allDatas.productName,
                   style: GoogleFonts.secularOne(
@@ -173,43 +166,44 @@ class ProductOverView extends StatelessWidget {
                     : SizedBox(
                         height: height * 0.139,
                       ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: backgroundcolor,
-                      minimumSize: const Size.fromHeight(45)),
-                  onPressed: () {
-                    if (isOffer == false) {
-                      allDatas = AllProductDetails(
-                          productImage: allDatas.productImage,
-                          productName: allDatas.productName,
-                          productRate: allDatas.productRate,
-                          productDescription: allDatas.productDescription,
-                          productTime: allDatas.productTime);
-                    } else if (isOffer == true) {
-                      allDatas = AllProductDetails(
-                          productImage: allDatas.productImage,
-                          productName: allDatas.productName,
-                          productRate: allDatas.productRate,
-                          productDescription: allDatas.productDescription,
-                          productTime: allDatas.productTime);
-                    }
-                    carrtInt = 2;
-                    isCart = false;
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AddressDetails(),
-                        ));
-                  },
-                  child: Text(
-                    'Buy',
-                    style: GoogleFonts.secularOne(
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
               ],
             ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: backgroundcolor,
+            minimumSize: const Size.fromHeight(45)),
+        onPressed: () {
+          isAddress = false;
+          if (isOffer == false) {
+            allDatas = AllProductDetails(
+                productImage: allDatas.productImage,
+                productName: allDatas.productName,
+                productRate: allDatas.productRate,
+                productDescription: allDatas.productDescription,
+                productTime: allDatas.productTime);
+          } else if (isOffer == true) {
+            allDatas = AllProductDetails(
+                productImage: allDatas.productImage,
+                productName: allDatas.productName,
+                productRate: allDatas.productRate,
+                productDescription: allDatas.productDescription,
+                productTime: allDatas.productTime);
+          }
+          carrtInt = 2;
+          isCart = false;
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AddressDetails(),
+              ));
+        },
+        child: Text(
+          'Buy',
+          style: GoogleFonts.secularOne(
+            fontSize: 20,
           ),
         ),
       ),

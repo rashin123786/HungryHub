@@ -1,32 +1,24 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
-import '../../../controlls/check_out_controller.dart';
 import '../../../controlls/add_address.dart';
 import '../../widgets/text_form_field.dart';
 
-class AddDelivaryAddress extends StatefulWidget {
+class AddDelivaryAddress extends StatelessWidget {
   String? id;
   AddDelivaryAddress({
     super.key,
     this.id,
   });
 
-  @override
-  State<AddDelivaryAddress> createState() => _AddDelivaryAddressState();
-}
-
-final _formkey = GlobalKey<FormState>();
-
-class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
+  final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final addAddressProvider = Provider.of<AddAddressController>(context);
@@ -46,7 +38,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                   controls: addAddressProvider.fullNamecontroller,
                   hintText: 'Full Name',
                   ispass: false,
-                  prefixIcons: Icon(
+                  prefixIcons: const Icon(
                     Icons.person,
                   ),
                   validator: (name) => name!.isEmpty ? 'Name is Empty' : null,
@@ -57,7 +49,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                   controls: addAddressProvider.numbercontroller,
                   hintText: 'Mobile No:',
                   ispass: false,
-                  prefixIcons: Icon(
+                  prefixIcons: const Icon(
                     Icons.phone_enabled,
                   ),
                   validator: (number) =>
@@ -69,7 +61,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                   controls: addAddressProvider.streetcontroller,
                   hintText: 'Street',
                   ispass: false,
-                  prefixIcons: Icon(
+                  prefixIcons: const Icon(
                     Icons.streetview,
                   ),
                   validator: (street) =>
@@ -81,7 +73,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                   controls: addAddressProvider.landMarkControler,
                   hintText: 'LandMark',
                   ispass: false,
-                  prefixIcons: Icon(
+                  prefixIcons: const Icon(
                     Icons.landscape_sharp,
                   ),
                   validator: (landMark) =>
@@ -93,7 +85,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                   controls: addAddressProvider.cityControler,
                   hintText: 'City',
                   ispass: false,
-                  prefixIcons: Icon(
+                  prefixIcons: const Icon(
                     Icons.location_city,
                   ),
                   validator: (city) => city!.isEmpty ? 'City is Empty' : null,
@@ -151,7 +143,7 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                       if (_formkey.currentState!.validate()) {
                         addAddressProvider.addAddress();
                         addAddressProvider.clearText();
-                        //  checkoutProvider.addAddress(context);
+
                         showSimpleNotification(
                             Text(
                               'Addeed Address',
@@ -160,12 +152,12 @@ class _AddDelivaryAddressState extends State<AddDelivaryAddress> {
                             ),
                             background: Colors.white,
                             duration: const Duration(milliseconds: 300));
-                        //   checkoutProvider.clearText();
+
                         Navigator.pop(context);
                       }
                     }
                   : () async {
-                      await addAddressProvider.updateAddress(widget.id);
+                      await addAddressProvider.updateAddress(id);
                       addAddressProvider.clearText();
                       Navigator.pop(context);
                     },

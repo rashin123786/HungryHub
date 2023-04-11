@@ -10,10 +10,11 @@ import 'controlls/authentication.dart';
 import 'controlls/bottom_nav_controler.dart';
 import 'controlls/cart_list_controller.dart';
 
+import 'controlls/payment_controller.dart';
 import 'controlls/search_controller.dart';
 import 'controlls/add_address.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const HungryHub());
@@ -50,6 +51,9 @@ class HungryHub extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => AddAddressController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PaymentController(),
         )
       ],
       child: OverlaySupport.global(

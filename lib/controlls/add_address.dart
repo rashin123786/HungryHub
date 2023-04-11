@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:hungryhub/domain/constants/constants.dart';
+
 import 'package:hungryhub/model/address_model.dart';
-import 'package:hungryhub/view/checkout/Address/add_delivary_address.dart';
 
 String? docId;
 
@@ -42,9 +41,7 @@ class AddAddressController with ChangeNotifier {
       "mobilenumber": numbercontroller.text,
       "pincode": pincodeControler.text,
       "street": streetcontroller.text,
-    }).then((value) {
-      print('succceesssssssss');
-    });
+    }).then((value) {});
     notifyListeners();
   }
 
@@ -81,14 +78,6 @@ class AddAddressController with ChangeNotifier {
   List<DelivaryAddressModel> get getResultAddressDetails {
     return delivaryDetailsss;
   }
-
-  // Stream<List<DelivaryAddressModel>> getAddress() {
-  //   return addressCollection.snapshots().map((event) {
-  //     return event.docs.map((e) {
-  //       return DelivaryAddressModel.fromjson(e.data() as Map<String, dynamic>);
-  //     }).toList();
-  //   });
-  // }
 
   deleteAddress(id) {
     addressCollection.doc(id).delete();

@@ -1,8 +1,12 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/controlls/cart_list_controller.dart';
+import 'package:hungryhub/controlls/payment_controller.dart';
 import 'package:hungryhub/domain/constants/constants.dart';
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/payment/widgets/order_items.dart';
@@ -10,11 +14,14 @@ import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 int pay = 1;
+String? paymentId;
+String datetime = '';
+double amount = 0;
 
 class PaymentScreen extends StatefulWidget {
   String? number;
   String? name;
-  int cartint;
+  num cartint;
 
   PaymentScreen({super.key, this.name, this.number, required this.cartint});
 
@@ -22,16 +29,10 @@ class PaymentScreen extends StatefulWidget {
   State<PaymentScreen> createState() => _PaymentScreenState();
 }
 
-enum paymentType { cod, onlinepayment }
-
 final _razorpay = Razorpay();
-// void gettransaction(paymentId)async{
-//   Map<String,dynamic> result = await _razorpay.ge
-
-// }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  var myType = paymentType.cod;
+  var myType = PaymentType.cod;
   @override
   void initState() {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
@@ -41,25 +42,36 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    print(response.paymentId);
-    print(response.orderId);
-    print(response.signature);
-    print("payment sucesssss");
-    // Do something when payment succeeds
+    void addOrderHistory() async {
+      datetime = DateTime.now().toString();
+      await FirebaseFirestore.instance.collection("orderhistory").add({
+        "paymentId": response.paymentId,
+        "dateTime": datetime,
+        "amount": isCart == true ? amount + 50 : allDatas.productRate + 50,
+      });
+    }
+
+    addOrderHistory();
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    // Do something when payment fails
     print("payment failedddd");
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    // Do something when an external wallet was selected
     print("external wallet selected");
   }
 
   @override
+  void dispose() {
+    _razorpay.clear();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final paymentProvider = Provider.of<PaymentController>(context);
+
     final cartProvider = Provider.of<CartProductControll>(context);
     double subtotal = cartProvider.getTotalPrice();
 
@@ -75,32 +87,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
         bottomNavigationBar: ListTile(
           title: Text(
             'Total Amount',
-            style: GoogleFonts.secularOne(fontSize: 20, color: Colors.grey),
+            style: menuscreen20,
           ),
           subtitle: isCart == true
-              ? Text(
-                  "₹${subtotal + 50}",
-                  style: GoogleFonts.secularOne(
-                    fontSize: 20,
-                    color: Colors.black,
-                  ),
-                )
-              : Text(
-                  "₹${allDatas.productRate + 50}",
-                  style: GoogleFonts.secularOne(
-                    fontSize: 20,
-                    color: Colors.black,
-                  ),
-                ),
+              ? Text("₹${subtotal + 50}", style: menuscreen20)
+              : Text("₹${allDatas.productRate + 50}", style: menuscreen20),
           trailing: SizedBox(
             width: width * 0.4,
             height: height * 0.5,
             child: MaterialButton(
               onPressed: () async {
                 if (pay == 2) {
+                  isCart == true ? amount = subtotal + 50 : null;
                   var options = {
                     'key': 'rzp_test_DlGayWYnDCQqKY',
-                    'amount': 100,
+                    'amount': isCart == true
+                        ? (subtotal + 50) * 100
+                        : (allDatas.productRate + 50) * 100,
                     'name': widget.name,
                     'description': "Delightful delivery,\nwherever you are.",
                     'prefill': {
@@ -108,10 +111,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       'email': 'rashin396@gmail.com'
                     }
                   };
+
                   _razorpay.open(options);
                 } else if (pay == 1) {
                   codDialgoue(context);
-                  print("cod successssssssssssssssssssssssss");
                 }
               },
               color: Colors.amber,
@@ -154,7 +157,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           }).toList(),
                         )
                       : ExpansionTile(
-                          title: Text(
+                          title: const Text(
                             "order items : 1",
                           ),
                           children: [
@@ -163,16 +166,22 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               leading: Image.network(
                                 allDatas.productImage,
                               ),
-                              trailing: Text("₹${(allDatas.productRate)}"),
+                              trailing: isOffer == true
+                                  ? Text("₹${(allDatas.productRate)}")
+                                  : Text(
+                                      "₹${((allDatas.productRate / 100) * 30).floorToDouble() + 10}"),
                             )
                           ],
                         ),
                   divider,
                   ListTile(
-                    title: Text('subtotal'),
+                    title: const Text('subtotal'),
                     trailing: isCart == true
-                        ? Text("₹${subtotal}")
-                        : Text("${allDatas.productRate}"),
+                        ? Text("₹$subtotal")
+                        : isOffer == true
+                            ? Text("₹${allDatas.productRate}")
+                            : Text(
+                                "₹${((allDatas.productRate / 100) * 30).floorToDouble() + 10}"),
                   ),
                   const ListTile(
                     title: Text('shipping charge'),
@@ -200,25 +209,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     style: menuscreen20,
                   ),
                   RadioListTile(
-                    value: paymentType.cod,
-                    groupValue: myType,
+                    value: PaymentType.cod,
+                    groupValue: paymentProvider.myPay,
                     title: const Text('Cash On Delivary'),
-                    onChanged: (value) {
-                      setState(() {
-                        pay = 1;
-                        myType = value!;
-                      });
+                    onChanged: (value) async {
+                      pay = 1;
+                      paymentProvider.checkPymentMethod(value!);
                     },
                   ),
                   RadioListTile(
-                    value: paymentType.onlinepayment,
-                    groupValue: myType,
+                    value: PaymentType.onlinepayment,
+                    groupValue: paymentProvider.myPay,
                     title: const Text('online Payment'),
                     onChanged: (value) {
-                      setState(() {
-                        pay = 2;
-                        myType = value!;
-                      });
+                      pay = 2;
+                      paymentProvider.checkPymentMethod(value!);
                     },
                   ),
                 ],
@@ -230,16 +235,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
 }
 
 codDialgoue(BuildContext context) {
-  // set up the button
   Widget okButton = ElevatedButton(
     style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-    child: Text("OK"),
+    child: const Text("OK"),
     onPressed: () {
       Navigator.pop(context);
     },
   );
 
-  // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     backgroundColor: backgroundcolor,
     title: Image.network(
@@ -248,14 +251,13 @@ codDialgoue(BuildContext context) {
       height: 200,
       fit: BoxFit.cover,
     ),
-    content: Text(
+    content: const Text(
         "Thank you for choosing cash on delivery. Please keep the exact amount ready for our delivery executive. Enjoy your purchase!"),
     actions: [
       okButton,
     ],
   );
 
-  // show the dialog
   showDialog(
     context: context,
     builder: (BuildContext context) {
