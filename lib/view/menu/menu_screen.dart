@@ -2,12 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryhub/controlls/authentication.dart';
 
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
 import 'package:hungryhub/view/checkout/payment/view/payment_screen.dart';
+import 'package:hungryhub/view/settings/settings_screen.dart';
 
 import 'package:hungryhub/view/wishlist/wish_list.dart';
+import 'package:provider/provider.dart';
 
 import '../../domain/constants/constants.dart';
 
@@ -20,6 +23,7 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authenticaProvider = Provider.of<AuthenticateProvider>(context);
     final size = MediaQuery.of(context).size;
     final width = size.width;
 
@@ -44,13 +48,6 @@ class MenuScreen extends StatelessWidget {
                 ),
               ),
               sizedboxHeight20,
-              ListTile(
-                textColor: backgroundcolor,
-                onTap: () {
-                  datetime = DateTime.now().toString();
-                },
-                title: Text('My Profile', style: menuscreen20),
-              ),
               ListTile(
                 title: Text('WishList', style: menuscreen20),
                 textColor: backgroundcolor,
@@ -97,19 +94,31 @@ class MenuScreen extends StatelessWidget {
                   style: menuscreen20,
                 ),
                 textColor: backgroundcolor,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SettingScreen(),
+                      ));
+                },
               ),
               sizedboxHeight50,
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: backgroundcolor,
                 ),
-                onPressed: () async {},
+                onPressed: () async {
+                  authenticaProvider.logOutWithGoogle(context);
+                },
                 child: const Text(
                   'Logout',
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
               ),
+              sizedboxHeight50,
+              sizedboxHeight50,
+              Text('V 1.0')
             ],
           ),
         ),
