@@ -37,6 +37,10 @@ DelivaryAddressModel allAddressData = DelivaryAddressModel();
 
 bool isOffer = true;
 int? isCategory;
+int pay = 1;
+String? paymentId;
+String datetime = '';
+double amount = 0;
 
 Divider divider = const Divider();
 Divider divider2 = const Divider(

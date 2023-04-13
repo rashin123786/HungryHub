@@ -1,68 +1,75 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geocoding/geocoding.dart';
+
+import 'package:hungryhub/controlls/add_address.dart';
+import 'package:hungryhub/domain/constants/constants.dart';
+
+import 'package:provider/provider.dart';
 
 const LatLng currentLocaction = LatLng(10.1632, 76.6413);
+String placename = 'select your location on map';
+bool isPress = false;
+LatLng? locationsss;
 
-class GoogleMapScreen extends StatefulWidget {
+class GoogleMapScreen extends StatelessWidget {
   const GoogleMapScreen({super.key});
 
   @override
-  State<GoogleMapScreen> createState() => _GoogleMapScreenState();
-}
-
-class _GoogleMapScreenState extends State<GoogleMapScreen> {
-  final controller = TextEditingController(text: 'kerala');
-
-  @override
-  @override
   Widget build(BuildContext context) {
+    final addressProvider = Provider.of<AddAddressController>(context);
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
             GoogleMap(
-              initialCameraPosition: CameraPosition(
+              initialCameraPosition: const CameraPosition(
                 target: currentLocaction,
                 zoom: 10,
               ),
+              onTap: addressProvider.onMapTap,
+              onMapCreated: addressProvider.onmapcreate,
+              markers: addressProvider.markers,
             ),
             Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  child: Container(
-                    color: Colors.white,
-                    child: TextFormField(
-                      controller: controller,
-                      onTap: () {
-                        placemarkerAddress();
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'search Location',
-                        fillColor: Colors.white,
-                        suffix: Icon(Icons.search),
-                        prefixIcon: Icon(
-                          Icons.close,
-                          color: Colors.black,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                    ),
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: double.infinity,
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Center(
+                  child: Text(
+                    placename,
+                    style: menuscreen20,
                   ),
-                ))
+                ),
+              ),
+            ),
           ],
         ),
       ),
-    );
-  }
+      bottomNavigationBar: ElevatedButton(
+        onPressed: () async {
+          await addressProvider.addLocationToFirebase();
 
-  placemarkerAddress() async {
-    List<Location> locations = await locationFromAddress(controller.text);
-    final location = locations.first;
-    final coordinates = LatLng(location.latitude, location.longitude);
-    print(coordinates);
+          Navigator.pop(context);
+          Navigator.pop(context);
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.amber,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+        ),
+        child: const Text(
+          "Set up location",
+        ),
+      ),
+    );
   }
 }

@@ -81,6 +81,7 @@ flutter:
     - assets/images/loading1.gif
     - assets/images/forgotpass1.png
     - assets/images/delivary.png
+    - assets/images/success1.gif
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

@@ -105,6 +105,12 @@ class AddDelivaryAddress extends StatelessWidget {
                         pincode!.isEmpty ? 'Pincode is Empty' : null),
                 sizedboxHeight10,
                 divider,
+                Center(
+                  child: Text(
+                    "Or",
+                    style: menuscreen20,
+                  ),
+                ),
                 InkWell(
                   onTap: () {
                     Navigator.push(

@@ -47,11 +47,9 @@ class AuthenticateProvider with ChangeNotifier {
 
   Future logOutWithGoogle(context) async {
     if (checks == false) {
-      print('qqqqq');
       await googleSignIn.disconnect();
       await FirebaseAuth.instance.signOut();
     } else if (checks == true) {
-      print('aaaaaa');
       FirebaseAuth.instance.signOut().then((value) {
         Navigator.pushReplacement(
             context,
@@ -72,7 +70,6 @@ class AuthenticateProvider with ChangeNotifier {
             builder: (context) => const Authenticate(),
           ));
     });
-    print('sign out');
 
     notifyListeners();
   }

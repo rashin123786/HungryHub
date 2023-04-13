@@ -108,7 +108,8 @@ class MenuScreen extends StatelessWidget {
                   backgroundColor: backgroundcolor,
                 ),
                 onPressed: () async {
-                  authenticaProvider.logOutWithGoogle(context);
+                  authenticaProvider.logOut(context);
+                  // authenticaProvider.logOutWithGoogle(context);
                 },
                 child: const Text(
                   'Logout',

@@ -77,7 +77,7 @@ class CartScreen extends StatelessWidget {
                             data.productImage,
                             fit: BoxFit.fill,
                             width: double.infinity,
-                            height: height * 0.2,
+                            height: height * 0.15,
                           ),
                         ),
                         Flexible(

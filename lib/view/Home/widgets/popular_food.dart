@@ -57,7 +57,7 @@ class PopularFoods extends StatelessWidget {
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(16.0),
                     ),
                     color: Colors.white,
                     shadowColor: backgroundcolor,
@@ -67,7 +67,7 @@ class PopularFoods extends StatelessWidget {
                         Stack(
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(21.0),
+                              borderRadius: BorderRadius.circular(22.0),
                               child: Image.network(
                                 popularData.productImage,
                                 fit: BoxFit.fill,

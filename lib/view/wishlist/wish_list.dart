@@ -10,7 +10,7 @@ import '../../domain/constants/constants.dart';
 import '../../model/all_product_model.dart.dart';
 import '../productOverview/product_overview.dart';
 
-class WishListScreen extends StatefulWidget {
+class WishListScreen extends StatelessWidget {
   WishListScreen({
     super.key,
     this.id,
@@ -26,11 +26,6 @@ class WishListScreen extends StatefulWidget {
   int? productRate;
   String? productDescription;
   String? productTime;
-  @override
-  State<WishListScreen> createState() => _WishListScreenState();
-}
-
-class _WishListScreenState extends State<WishListScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
