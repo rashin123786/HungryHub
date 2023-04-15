@@ -47,9 +47,6 @@ class HungryHub extends StatelessWidget {
           create: (context) => SearchControll(),
         ),
         ChangeNotifierProvider(
-          create: (context) => CheckOutController(),
-        ),
-        ChangeNotifierProvider(
           create: (context) => AddAddressController(),
         ),
         ChangeNotifierProvider(

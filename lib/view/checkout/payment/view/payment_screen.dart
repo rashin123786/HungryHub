@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
@@ -42,7 +43,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     void addOrderHistory() async {
       datetime = DateTime.now().toString();
-      await FirebaseFirestore.instance.collection("orderhistory").add({
+      await FirebaseFirestore.instance
+          .collection("orderhistory")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection("yourorder")
+          .add({
         "paymentId": response.paymentId,
         "dateTime": datetime,
         "amount": isCart == true ? amount + 50 : allDatas.productRate + 50,

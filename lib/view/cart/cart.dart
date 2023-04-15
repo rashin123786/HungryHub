@@ -56,7 +56,7 @@ class CartScreen extends StatelessWidget {
               child: GridView.builder(
                 itemCount: cartProductControll.getcartDataList.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: (0.55 / 0.8),
+                    childAspectRatio: (0.57 / 0.8),
                     crossAxisSpacing: 2,
                     crossAxisCount: 2),
                 itemBuilder: (context, index) {
@@ -97,7 +97,7 @@ class CartScreen extends StatelessWidget {
                           ),
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CounterWidget(
                               id: data.id,

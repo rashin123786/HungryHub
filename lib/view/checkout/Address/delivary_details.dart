@@ -25,7 +25,7 @@ class AddressDetails extends StatelessWidget {
     final addAddressProvider = Provider.of<AddAddressController>(context);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      addAddressProvider.getAllAddress();
+      addAddressProvider.getAllAddress1();
     });
 
     return Scaffold(

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -22,7 +23,10 @@ class AddAddressController with ChangeNotifier {
   final pincodeControler = TextEditingController();
   final locationControler = TextEditingController();
   void addAddress() {
-    addressCollection.add({
+    addressCollection
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("youraddress")
+        .add({
       "id": addressCollection.id,
       "city": cityControler.text,
       "fullname": fullNamecontroller.text,
@@ -31,13 +35,36 @@ class AddAddressController with ChangeNotifier {
       "pincode": pincodeControler.text,
       "street": streetcontroller.text,
     }).then((value) {
+      print(value.id);
       docId = value.id;
-      addressCollection.doc(docId).update({
+      addressCollection
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection("youraddress")
+          .doc(docId)
+          .update({
         "id": docId,
       });
     });
     notifyListeners();
   }
+
+  // addAddress1() {
+  //   FirebaseFirestore.instance
+  //       .collection("address")
+  //       .doc(FirebaseAuth.instance.currentUser!.uid)
+  //       .collection("youraddress")
+  //       .doc()
+  //       .set({
+  //     "id": addressCollection.id,
+  //     "city": cityControler.text,
+  //     "fullname": fullNamecontroller.text,
+  //     "landmark": landMarkControler.text,
+  //     "mobilenumber": numbercontroller.text,
+  //     "pincode": pincodeControler.text,
+  //     "street": streetcontroller.text,
+  //   });
+  //   notifyListeners();
+  // }
 
   void addGoogleMap({
     String? name,
@@ -47,7 +74,10 @@ class AddAddressController with ChangeNotifier {
     String? country,
     String? pincode,
   }) async {
-    addressCollection.add({
+    addressCollection
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("youraddress")
+        .add({
       "id": addressCollection.id,
       "city": area,
       "fullname": name,
@@ -57,7 +87,11 @@ class AddAddressController with ChangeNotifier {
       "street": street,
     }).then((value) {
       docId = value.id;
-      addressCollection.doc(docId).update({
+      addressCollection
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection("youraddress")
+          .doc(docId)
+          .update({
         "id": docId,
       });
     });
@@ -65,7 +99,11 @@ class AddAddressController with ChangeNotifier {
   }
 
   updateAddress(id) async {
-    addressCollection.doc(id).update({
+    addressCollection
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("youraddress")
+        .doc(id)
+        .update({
       "id": id,
       "city": cityControler.text,
       "fullname": fullNamecontroller.text,
@@ -89,9 +127,13 @@ class AddAddressController with ChangeNotifier {
   }
 
   List<DelivaryAddressModel> delivaryDetailsss = [];
-  void getAllAddress() async {
+  void getAllAddress1() async {
     List<DelivaryAddressModel> newDelivaryDetailsss = [];
-    final addresList = await addressCollection.get();
+    final addresList = await FirebaseFirestore.instance
+        .collection("address")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("youraddress")
+        .get();
     for (var element in addresList.docs) {
       DelivaryAddressModel delivaryModel = DelivaryAddressModel(
           id: element.get('id'),
@@ -112,7 +154,11 @@ class AddAddressController with ChangeNotifier {
   }
 
   deleteAddress(id) {
-    addressCollection.doc(id).delete();
+    addressCollection
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("youraddress")
+        .doc(id)
+        .delete();
     notifyListeners();
   }
 
