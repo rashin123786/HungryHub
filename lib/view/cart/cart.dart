@@ -56,7 +56,7 @@ class CartScreen extends StatelessWidget {
               child: GridView.builder(
                 itemCount: cartProductControll.getcartDataList.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: (0.57 / 0.8),
+                    childAspectRatio: (0.54 / 0.8),
                     crossAxisSpacing: 2,
                     crossAxisCount: 2),
                 itemBuilder: (context, index) {
@@ -96,25 +96,20 @@ class CartScreen extends StatelessWidget {
                             fontSize: 25,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CounterWidget(
-                              id: data.id,
-                              productDescription: data.productDescription,
-                              productImage: data.productImage,
-                              productName: data.productName,
-                              productRate: data.productRate,
-                              productTime: data.productTime,
-                              produtQuantity: 1,
-                            ),
-                            IconButton(
-                                onPressed: () {
-                                  cartDeleteDialogue(context, data.id);
-                                },
-                                icon: const Icon(Icons.delete))
-                          ],
-                        )
+                        CounterWidget(
+                          id: data.id,
+                          productDescription: data.productDescription,
+                          productImage: data.productImage,
+                          productName: data.productName,
+                          productRate: data.productRate,
+                          productTime: data.productTime,
+                          produtQuantity: 1,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              cartDeleteDialogue(context, data.id);
+                            },
+                            icon: const Icon(Icons.delete))
                       ],
                     ),
                   );
