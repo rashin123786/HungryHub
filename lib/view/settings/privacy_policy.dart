@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:hungryhub/controller/constants/constants.dart';
 
 class PrivacyPolicy extends StatelessWidget {
   const PrivacyPolicy({super.key});

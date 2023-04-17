@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hungryhub/domain/constants/constants.dart';
+
+import 'package:hungryhub/controller/constants/constants.dart';
 import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
 import 'package:hungryhub/view/checkout/Address/google_map.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
-import '../../../controlls/add_address.dart';
+import '../../../controller/provider/add_address.dart';
 import '../../widgets/text_form_field.dart';
 
 class AddDelivaryAddress extends StatelessWidget {

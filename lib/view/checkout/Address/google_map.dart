@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'package:hungryhub/controlls/add_address.dart';
-import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:hungryhub/controller/constants/constants.dart';
 
 import 'package:provider/provider.dart';
+
+import '../../../controller/provider/add_address.dart';
 
 const LatLng currentLocaction = LatLng(10.1632, 76.6413);
 String placename = 'select your location on map';

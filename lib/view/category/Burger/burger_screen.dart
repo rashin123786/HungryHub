@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:hungryhub/controlls/search_controller.dart';
-import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:hungryhub/controller/search_controller.dart';
+import 'package:hungryhub/controller/constants/constants.dart';
 import 'package:hungryhub/view/widgets/wish_list_button.dart';
 
 import 'package:hungryhub/view/search/search_widget.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../../domain/services/burger_product.dart';
+import '../../../controller/services/burger_product.dart';
 import '../../../model/all_product_model.dart.dart';
 import '../../productOverview/product_overview.dart';
 

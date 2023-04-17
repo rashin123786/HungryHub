@@ -7,7 +7,7 @@ import 'package:overlay_support/overlay_support.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../controlls/cart_list_controller.dart';
+import '../../controller/provider/cart_list_controller.dart';
 
 // ignore: must_be_immutable
 class CounterWidget extends StatefulWidget {

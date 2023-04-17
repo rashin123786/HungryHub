@@ -1,23 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:hungryhub/view/settings/about_us.dart';
 import 'package:hungryhub/view/settings/privacy_policy.dart';
 import 'package:hungryhub/view/settings/terms_and_condition.dart';
-import '../../domain/constants/constants.dart';
+import '../../controller/constants/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-class MyWidget extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return IconButton(
-        // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-        icon: FaIcon(FontAwesomeIcons.gamepad),
-        onPressed: () {
-          print("Pressed");
-        });
-  }
-}
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -48,14 +36,14 @@ class SettingScreen extends StatelessWidget {
                   "Privacy Policy",
                   style: menuscreen20,
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.forward_sharp,
                 ),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PrivacyPolicy(),
+                        builder: (context) => const PrivacyPolicy(),
                       ));
                 },
               ),
@@ -73,14 +61,14 @@ class SettingScreen extends StatelessWidget {
                   "Terms & condtions",
                   style: menuscreen20,
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.forward_sharp,
                 ),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TermsAndCondition(),
+                        builder: (context) => const TermsAndCondition(),
                       ));
                 },
               ),
@@ -98,14 +86,14 @@ class SettingScreen extends StatelessWidget {
                   "About us",
                   style: menuscreen20,
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.forward_sharp,
                 ),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AboutUs(),
+                        builder: (context) => const AboutUs(),
                       ));
                 },
               ),
@@ -124,7 +112,7 @@ class SettingScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  icon: FaIcon(
+                  icon: const FaIcon(
                     FontAwesomeIcons.instagram,
                     color: Colors.amber,
                   ),
@@ -137,7 +125,7 @@ class SettingScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  icon: FaIcon(
+                  icon: const FaIcon(
                     FontAwesomeIcons.github,
                     color: Colors.amber,
                   ),
@@ -150,7 +138,7 @@ class SettingScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    icon: FaIcon(
+                    icon: const FaIcon(
                       FontAwesomeIcons.linkedin,
                       color: Colors.amber,
                     ))

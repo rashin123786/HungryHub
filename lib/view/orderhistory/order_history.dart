@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:hungryhub/domain/services/order_history.dart';
+import 'package:hungryhub/controller/services/order_history.dart';
 
-import '../../domain/constants/constants.dart';
+import '../../controller/constants/constants.dart';
 
 class OrderHistory extends StatelessWidget {
   OrderHistory({super.key});

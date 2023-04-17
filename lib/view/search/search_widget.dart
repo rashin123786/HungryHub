@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/view/productOverview/product_overview.dart';
 
-import '../../domain/constants/constants.dart';
+import '../../controller/constants/constants.dart';
 import '../../model/all_product_model.dart.dart';
 import '../widgets/wish_list_button.dart';
 

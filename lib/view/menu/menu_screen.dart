@@ -2,17 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryhub/controlls/authentication.dart';
+import 'package:hungryhub/controller/authentication.dart';
 
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
-import 'package:hungryhub/view/checkout/payment/view/payment_screen.dart';
+
 import 'package:hungryhub/view/settings/settings_screen.dart';
 
 import 'package:hungryhub/view/wishlist/wish_list.dart';
 import 'package:provider/provider.dart';
 
-import '../../domain/constants/constants.dart';
+import '../../controller/constants/constants.dart';
 
 bool isAddress = false;
 
@@ -98,7 +98,7 @@ class MenuScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SettingScreen(),
+                        builder: (context) => const SettingScreen(),
                       ));
                 },
               ),
@@ -119,7 +119,7 @@ class MenuScreen extends StatelessWidget {
               ),
               sizedboxHeight50,
               sizedboxHeight50,
-              Text('V 1.0')
+              const Text('V 1.0')
             ],
           ),
         ),

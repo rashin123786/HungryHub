@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hungryhub/model/all_product_model.dart.dart';
 
-import '../../../domain/constants/constants.dart';
-import '../../../domain/services/offer.dart';
+import '../../../controller/constants/constants.dart';
+import '../../../controller/services/offer.dart';
 
 import '../../productOverview/product_overview.dart';
 

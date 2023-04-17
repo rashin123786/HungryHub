@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:hungryhub/domain/services/authenticate.dart';
+import 'package:hungryhub/controller/services/authenticate.dart';
+import 'package:hungryhub/view/authentication/signup.dart';
 import 'package:hungryhub/view/widgets/bottom_nav.dart';
 
-import '../view/authentication/forgott_pass.dart';
-import '../view/authentication/sign_in.dart';
-import '../view/authentication/signup.dart';
-import '../view/Home/home.dart';
+import '../../view/Home/home.dart';
+import '../../view/authentication/forgott_pass.dart';
+import '../../view/authentication/sign_in.dart';
 
 late final int istaps;
 
@@ -30,7 +30,6 @@ class AuthenticateProvider with ChangeNotifier {
       );
       await FirebaseAuth.instance.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
-      print(e);
       // ignore: unnecessary_null_comparison
       if (e.code == null) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -83,7 +82,6 @@ class AuthenticateProvider with ChangeNotifier {
               email: emailcontrol.text.trim(),
               password: passwordcontrol.text.trim())
           .then((value) {
-        print("successfull login");
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -154,7 +152,6 @@ class AuthenticateProvider with ChangeNotifier {
             content: Text("Password is Too Weak"),
           ),
         );
-        print(e);
       }
     }
     notifyListeners();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:hungryhub/controller/constants/constants.dart';
 import 'package:hungryhub/model/all_product_model.dart.dart';
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/Address/delivary_details.dart';

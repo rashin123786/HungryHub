@@ -6,16 +6,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryhub/controlls/cart_list_controller.dart';
-import 'package:hungryhub/controlls/payment_controller.dart';
-import 'package:hungryhub/domain/constants/constants.dart';
-import 'package:hungryhub/view/Home/home.dart';
+
+import 'package:hungryhub/controller/constants/constants.dart';
+
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/payment/view/succes_page.dart';
 import 'package:hungryhub/view/checkout/payment/widgets/order_items.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+
+import '../../../../controller/provider/cart_list_controller.dart';
+import '../../../../controller/provider/payment_controller.dart';
 
 class PaymentScreen extends StatefulWidget {
   String? number;
@@ -50,7 +52,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           .add({
         "paymentId": response.paymentId,
         "dateTime": datetime,
-        "amount": isCart == true ? amount + 50 : allDatas.productRate + 50,
+        "amount": isCart == true ? amount : allDatas.productRate + 50,
       });
     }
 
@@ -58,7 +60,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SuccesPage(),
+          builder: (context) => const SuccesPage(),
         ));
   }
 

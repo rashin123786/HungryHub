@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hungryhub/domain/services/sandwich._product.dart';
+import 'package:hungryhub/controller/services/sandwich._product.dart';
 import 'package:hungryhub/model/all_product_model.dart.dart';
 
-import '../domain/services/burger_product.dart';
-import '../domain/services/pizza_product.dart';
+import '../services/burger_product.dart';
+import '../services/pizza_product.dart';
 
 class SearchControll with ChangeNotifier {
   Stream<List<AllProductDetails>>? burgerstream;

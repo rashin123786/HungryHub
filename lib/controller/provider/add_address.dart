@@ -6,8 +6,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:hungryhub/model/address_model.dart';
 
-import '../domain/constants/constants.dart';
-import '../view/checkout/Address/google_map.dart';
+import '../../view/checkout/Address/google_map.dart';
+import '../constants/constants.dart';
 
 String? docId;
 
@@ -35,7 +35,6 @@ class AddAddressController with ChangeNotifier {
       "pincode": pincodeControler.text,
       "street": streetcontroller.text,
     }).then((value) {
-      print(value.id);
       docId = value.id;
       addressCollection
           .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -47,24 +46,6 @@ class AddAddressController with ChangeNotifier {
     });
     notifyListeners();
   }
-
-  // addAddress1() {
-  //   FirebaseFirestore.instance
-  //       .collection("address")
-  //       .doc(FirebaseAuth.instance.currentUser!.uid)
-  //       .collection("youraddress")
-  //       .doc()
-  //       .set({
-  //     "id": addressCollection.id,
-  //     "city": cityControler.text,
-  //     "fullname": fullNamecontroller.text,
-  //     "landmark": landMarkControler.text,
-  //     "mobilenumber": numbercontroller.text,
-  //     "pincode": pincodeControler.text,
-  //     "street": streetcontroller.text,
-  //   });
-  //   notifyListeners();
-  // }
 
   void addGoogleMap({
     String? name,

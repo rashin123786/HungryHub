@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../domain/constants/constants.dart';
+import '../../../../controller/constants/constants.dart';
 
 class SuccesPage extends StatelessWidget {
   const SuccesPage({super.key});
@@ -48,7 +48,7 @@ class SuccesPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).popUntil((route) => route.isFirst);
                 },
-                child: Text(
+                child: const Text(
                   "OK",
                 ),
               )

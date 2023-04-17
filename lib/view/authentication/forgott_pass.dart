@@ -6,8 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../controlls/authentication.dart';
-import '../../domain/constants/constants.dart';
+import '../../controller/authentication.dart';
+import '../../controller/constants/constants.dart';
 import '../widgets/text_form_field.dart';
 
 final forgotpasscontrol = TextEditingController();

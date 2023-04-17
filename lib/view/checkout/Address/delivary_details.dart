@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:hungryhub/domain/constants/constants.dart';
+import 'package:hungryhub/controller/constants/constants.dart';
+import 'package:hungryhub/controller/provider/add_address.dart';
 import 'package:hungryhub/model/address_model.dart';
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/Address/add_delivary_address.dart';
@@ -10,8 +11,6 @@ import 'package:hungryhub/view/checkout/payment/view/payment_screen.dart';
 import 'package:hungryhub/view/menu/menu_screen.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
-
-import '../../../controlls/add_address.dart';
 
 int isSelectedIndex = 0;
 int isTap = 0;

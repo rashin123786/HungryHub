@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../model/all_product_model.dart.dart';
+import '../../model/all_product_model.dart.dart';
 
 class WishListController with ChangeNotifier {
   bool isLoding = false;

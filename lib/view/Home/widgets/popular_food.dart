@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:hungryhub/domain/constants/constants.dart';
-import 'package:hungryhub/domain/services/popular_food.dart';
+import 'package:hungryhub/controller/constants/constants.dart';
+import 'package:hungryhub/controller/services/popular_food.dart';
 import 'package:hungryhub/view/widgets/wish_list_button.dart';
 
 import '../../../model/all_product_model.dart.dart';

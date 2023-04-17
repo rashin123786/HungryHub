@@ -5,10 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryhub/controlls/wish_list_controller.dart';
 
 import 'package:provider/provider.dart';
 import 'package:overlay_support/overlay_support.dart';
+
+import '../../controller/provider/wish_list_controller.dart';
 
 class WishListButton extends StatefulWidget {
   WishListButton({

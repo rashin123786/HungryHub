@@ -9,8 +9,8 @@ import 'package:hungryhub/view/widgets/counter.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
-import '../../controlls/cart_list_controller.dart';
-import '../../domain/constants/constants.dart';
+import '../../controller/constants/constants.dart';
+import '../../controller/provider/cart_list_controller.dart';
 import '../menu/menu_screen.dart';
 
 bool isCart = false;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:hungryhub/domain/constants/constants.dart';
+
+import 'package:hungryhub/controller/constants/constants.dart';
 
 class AboutUs extends StatelessWidget {
   const AboutUs({super.key});
@@ -22,8 +21,8 @@ class AboutUs extends StatelessWidget {
         child: ListView(
           children: [
             Image.asset('assets/images/foodicon3.jpg'),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 ''' Welcome to Hungry Hub, the ultimate solution for all your food cravings! We are a team of passionate foodies who believe in making your dining experience convenient, fun, and unforgettable. With our user-friendly app and seamless services, we bring you the best food options from top-rated restaurants in your area.
             

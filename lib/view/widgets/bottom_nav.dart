@@ -5,8 +5,9 @@ import 'package:hungryhub/view/Home/home.dart';
 
 import 'package:hungryhub/view/wishlist/wish_list.dart';
 import 'package:provider/provider.dart';
-import '../../controlls/bottom_nav_controler.dart';
-import '../../domain/constants/constants.dart';
+
+import '../../controller/constants/constants.dart';
+import '../../controller/provider/bottom_nav_controler.dart';
 import '../orderhistory/order_history.dart';
 
 class BottomNav extends StatelessWidget {

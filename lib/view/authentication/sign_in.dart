@@ -7,9 +7,9 @@ import 'package:hungryhub/view/authentication/signup.dart';
 import 'package:hungryhub/view/widgets/text_form_field.dart';
 import 'package:provider/provider.dart';
 
-import '../../controlls/authentication.dart';
-import '../../domain/constants/constants.dart';
-import '../../domain/services/authenticate.dart';
+import '../../controller/authentication.dart';
+import '../../controller/constants/constants.dart';
+import '../../controller/services/authenticate.dart';
 
 bool checks = true;
 
