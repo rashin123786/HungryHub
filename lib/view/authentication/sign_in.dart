@@ -2,12 +2,12 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:hungryhub/controller/provider/authentication.dart';
 import 'package:hungryhub/view/authentication/forgott_pass.dart';
 import 'package:hungryhub/view/authentication/signup.dart';
 import 'package:hungryhub/view/widgets/text_form_field.dart';
 import 'package:provider/provider.dart';
 
-import '../../controller/authentication.dart';
 import '../../controller/constants/constants.dart';
 import '../../controller/services/authenticate.dart';
 

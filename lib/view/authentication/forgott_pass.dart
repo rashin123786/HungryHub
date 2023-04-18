@@ -3,10 +3,10 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryhub/controller/provider/authentication.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../controller/authentication.dart';
 import '../../controller/constants/constants.dart';
 import '../widgets/text_form_field.dart';
 

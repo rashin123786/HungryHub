@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryhub/controller/provider/search_controller.dart';
 import 'package:hungryhub/controller/services/sandwich._product.dart';
 import 'package:hungryhub/view/search/search_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../../controller/search_controller.dart';
 import '../../../controller/constants/constants.dart';
 import '../../../model/all_product_model.dart.dart';
 import '../../widgets/wish_list_button.dart';

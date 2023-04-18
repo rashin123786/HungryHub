@@ -8,10 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/controller/constants/constants.dart';
+import 'package:hungryhub/model/all_product_model.dart.dart';
 
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/payment/view/succes_page.dart';
 import 'package:hungryhub/view/checkout/payment/widgets/order_items.dart';
+import 'package:intl/intl.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -44,14 +46,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     void addOrderHistory() async {
-      datetime = DateTime.now().toString();
+      DateTime datetime = DateTime.now();
+      String formatDate = DateFormat('dd-MMMM-yyyy HH:mm').format(datetime);
       await FirebaseFirestore.instance
           .collection("orderhistory")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection("yourorder")
           .add({
         "paymentId": response.paymentId,
-        "dateTime": datetime,
+        "dateTime": formatDate,
         "amount": isCart == true ? amount : allDatas.productRate + 50,
       });
     }

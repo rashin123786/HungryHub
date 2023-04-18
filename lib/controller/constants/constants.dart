@@ -39,7 +39,7 @@ bool isOffer = true;
 int? isCategory;
 int pay = 1;
 String? paymentId;
-String datetime = '';
+
 double amount = 0;
 
 Divider divider = const Divider();

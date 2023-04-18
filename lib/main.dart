@@ -1,17 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:hungryhub/controller/provider/add_address.dart';
+import 'package:hungryhub/controller/provider/authentication.dart';
 import 'package:hungryhub/controller/provider/bottom_nav_controler.dart';
 import 'package:hungryhub/controller/provider/cart_list_controller.dart';
 import 'package:hungryhub/controller/provider/payment_controller.dart';
 import 'package:hungryhub/controller/provider/search_controller.dart';
+
 import 'package:hungryhub/controller/provider/wish_list_controller.dart';
 import 'package:hungryhub/view/SplashScreen/splash_screen.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
-
-import 'controller/provider/authentication.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

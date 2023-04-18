@@ -11,8 +11,7 @@ import 'package:hungryhub/view/category/pizza/pizza_screen.dart';
 import 'package:hungryhub/view/category/sandwich/sandwich_screen.dart';
 
 import 'package:hungryhub/view/Home/widgets/popular_food.dart';
-
-import '../menu/menu_screen.dart';
+import 'package:hungryhub/view/menu/menu_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});

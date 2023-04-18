@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:hungryhub/controller/search_controller.dart';
 import 'package:hungryhub/controller/constants/constants.dart';
+import 'package:hungryhub/controller/provider/search_controller.dart';
 import 'package:hungryhub/view/widgets/wish_list_button.dart';
 
 import 'package:hungryhub/view/search/search_widget.dart';
-
 import 'package:provider/provider.dart';
 
 import '../../../controller/services/burger_product.dart';
@@ -45,9 +44,6 @@ class BurgerScreen extends StatelessWidget {
                     onChanged: (value) {
                       istap = true;
                       searchProvider.onChangeButtonBurger(value);
-                      // setState(() {
-                      //   burgerstream = searchBurger(value);
-                      // });
                     },
                     controller: searchBurgerControl,
                     validator: (value) =>
