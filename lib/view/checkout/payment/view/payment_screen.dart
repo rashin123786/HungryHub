@@ -1,19 +1,17 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungryhub/controller/constants/constants.dart';
 import 'package:hungryhub/model/all_product_model.dart.dart';
+import 'package:hungryhub/model/cart_model.dart.dart';
 
 import 'package:hungryhub/view/cart/cart.dart';
 import 'package:hungryhub/view/checkout/payment/view/succes_page.dart';
 import 'package:hungryhub/view/checkout/payment/widgets/order_items.dart';
-import 'package:intl/intl.dart';
+
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -36,6 +34,7 @@ final _razorpay = Razorpay();
 
 class _PaymentScreenState extends State<PaymentScreen> {
   var myType = PaymentType.cod;
+
   @override
   void initState() {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
@@ -44,22 +43,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
     super.initState();
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    void addOrderHistory() async {
-      DateTime datetime = DateTime.now();
-      String formatDate = DateFormat('dd-MMMM-yyyy HH:mm').format(datetime);
-      await FirebaseFirestore.instance
-          .collection("orderhistory")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection("yourorder")
-          .add({
-        "paymentId": response.paymentId,
-        "dateTime": formatDate,
-        "amount": isCart == true ? amount : allDatas.productRate + 50,
-      });
-    }
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
+    paymentId = response.paymentId ?? '';
 
-    addOrderHistory();
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -99,6 +85,22 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
     final cartProvider = Provider.of<CartProductControll>(context);
     double subtotal = cartProvider.getTotalPrice();
+    if (isCart == false) {
+      bool isExist = cartModelList.any(
+        (cartModel) => cartModel.productName == allDatas.productName,
+      );
+      if (!isExist) {
+        CartModel allProductDetails = CartModel(
+          productImage: allDatas.productImage,
+          productName: allDatas.productName,
+          productRate: allDatas.productRate,
+          productDescription: allDatas.productDescription,
+          productTime: allDatas.productTime,
+          produtQuantity: 1,
+        );
+        cartModelList.add(allProductDetails);
+      }
+    }
 
     cartProvider.getCartList();
     final size = MediaQuery.of(context).size;
@@ -139,6 +141,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
                 _razorpay.open(options);
               } else if (pay == 1) {
+                if (isCart == true) {
+                  Provider.of<PaymentController>(context, listen: false)
+                      .deletecart();
+                }
                 codDialgoue(context);
               }
             },
@@ -171,21 +177,33 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   subtitle: Text("+91 ${widget.number}"),
                 ),
                 divider,
-                isCart == true
-                    ? ExpansionTile(
-                        title: Text(
-                            'order Item : ${cartProvider.getcartDataList.length}'),
-                        children: cartProvider.getcartDataList.map((e) {
-                          return OrderItems(
-                            cartModel: e,
+                ExpansionTile(
+                  title: isCart == true
+                      ? Text(
+                          'order Item : ${cartProvider.getcartDataList.length}')
+                      : const Text("order items : 1"),
+                  children: isCart == true
+                      ? cartProvider.getcartDataList.map((cartData) {
+                          bool isExist = cartModelList.any(
+                            (cartModel) =>
+                                cartModel.productName == cartData.productName,
                           );
-                        }).toList(),
-                      )
-                    : ExpansionTile(
-                        title: const Text(
-                          "order items : 1",
-                        ),
-                        children: [
+                          if (!isExist) {
+                            CartModel allProductDetails = CartModel(
+                              productImage: cartData.productImage,
+                              productName: cartData.productName,
+                              productRate: cartData.productRate,
+                              productDescription: cartData.productDescription,
+                              productTime: cartData.productTime,
+                              produtQuantity: cartData.produtQuantity,
+                            );
+                            cartModelList.add(allProductDetails);
+                          }
+                          return OrderItems(
+                            cartModel: cartData,
+                          );
+                        }).toList()
+                      : [
                           ListTile(
                             title: Text(allDatas.productName),
                             leading: Image.network(
@@ -195,9 +213,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 ? Text("₹${(allDatas.productRate)}")
                                 : Text(
                                     "₹${((allDatas.productRate / 100) * 30).floorToDouble() + 10}"),
-                          )
+                          ),
                         ],
-                      ),
+                ),
                 divider,
                 ListTile(
                   title: const Text('subtotal'),

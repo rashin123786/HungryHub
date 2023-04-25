@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:499744643857:android:757ed4b8f34eb043284ab0",
         "android_client_info": {
-          "package_name": "com.example.hungryhub"
+          "package_name": "in.brototype.hungryhub"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "499744643857-hcd350al182hklc9at2n08ofbhh3nd16.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.hungryhub",
+            "package_name": "in.brototype.hungryhub",
             "certificate_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
           }
         },

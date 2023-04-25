@@ -27,7 +27,7 @@ class PopularFoods extends StatelessWidget {
         } else if (snapshot.hasData) {
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: (0.45 / 0.57),
+                childAspectRatio: (0.4 / 0.57),
                 crossAxisSpacing: 2,
                 crossAxisCount: 2),
             shrinkWrap: true,

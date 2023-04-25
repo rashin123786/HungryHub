@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryhub/controller/provider/payment_controller.dart';
+import 'package:hungryhub/model/all_product_model.dart.dart';
+
+import 'package:provider/provider.dart';
 
 import '../../../../controller/constants/constants.dart';
+import '../../../../model/cart_model.dart.dart';
+
+List<CartModel> cartModelList = [];
 
 class SuccesPage extends StatelessWidget {
   const SuccesPage({super.key});
@@ -42,15 +49,21 @@ class SuccesPage extends StatelessWidget {
                   ),
                 ),
               ),
-              ElevatedButton(
-                style:
-                    ElevatedButton.styleFrom(backgroundColor: backgroundcolor),
-                onPressed: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+              Consumer<PaymentController>(
+                builder: (context, value, child) {
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: backgroundcolor),
+                    onPressed: () {
+                      value.addOrderHistory(paymentId!, cartModelList);
+                      value.deletecart();
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                    },
+                    child: const Text(
+                      "OK",
+                    ),
+                  );
                 },
-                child: const Text(
-                  "OK",
-                ),
               )
             ],
           ),

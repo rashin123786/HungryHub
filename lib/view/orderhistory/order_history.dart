@@ -3,19 +3,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:hungryhub/controller/services/order_history.dart';
+import 'package:hungryhub/model/order_history_model.dart';
+import 'package:hungryhub/view/orderhistory/inside_order_history.dart';
 
 import '../../controller/constants/constants.dart';
-import 'package:intl/intl.dart';
 
 class OrderHistory extends StatelessWidget {
-  OrderHistory({super.key});
-
-  TextEditingController searchController = TextEditingController();
+  const OrderHistory({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
           "order History",
@@ -40,6 +40,7 @@ class OrderHistory extends StatelessWidget {
                               itemCount: snapshot.data!.length,
                               itemBuilder: (context, index) {
                                 final historyData = snapshot.data![index];
+
                                 return ListTile(
                                   title: Text(historyData.paymentId),
                                   subtitle: Text(historyData.dateTime),
@@ -47,6 +48,25 @@ class OrderHistory extends StatelessWidget {
                                     "₹${historyData.amount}",
                                     style: menuscreen20,
                                   ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              SingleOrderHistory(
+                                            orderHistoryModel:
+                                                OrderHistoryModel(
+                                              amount: historyData.amount,
+                                              dateTime: historyData.dateTime,
+                                              paymentId: historyData.paymentId,
+                                              productName:
+                                                  historyData.productName,
+                                              producutQuantity:
+                                                  historyData.producutQuantity,
+                                            ),
+                                          ),
+                                        ));
+                                  },
                                 );
                               },
                               separatorBuilder: (context, index) {
@@ -58,7 +78,7 @@ class OrderHistory extends StatelessWidget {
                       ConnectionState.waiting) {
                     return const CircularProgressIndicator();
                   } else {
-                    return const Text("Something went wrong");
+                    return Text("Something went wrong${snapshot.error}");
                   }
                 },
               ),
