@@ -118,7 +118,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
         subtitle: isCart == true
             ? Text("₹${subtotal + 50}", style: menuscreen20)
-            : Text("₹${allDatas.productRate + 50}", style: menuscreen20),
+            : isOffer == true
+                ? Text("₹${allDatas.productRate + 50}", style: menuscreen20)
+                : Text(
+                    "₹${((allDatas.productRate / 100) * 30).floorToDouble() + 60}",
+                    style: menuscreen20,
+                  ),
         trailing: SizedBox(
           width: width * 0.4,
           height: height * 0.5,
@@ -241,10 +246,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           "₹${subtotal + 50}",
                           style: menuscreen20,
                         )
-                      : Text(
-                          "₹${allDatas.productRate + 50}",
-                          style: menuscreen20,
-                        ),
+                      : isOffer == true
+                          ? Text(
+                              "₹${allDatas.productRate + 50}",
+                              style: menuscreen20,
+                            )
+                          : Text(
+                              "₹${((allDatas.productRate / 100) * 30).floorToDouble() + 60}",
+                              style: menuscreen20,
+                            ),
                 ),
                 divider,
                 Text(

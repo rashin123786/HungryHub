@@ -56,6 +56,8 @@ class OrderHistory extends StatelessWidget {
                                               SingleOrderHistory(
                                             orderHistoryModel:
                                                 OrderHistoryModel(
+                                              productRate:
+                                                  historyData.productRate,
                                               amount: historyData.amount,
                                               dateTime: historyData.dateTime,
                                               paymentId: historyData.paymentId,

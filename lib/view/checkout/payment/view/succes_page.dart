@@ -54,10 +54,11 @@ class SuccesPage extends StatelessWidget {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: backgroundcolor),
-                    onPressed: () {
+                    onPressed: () async {
                       value.addOrderHistory(paymentId!, cartModelList);
                       value.deletecart();
                       Navigator.of(context).popUntil((route) => route.isFirst);
+                      cartModelList.clear();
                     },
                     child: const Text(
                       "OK",
