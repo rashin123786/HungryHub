@@ -42,12 +42,6 @@ class MenuScreen extends StatelessWidget {
                     'https://toppng.com/uploads/preview/customer-icon-whatsapp-profile-picture-ico-115630569778argolzwmt.png'),
               ),
               sizedboxHeight10,
-              Text(
-                user.displayName ?? 'user1',
-                style: GoogleFonts.secularOne(
-                  fontSize: 25,
-                ),
-              ),
               sizedboxHeight20,
               ListTile(
                 title: Text('WishList', style: menuscreen20),

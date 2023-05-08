@@ -13,35 +13,9 @@ late final int istaps;
 
 class AuthenticateProvider with ChangeNotifier {
   final googleSignIn = GoogleSignIn();
-  GoogleSignInAccount? _user;
+
   int istap = 1;
 
-// --------GoogleLogin------------//
-  GoogleSignInAccount get user => _user!;
-  Future googleLogIn(context) async {
-    try {
-      final googleUser = await googleSignIn.signIn();
-      if (googleUser == null) return;
-      _user = googleUser;
-      final googleAuth = await googleUser.authentication;
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      await FirebaseAuth.instance.signInWithCredential(credential);
-    } on FirebaseAuthException catch (e) {
-      // ignore: unnecessary_null_comparison
-      if (e.code == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            duration: Duration(milliseconds: 300),
-            content: Text("Email doesn't Exist"),
-          ),
-        );
-      }
-    }
-    notifyListeners();
-  }
   //------logOutwithgoogle-------------//
 
   Future logOutWithGoogle(context) async {

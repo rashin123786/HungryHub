@@ -114,21 +114,6 @@ class _SignInState extends State<SignIn> {
                     },
                   ),
                   sizedboxHeight20,
-                  SignInButton(Buttons.Google, onPressed: () async {
-                    checks = false;
-                    final provider = Provider.of<AuthenticateProvider>(
-                      context,
-                      listen: false,
-                    );
-                    await provider.googleLogIn(context);
-                    // ignore: use_build_context_synchronously
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Authenticate(),
-                      ),
-                    );
-                  })
                 ],
               ),
             ),
