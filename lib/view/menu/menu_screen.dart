@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryhub/controller/provider/authentication.dart';
 
 import 'package:hungryhub/view/cart/cart.dart';
@@ -10,7 +9,6 @@ import 'package:hungryhub/view/checkout/Address/delivary_details.dart';
 
 import 'package:hungryhub/view/settings/settings_screen.dart';
 
-import 'package:hungryhub/view/wishlist/wish_list.dart';
 import 'package:provider/provider.dart';
 
 import '../../controller/constants/constants.dart';
@@ -32,10 +30,21 @@ class MenuScreen extends StatelessWidget {
       width: width * 0.6,
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 12, right: 12, top: 50),
+          padding: const EdgeInsets.only(left: 12, right: 12, top: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                    )),
+              ),
               CircleAvatar(
                 radius: 50,
                 backgroundImage: NetworkImage(user.photoURL ??
@@ -43,17 +52,6 @@ class MenuScreen extends StatelessWidget {
               ),
               sizedboxHeight10,
               sizedboxHeight20,
-              ListTile(
-                title: Text('WishList', style: menuscreen20),
-                textColor: backgroundcolor,
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WishListScreen(),
-                      ));
-                },
-              ),
               ListTile(
                 title: Text(
                   'Cart',

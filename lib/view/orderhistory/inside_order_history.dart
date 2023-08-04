@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:hungryhub/controller/constants/constants.dart';
 import 'package:hungryhub/model/order_history_model.dart';
 
@@ -68,14 +66,14 @@ class SingleOrderHistory extends StatelessWidget {
             ),
             trailing: SizedBox(
               child: ElevatedButton(
-                child: Text("ok"),
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  minimumSize: Size.fromWidth(200),
+                  minimumSize: const Size.fromWidth(200),
                   backgroundColor: backgroundcolor,
                 ),
+                child: const Text("ok"),
               ),
             ),
           ),
